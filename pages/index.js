@@ -1,65 +1,35 @@
-import Link from 'next/link'
-import dbConnect from '../utils/dbConnect'
-import Pet from '../models/Pet'
+import Link from 'next/link';
+import Person from '../models/Person';
+import dbConnect from '../utils/dbConnect';
 
-const Index = ({ pets }) => (
+const Index = ({ people }) => (
   <>
-    {/* Create a card for each pet */}
-    {pets.map((pet) => (
-      <div key={pet._id}>
-        <div className="card">
-          <img src={pet.image_url} />
-          <h5 className="pet-name">{pet.name}</h5>
-          <div className="main-content">
-            <p className="pet-name">{pet.name}</p>
-            <p className="owner">Owner: {pet.owner_name}</p>
-
-            {/* Extra Pet Info: Likes and Dislikes */}
-            <div className="likes info">
-              <p className="label">Likes</p>
-              <ul>
-                {pet.likes.map((data, index) => (
-                  <li key={index}>{data} </li>
-                ))}
-              </ul>
-            </div>
-            <div className="dislikes info">
-              <p className="label">Dislikes</p>
-              <ul>
-                {pet.dislikes.map((data, index) => (
-                  <li key={index}>{data} </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="btn-container">
-              <Link href="/[id]/edit" as={`/${pet._id}/edit`}>
-                <button className="btn edit">Edit</button>
-              </Link>
-              <Link href="/[id]" as={`/${pet._id}`}>
-                <button className="btn view">View</button>
-              </Link>
-            </div>
+    <h1>This is next with mongoose!</h1>
+    <div>
+      {people.length > 0 &&
+        people.map((person) => (
+          <div className='card'>
+            <p>{person.name}</p>
+            <p>{person.email}</p>
+            <p>{person._id}</p>
+            <Link href={`/${person._id}`}>To Person Page</Link>
           </div>
-        </div>
-      </div>
-    ))}
+        ))}
+    </div>
   </>
-)
+);
 
-/* Retrieves pet(s) data from mongodb database */
 export async function getServerSideProps() {
-  await dbConnect()
+  await dbConnect();
 
-  /* find all the data in our database */
-  const result = await Pet.find({})
-  const pets = result.map((doc) => {
-    const pet = doc.toObject()
-    pet._id = pet._id.toString()
-    return pet
-  })
+  const result = await Person.find({});
+  const people = result.map((doc) => {
+    const person = doc.toObject();
+    person._id = person._id.toString();
+    return person;
+  });
 
-  return { props: { pets: pets } }
+  return { props: { people: people } };
 }
 
-export default Index
+export default Index;

@@ -8,7 +8,7 @@ const Index = ({ people }) => (
     <div>
       {people.length > 0 &&
         people.map((person) => (
-          <div className='card'>
+          <div key={person._id} className='card'>
             <p>{person.name}</p>
             <p>{person.email}</p>
             <p>{person._id}</p>
@@ -28,7 +28,6 @@ export async function getServerSideProps() {
     person._id = person._id.toString();
     return person;
   });
-
   return { props: { people: people } };
 }
 

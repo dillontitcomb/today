@@ -57,8 +57,6 @@
 
 .card:hover {
   --shadow: rgba(53, 53, 53, 0.103);
-  /* transform: rotateY(180deg) translate(20px, 20px);
-  background: pink; */
 }
 
 .card:hover .main-content {
@@ -92,20 +90,6 @@
 .owner {
   color: grey;
   font-size: 110%;
-}
-
-.pet-name {
-  font-weight: bold;
-  font-size: 130%;
-}
-
-h5.pet-name {
-  color: white;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  padding: 10px;
-  text-shadow: 0px 0px 4px black;
 }
 
 .info ul {
@@ -172,11 +156,6 @@ li {
 .view.btn {
   --accent: blue;
   margin-left: 10px;
-}
-
-/* Delete Pet */
-.pet-container {
-  width: 100%;
 }
 
 .confirmation-box.show {

@@ -1,11 +1,12 @@
+import { Provider } from 'next-auth/client';
 import Head from 'next/head';
 import Link from 'next/link';
 import '../css/form.css';
 import '../css/style.css';
 
-function MyApp({ Component, pageProps }) {
+function Today({ Component, pageProps }) {
   return (
-    <>
+    <Provider session={pageProps.session}>
       <Head>
         <title>
           Today, the compassionate habit tracking and productivity app
@@ -25,8 +26,8 @@ function MyApp({ Component, pageProps }) {
       <div className='grid wrapper'>
         <Component {...pageProps} />
       </div>
-    </>
+    </Provider>
   );
 }
 
-export default MyApp;
+export default Today;

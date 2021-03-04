@@ -19,7 +19,14 @@ const options = {
       },
       from: process.env.EMAIL_FROM,
     }),
+    Providers.Google({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
+      authorizationUrl:
+        'https://accounts.google.com/o/oauth2/v2/auth?prompt=consent&access_type=offline&response_type=code',
+    }),
   ],
+  debug: true,
   database: process.env.MONGODB_URI,
   session: {
     jwt: true,

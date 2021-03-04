@@ -5,7 +5,7 @@ import dbConnect from '../utils/dbConnect';
 
 const Index = ({ people }) => {
   const [session, loading] = useSession();
-  if (loading) return <p>...Loading...</p>;
+  if (loading) return <p>Loading...</p>;
   return (
     <>
       <h1>Today</h1>
@@ -47,6 +47,7 @@ export async function getServerSideProps() {
 
   const result = await Person.find({});
   const people = result.map((doc) => {
+    console.log(doc);
     const person = doc.toObject();
     person._id = person._id.toString();
     return person;

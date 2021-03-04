@@ -27,6 +27,7 @@ const Index = ({ people }) => {
           </>
         )}
       </div>
+      {session && <Link href={`/tasks`}>To Tasks Page</Link>}
       <div>
         {people.length > 0 &&
           people.map((person) => (

@@ -1,9 +1,7 @@
 import { signIn, signOut, useSession } from 'next-auth/client';
 import Link from 'next/link';
-import Person from '../models/Person';
-import dbConnect from '../utils/dbConnect';
 
-const Index = ({ people }) => {
+const Index = () => {
   const [session, loading] = useSession();
   if (loading) return <p>Loading...</p>;
   return (
@@ -28,34 +26,8 @@ const Index = ({ people }) => {
         )}
       </div>
       {session && <Link href={`/tasks`}>To Tasks Page</Link>}
-      <div>
-        {people.length > 0 &&
-          people.map((person) => (
-            <div key={person._id} className='card'>
-              <p>{person.name}</p>
-              <p>{person.email}</p>
-              <p>{person._id}</p>
-              <Link href={`/${person._id}`}>To Person Page</Link>
-            </div>
-          ))}
-      </div>
     </>
   );
 };
-
-export async function getServerSideProps() {
-  await dbConnect();
-
-  const result = await Person.find({});
-  const people = result.map((doc) => {
-    const person = doc.toObject();
-    person._id = person._id.toString();
-    return person;
-  });
-
-  return {
-    props: JSON.parse(JSON.stringify({ people: people })),
-  };
-}
 
 export default Index;

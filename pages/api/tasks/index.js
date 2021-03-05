@@ -1,6 +1,7 @@
 import { getSession } from 'next-auth/client';
 import Task from '../../../models/Task';
 import dbConnect from '../../../utils/dbConnect';
+import {mutate} from 'swr'
 
 export default async function handler(req, res) {
   console.log('Request has been sent to api/tasks');

@@ -1,8 +1,8 @@
 import { useSession } from 'next-auth/client';
-import useSWR from 'swr';
+import useTasks from '../hooks/useTasks';
 
 const fakeUserData = {
-  name: 'Eat a sandwich',
+  name: 'Hammer some nails',
   time: 35,
   resistance: 5,
   urgency: 5,
@@ -17,7 +17,7 @@ const fetcher = (url) =>
 
 export default function Tasks() {
   const [session, loading] = useSession();
-  const { data: tasks, error } = useSWR('/api/tasks', fetcher);
+  const { tasks, isLoading, isError } = useTasks();
 
   function submitFakeForm() {
     console.log('Attempting the fake form!');
@@ -27,7 +27,7 @@ export default function Tasks() {
     });
   }
 
-  if (error) return <p>Failed to load</p>;
+  if (isError) return <p>Failed to load</p>;
   if (loading) return 'Loading...';
   if (!loading && !session) return <p>Access Denied</p>;
 

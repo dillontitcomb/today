@@ -1,20 +1,14 @@
-import { useSession } from 'next-auth/client';
-import Form from './Form';
+import { useFormik } from 'formik';
 
-const AddTask = () => {
-  const [session, loading] = useSession();
-
-  const taskForm = {
-    name: '',
-    time: '',
-    resistance: '',
-    urgency: '',
-    recurring: false,
-    status: 'incomplete',
-    user: session && session.userId,
-  };
-
-  return <Form formId='add-task-form' taskForm={taskForm} UpdateTask='true' />;
-};
-
-export default AddTask;
+export default function AddTask() {
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      time: 30,
+      resistance: 1,
+      urgency: 1,
+      recurring: false,
+      status: 'incomplete',
+    },
+  });
+}

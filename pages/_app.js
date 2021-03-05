@@ -1,7 +1,6 @@
 import { Provider } from 'next-auth/client';
 import Head from 'next/head';
 import Link from 'next/link';
-import '../css/form.css';
 import '../css/style.css';
 
 function Today({ Component, pageProps }) {
@@ -17,9 +16,6 @@ function Today({ Component, pageProps }) {
         <div className='nav'>
           <Link href='/'>
             <a>Today</a>
-          </Link>
-          <Link href='/new'>
-            <a>Add Person</a>
           </Link>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import Task from '../../../tasks/Task';
+import Task from '../../../models/Task';
 import dbConnect from '../../../utils/dbConnect';
 
 export default async function handler(req, res) {
@@ -24,9 +24,9 @@ export default async function handler(req, res) {
 
     case 'PUT' /* Edit a task by its ID */:
       try {
-        const task = await Task.findByIdAndUpdate(id, req.body, {
+        const task = await Task.findByIdAndUpdate(id, JSON.parse(req.body), {
           new: true,
-          runValidators: true,
+          runValidators: false,
         });
         if (!task) {
           return res.status(400).json({ success: false });

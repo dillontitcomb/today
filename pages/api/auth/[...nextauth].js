@@ -34,7 +34,7 @@ const options = {
   },
   callbacks: {
     async session(session, user) {
-      console.log(session);
+      // console.log(session);
       const { sub } = user;
       session.user.userId = sub;
       return session;

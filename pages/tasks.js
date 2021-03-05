@@ -1,8 +1,7 @@
 import { useSession } from 'next-auth/client';
 import { mutate } from 'swr';
 import useTasks from '../hooks/useTasks';
-
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+import { fetcher } from '../utils/helperFunctions';
 
 const fakeUserData = {
   name: 'moneyball',

@@ -32,6 +32,13 @@ const options = {
     jwt: true,
     maxAge: 30 * 24 * 60 * 60, // days*hours*mins*seconds = 30 days
   },
+  callbacks: {
+    async session(session, user) {
+      const { sub } = user;
+      session.user.userId = sub;
+      return session;
+    },
+  },
 };
 
 export default (req, res) => NextAuth(req, res, options);

@@ -48,12 +48,14 @@ export async function getServerSideProps() {
 
   const result = await Person.find({});
   const people = result.map((doc) => {
-    console.log(doc);
     const person = doc.toObject();
     person._id = person._id.toString();
     return person;
   });
-  return { props: { people: people } };
+
+  return {
+    props: JSON.parse(JSON.stringify({ people: people })),
+  };
 }
 
 export default Index;

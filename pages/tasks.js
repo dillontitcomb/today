@@ -1,8 +1,11 @@
 import { useSession } from 'next-auth/client';
+import { mutate } from 'swr';
 import useTasks from '../hooks/useTasks';
 
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
 const fakeUserData = {
-  name: 'Hammer some nails',
+  name: 'moneyball',
   time: 35,
   resistance: 5,
   urgency: 5,
@@ -10,24 +13,22 @@ const fakeUserData = {
   status: 'ongoing',
 };
 
-const fetcher = (url) =>
-  fetch(url)
-    .then((res) => res.json())
-    .then((json) => json.data);
-
 export default function Tasks() {
   const [session, loading] = useSession();
-  const { tasks, isLoading, isError } = useTasks();
+  console.log('HERE IS THE SESSION');
+  const { tasks, error } = useTasks();
+  console.log('HERE ARE THE TASKS:', tasks);
+  if (error) console.log(error);
 
-  function submitFakeForm() {
+  async function submitFakeForm() {
     console.log('Attempting the fake form!');
-    fetch('http://localhost:3000/api/tasks', {
+    await fetcher('http://localhost:3000/api/tasks', {
       method: 'POST',
       body: JSON.stringify(fakeUserData),
     });
+    mutate('/api/tasks');
   }
 
-  if (isError) return <p>Failed to load</p>;
   if (loading) return 'Loading...';
   if (!loading && !session) return <p>Access Denied</p>;
 

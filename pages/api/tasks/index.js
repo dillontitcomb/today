@@ -1,7 +1,6 @@
 import { getSession } from 'next-auth/client';
 import Task from '../../../models/Task';
 import dbConnect from '../../../utils/dbConnect';
-import {mutate} from 'swr'
 
 export default async function handler(req, res) {
   console.log('Request has been sent to api/tasks');
@@ -33,11 +32,10 @@ export default async function handler(req, res) {
     // Private create task
     case 'POST':
       console.log('Attempting to POST to api/tasks');
-      let bodyObject = JSON.parse(req.body);
-      bodyObject.user = session.user.userId;
-      console.log(bodyObject);
+      let reqBody = JSON.parse(req.body);
+      reqBody.user = session.user.userId;
       try {
-        const task = await Task.create(bodyObject);
+        const task = await Task.create(reqBody);
         res.status(201).json({ success: true, data: task });
       } catch (error) {
         console.log(error);

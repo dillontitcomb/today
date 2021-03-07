@@ -19,12 +19,13 @@ export default function DeleteTask() {
     },
     onSubmit: async (values) => {
       console.log(values);
-      const deletedTask = await fetcher(
+      const res = await fetcher(
         `http://localhost:3000/api/tasks/${values.selectedTaskId}`,
         {
           method: 'DELETE',
         }
       );
+      console.log(res.message);
     },
   });
 

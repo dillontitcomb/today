@@ -45,7 +45,13 @@ export default async function handler(req, res) {
             .status(400)
             .json({ success: false, message: 'Task was successfully deleted' });
         }
-        res.status(200).json({ success: true, data: {} });
+        res
+          .status(200)
+          .json({
+            success: true,
+            data: {},
+            message: 'Task was successfully deleted.',
+          });
       } catch (error) {
         res.status(400).json({ success: false });
       }

@@ -2,6 +2,7 @@ import { useSession } from 'next-auth/client';
 import Link from 'next/link';
 import { useState } from 'react';
 import AddTask from '../../components/addTask';
+import DeleteTask from '../../components/DeleteTask';
 import EditTask from '../../components/EditTask';
 import useTasks from '../../hooks/useTasks';
 
@@ -45,6 +46,7 @@ export default function Tasks() {
       <div>
         <AddTask></AddTask>
         {!loading && <EditTask task={taskToEdit}></EditTask>}
+        <DeleteTask></DeleteTask>
       </div>
     </div>
   );

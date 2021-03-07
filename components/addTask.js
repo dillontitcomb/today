@@ -33,6 +33,46 @@ export default function AddTask() {
           onChange={formik.handleChange}
           value={formik.values.name}
         />
+        <label htmlFor='time'>Time</label>
+        <input
+          type='number'
+          name='time'
+          id='time'
+          onChange={formik.handleChange}
+          value={formik.values.time}
+        />
+        <label htmlFor='resistance'>Resistance</label>
+        <input
+          type='number'
+          name='resistance'
+          id='resistance'
+          onChange={formik.handleChange}
+          value={formik.values.resistance}
+        />
+        <label htmlFor='urgency'>Urgency</label>
+        <input
+          type='number'
+          name='urgency'
+          id='urgency'
+          onChange={formik.handleChange}
+          value={formik.values.urgency}
+        />
+        <label htmlFor='recurring'>Recurring</label>
+        <input
+          type='checkbox'
+          name='recurring'
+          id='recurring'
+          onChange={formik.handleChange}
+          value={formik.values.recurring}
+        />
+        <label htmlFor='status'>Status</label>
+        <input
+          type='text'
+          name='status'
+          id='status'
+          onChange={formik.handleChange}
+          value={formik.values.status}
+        />
         <button type='submit'>Submit Form</button>
       </form>
     </div>

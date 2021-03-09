@@ -1,7 +1,7 @@
 import { signIn, signOut, useSession } from 'next-auth/client';
 import Link from 'next/link';
 
-const Index = () => {
+const index = () => {
   const [session, loading] = useSession();
   if (loading) return <p>Loading...</p>;
   return (
@@ -30,4 +30,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default index;

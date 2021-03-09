@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import EditTask from '../../../components/EditTask';
 import useTask from '../../../hooks/useTask';
 
-export default function TaskPage() {
+export default function taskPage() {
   const router = useRouter();
   const { id } = router.query;
   console.log(id);

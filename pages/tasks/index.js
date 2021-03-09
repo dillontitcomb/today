@@ -6,7 +6,7 @@ import DeleteTask from '../../components/DeleteTask';
 import EditTask from '../../components/EditTask';
 import useTasks from '../../hooks/useTasks';
 
-export default function Tasks() {
+export default function tasks() {
   const [taskToEdit, setTaskToEdit] = useState({});
   const [session, loading] = useSession();
   const { tasks, error } = useTasks();

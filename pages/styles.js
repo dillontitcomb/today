@@ -1,5 +1,6 @@
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
-
 const Title = styled.h1`
   font-size: 50px;
   color: ${({ theme }) => theme.colors.primary};
@@ -19,7 +20,7 @@ const Container = styled.div`
 
 const GridContainer = styled(Container)`
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(4, auto);
   grid-gap: 1em;
   justify-content: center;
 `;
@@ -93,13 +94,24 @@ export default function styles(params) {
             <Button disabled>Disabled</Button>
           </GridItem>
           <GridItem>
-            <IconButton secondary>-</IconButton>
+            <IconButton>
+              <FontAwesomeIcon icon={faMinus}></FontAwesomeIcon>
+            </IconButton>
           </GridItem>
           <GridItem>
-            <IconButton primary>+</IconButton>
+            <IconButton primary>
+              <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
+            </IconButton>
           </GridItem>
           <GridItem>
-            <Button>Button</Button>
+            <IconButton secondary>
+              <FontAwesomeIcon icon={faMinus}></FontAwesomeIcon>
+            </IconButton>
+          </GridItem>
+          <GridItem>
+            <IconButton disabled>
+              <FontAwesomeIcon icon={faMinus}></FontAwesomeIcon>
+            </IconButton>
           </GridItem>
         </GridContainer>
       </Container>

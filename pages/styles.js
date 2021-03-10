@@ -1,6 +1,20 @@
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
+
+const handleBgColorType = (style, theme) => {
+  switch (style) {
+    case 'primary':
+      return theme.colors.primary;
+    case 'secondary':
+      return theme.colors.secondary;
+    case 'disabled':
+      return theme.colors.lightGrey;
+    default:
+      return theme.colors.midGrey;
+  }
+};
+
 const Title = styled.h1`
   font-size: 50px;
   color: ${({ theme }) => theme.colors.primary};
@@ -30,38 +44,89 @@ const GridItem = styled.div`
   padding: 0.5rem;
 `;
 
+const handleTextColorType = (style, theme) => {
+  switch (style) {
+    case 'primary':
+      return theme.colors.lightText;
+    case 'secondary':
+      return theme.colors.lightText;
+    case 'disabled':
+      return theme.colors.darkGrey;
+    default:
+      return theme.colors.darkText;
+  }
+};
+
+const handleBgHoverColorType = (style, theme) => {
+  switch (style) {
+    case 'primary':
+      return theme.colors.primaryDulled;
+    case 'secondary':
+      return theme.colors.secondaryDulled;
+    case 'disabled':
+      return theme.colors.lightGrey;
+    default:
+      return theme.colors.lightGrey;
+  }
+};
+
+const handleOutlineBgHoverColor = (style, theme) => {
+  switch (style) {
+    case 'primary':
+      return theme.colors.primary;
+    case 'secondary':
+      return theme.colors.secondary;
+    case 'disabled':
+      return theme.colors.darkGrey;
+    default:
+      return theme.colors.darkestGrey;
+  }
+};
+const handleOutlineTextColor = (style, theme) => {
+  switch (style) {
+    case 'primary':
+      return theme.colors.primary;
+    case 'secondary':
+      return theme.colors.secondary;
+    case 'disabled':
+      return theme.colors.darkGrey;
+    default:
+      return theme.colors.darkestGrey;
+  }
+};
+
 const Button = styled.button`
-  min-width: 120px;
-  max-height: 34.4px;
   display: inline-block;
   background-color: ${(props) =>
-    props.primary
-      ? props.theme.colors.primary
-      : props.secondary
-      ? props.theme.colors.secondary
-      : props.disabled
-      ? props.theme.colors.lightGrey
-      : props.theme.colors.midGrey};
+    handleBgColorType(props.buttonstyle, props.theme)};
   font-size: 1rem;
-  color: ${(props) =>
-    props.primary || props.secondary
-      ? props.theme.colors.lightText
-      : props.disabled
-      ? props.theme.colors.darkGrey
-      : props.theme.colors.darkText};
-  padding: 0.5rem 1rem;
+  color: ${(props) => handleTextColorType(props.buttonstyle, props.theme)};
+  padding: 0.5rem;
   border: none;
   cursor: pointer;
   outline: none;
   border-radius: 5px;
   &:hover {
     background-color: ${(props) =>
-      props.primary
-        ? props.theme.colors.primaryDulled
-        : props.secondary
-        ? props.theme.colors.secondaryDulled
-        : props.theme.colors.lightGrey};
-    cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+      handleBgHoverColorType(props.buttonstyle, props.theme)};
+    cursor: ${(props) =>
+      props.buttonstyle == 'disabled' ? 'not-allowed' : 'pointer'};
+  }
+`;
+
+const OutlineButton = styled.button`
+  display: inline-block;
+  padding: 0.5rem;
+  border-radius: 5px;
+  background-color: ${({ theme }) => theme.colors.background};
+  cursor: pointer;
+  border: 2px solid
+    ${(props) => handleOutlineBgHoverColor(props.buttonstyle, props.theme)};
+  color: ${(props) => handleOutlineTextColor(props.buttonstyle, props.theme)};
+  &:hover {
+    opacity: ${(props) => (props.buttonstyle == 'disabled' ? 1 : 0.8)};
+    cursor: ${(props) =>
+      props.buttonstyle == 'disabled' ? 'not-allowed' : 'pointer'};
   }
 `;
 
@@ -75,44 +140,60 @@ const IconButton = styled(Button)`
   border-radius: 100%;
 `;
 
+const PlusButton = (props) => {
+  return (
+    <GridItem>
+      <IconButton {...props}>
+        <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
+      </IconButton>
+    </GridItem>
+  );
+};
+const MinusButton = (props) => {
+  return (
+    <GridItem>
+      <IconButton {...props}>
+        <FontAwesomeIcon icon={faMinus}></FontAwesomeIcon>
+      </IconButton>
+    </GridItem>
+  );
+};
+
 export default function styles(params) {
   return (
     <div>
       <Title>Style Guide!</Title>
-      <Container secondary>
+      <Container buttonstyle='secondary'>
         <GridContainer>
           <GridItem>
             <Button>Default</Button>
           </GridItem>
           <GridItem>
-            <Button primary>Primary</Button>
+            <Button buttonstyle='primary'>Primary</Button>
           </GridItem>
           <GridItem>
-            <Button secondary>Secondary</Button>
+            <Button buttonstyle='secondary'>Secondary</Button>
           </GridItem>
           <GridItem>
-            <Button disabled>Disabled</Button>
+            <Button buttonstyle='disabled'>Disabled</Button>
           </GridItem>
           <GridItem>
-            <IconButton>
-              <FontAwesomeIcon icon={faMinus}></FontAwesomeIcon>
-            </IconButton>
+            <OutlineButton>Default</OutlineButton>
           </GridItem>
           <GridItem>
-            <IconButton primary>
-              <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
-            </IconButton>
+            <OutlineButton buttonstyle='primary'>Primary</OutlineButton>
           </GridItem>
           <GridItem>
-            <IconButton secondary>
-              <FontAwesomeIcon icon={faMinus}></FontAwesomeIcon>
-            </IconButton>
+            <OutlineButton buttonstyle='secondary'>Secondary</OutlineButton>
           </GridItem>
           <GridItem>
-            <IconButton disabled>
-              <FontAwesomeIcon icon={faMinus}></FontAwesomeIcon>
-            </IconButton>
+            <OutlineButton buttonstyle='disabled'>Disabled</OutlineButton>
           </GridItem>
+
+          <PlusButton></PlusButton>
+          <PlusButton buttonstyle='primary'></PlusButton>
+          <MinusButton buttonstyle='secondary'></MinusButton>
+          <MinusButton buttonstyle='disabled'></MinusButton>
         </GridContainer>
       </Container>
     </div>

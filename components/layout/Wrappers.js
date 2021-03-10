@@ -38,5 +38,4 @@ export const GridRowsContainer = styled(Container)`
 
 export const FlexContainer = styled(Container)`
   display: grid;
-
-`
+`;

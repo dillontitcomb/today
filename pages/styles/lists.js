@@ -38,17 +38,21 @@ const IconListItem = styled.div`
 `;
 
 const PlusMinusListItem = (props) => {
+  let plusStyle = 'primary';
+  let minusStyle = 'secondary';
+
+  if (props.muted) {
+    plusStyle = '';
+    minusStyle = '';
+  } else if (props.disabled) {
+    plusStyle = 'disabled';
+    minusStyle = 'disabled';
+  }
   return (
     <IconListItem>
-      <PlusOutlineButton
-        buttonstyle={props.muted ? '' : props.disabled ? 'disabled' : 'primary'}
-      ></PlusOutlineButton>
+      <PlusOutlineButton buttonstyle={plusStyle}></PlusOutlineButton>
       <p>{props.children}</p>
-      <MinusOutlineButton
-        buttonstyle={
-          props.muted ? '' : props.disabled ? 'disabled' : 'secondary'
-        }
-      ></MinusOutlineButton>
+      <MinusOutlineButton buttonstyle={minusStyle}></MinusOutlineButton>
     </IconListItem>
   );
 };

@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import Navbar from '../components/layout/Navbar';
-import '../css/style.css';
+import '../css/_app.css';
 
 const theme = {
   colors: {

@@ -20,29 +20,44 @@ const Container = styled.div`
 const FlexContainer = styled(Container)`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
 `;
 
+const FlexGridItem = styled.div`
+  padding: 0.5rem;
+  flex: 1;
+`;
+
 const Button = styled.button`
   display: inline-block;
-  background-color: ${(props) =>
-    props.secondary
-      ? props.theme.colors.lightGrey
-      : props.theme.colors.primary};
+  background-color: ${(props) => props.theme.colors.primary};
   font-size: 1rem;
-  color: ${(props) =>
-    props.secondary
-      ? props.theme.colors.darkText
-      : props.theme.colors.lightText};
+  color: ${(props) => props.theme.colors.lightText};
   padding: 0.5rem 1rem;
   border: none;
   cursor: pointer;
   outline: none;
   border-radius: 5px;
   &:hover {
-    background-color: ${(props) => props.theme.colors.primaryAccent};
+    background-color: ${(props) => props.theme.colors.primaryDulled};
+  }
+`;
+
+const SecondaryButton = styled(Button)`
+  background-color: ${({ theme }) => theme.colors.secondary};
+  color: ${({ theme }) => theme.colors.lightText};
+  &:hover {
+    background-color: ${(props) => props.theme.colors.secondaryDulled};
+  }
+`;
+
+const DangerButton = styled(Button)`
+  background-color: ${({ theme }) => theme.colors.danger};
+  color: ${({ theme }) => theme.colors.lightText};
+  &:hover {
+    background-color: ${(props) => props.theme.colors.dangerDulled};
   }
 `;
 
@@ -51,11 +66,17 @@ export default function styles(params) {
     <div>
       <Title>Style Guide!</Title>
       <Container secondary>
-        <p>This is some text</p>
         <FlexContainer>
-          <Button>Primary Button</Button>
-          <Button secondary>Button Secondary</Button>
-          <p>Card body</p>
+          <FlexGridItem>
+            <Button>Primary Button</Button>
+          </FlexGridItem>
+          <FlexGridItem>
+            {' '}
+            <SecondaryButton>Button Secondary</SecondaryButton>
+          </FlexGridItem>
+          <FlexGridItem>
+            <DangerButton>Card body</DangerButton>
+          </FlexGridItem>
         </FlexContainer>
       </Container>
     </div>

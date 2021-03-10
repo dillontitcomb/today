@@ -8,16 +8,17 @@ import '../css/style.css';
 const theme = {
   colors: {
     primary: '#225649',
+    primaryLight: '#edf8f5',
     primaryDulled: '#007C5D',
     secondary: '#9C4F5D',
     secondaryDulled: '#BB7682',
     background: 'white',
     accent: '#E08A00',
-    darkText: 'black',
-    lightText: 'white',
-    lightGrey: '#E3E3E3',
-    midGrey: '8E8E8E',
-    darkGrey: '#999999',
+    darkText: '#212121',
+    lightText: '#fafafa',
+    lightGrey: '#F5F5F5',
+    midGrey: '#E0E0E0',
+    darkGrey: '#9E9E9E',
     success: 'green',
     danger: '#dc3545',
     dangerDulled: '#F25B69',
@@ -33,7 +34,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Merriweather', serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 1rem;
     line-height: 1.6;
     background-color: ${theme.colors.lightGrey};

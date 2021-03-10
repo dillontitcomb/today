@@ -17,48 +17,61 @@ const Container = styled.div`
   text-align: center;
 `;
 
-const FlexContainer = styled(Container)`
-  display: flex;
-  align-items: center;
+const GridContainer = styled(Container)`
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-gap: 1em;
   justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
 `;
 
-const FlexGridItem = styled.div`
+const GridItem = styled.div`
+  place-self: center;
   padding: 0.5rem;
-  flex: 1;
 `;
 
 const Button = styled.button`
+  min-width: 120px;
+  max-height: 34.4px;
   display: inline-block;
-  background-color: ${(props) => props.theme.colors.primary};
+  background-color: ${(props) =>
+    props.primary
+      ? props.theme.colors.primary
+      : props.secondary
+      ? props.theme.colors.secondary
+      : props.disabled
+      ? props.theme.colors.lightGrey
+      : props.theme.colors.midGrey};
   font-size: 1rem;
-  color: ${(props) => props.theme.colors.lightText};
+  color: ${(props) =>
+    props.primary || props.secondary
+      ? props.theme.colors.lightText
+      : props.disabled
+      ? props.theme.colors.darkGrey
+      : props.theme.colors.darkText};
   padding: 0.5rem 1rem;
   border: none;
   cursor: pointer;
   outline: none;
   border-radius: 5px;
   &:hover {
-    background-color: ${(props) => props.theme.colors.primaryDulled};
+    background-color: ${(props) =>
+      props.primary
+        ? props.theme.colors.primaryDulled
+        : props.secondary
+        ? props.theme.colors.secondaryDulled
+        : props.theme.colors.lightGrey};
+    cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
   }
 `;
 
-const SecondaryButton = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.secondary};
-  color: ${({ theme }) => theme.colors.lightText};
-  &:hover {
-    background-color: ${(props) => props.theme.colors.secondaryDulled};
-  }
-`;
-
-const DangerButton = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.danger};
-  color: ${({ theme }) => theme.colors.lightText};
-  &:hover {
-    background-color: ${(props) => props.theme.colors.dangerDulled};
-  }
+const IconButton = styled(Button)`
+  min-height: 0px;
+  min-width: 0px;
+  padding: 0;
+  margin: 0;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 100%;
 `;
 
 export default function styles(params) {
@@ -66,18 +79,29 @@ export default function styles(params) {
     <div>
       <Title>Style Guide!</Title>
       <Container secondary>
-        <FlexContainer>
-          <FlexGridItem>
-            <Button>Primary Button</Button>
-          </FlexGridItem>
-          <FlexGridItem>
-            {' '}
-            <SecondaryButton>Button Secondary</SecondaryButton>
-          </FlexGridItem>
-          <FlexGridItem>
-            <DangerButton>Card body</DangerButton>
-          </FlexGridItem>
-        </FlexContainer>
+        <GridContainer>
+          <GridItem>
+            <Button>Default</Button>
+          </GridItem>
+          <GridItem>
+            <Button primary>Primary</Button>
+          </GridItem>
+          <GridItem>
+            <Button secondary>Secondary</Button>
+          </GridItem>
+          <GridItem>
+            <Button disabled>Disabled</Button>
+          </GridItem>
+          <GridItem>
+            <IconButton secondary>-</IconButton>
+          </GridItem>
+          <GridItem>
+            <IconButton primary>+</IconButton>
+          </GridItem>
+          <GridItem>
+            <Button>Button</Button>
+          </GridItem>
+        </GridContainer>
       </Container>
     </div>
   );

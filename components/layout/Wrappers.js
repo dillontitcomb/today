@@ -24,6 +24,7 @@ export const GridColumnsContainer = styled(Container)`
   );
   grid-gap: ${(props) => (props.gridgap ? props.gridgap : 0)}rem;
   justify-content: center;
+
   > * {
     place-self: center;
   }
@@ -36,6 +37,11 @@ export const GridRowsContainer = styled(Container)`
   justify-content: center;
 `;
 
-export const FlexContainer = styled(Container)`
-  display: grid;
-`;
+export const SplitPanel = ({ left, right }) => {
+  return (
+    <GridColumnsContainer cols='2'>
+      <Container nopad>{left}</Container>
+      <Container nopad>{right}</Container>
+    </GridColumnsContainer>
+  );
+};

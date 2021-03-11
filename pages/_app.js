@@ -41,6 +41,9 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${theme.colors.lightGrey};
     color:  ${theme.colors.darkText};
   }
+  a {
+    text-decoration: none;
+  }
   `;
 
 function today({ Component, pageProps }) {

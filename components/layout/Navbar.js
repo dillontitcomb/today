@@ -1,24 +1,73 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 
 const Navigation = styled.nav`
+  padding: 1.2rem;
   border: none;
-  height: 100px;
-  display: flex;
-  justify-content: space-between;
+  height: 50px;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  justify-content: center;
   align-items: center;
-  padding: 0.7rem 2rem;
-  z-index: 1;
-  width: 100%;
-  border-bottom: 2px solid ${({ theme }) => theme.colors.darkGrey};
   box-shadow: 0px 1px 5px 0 ${({ theme }) => theme.colors.darkGrey};
   background-color: ${({ theme }) => theme.colors.background};
 `;
 
-export default function Navbar({ children }) {
+const NavLogo = styled.a`
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: ${({ theme }) => theme.colors.primary};
+  &:hover {
+    cursor: pointer;
+  }
+  @media (max-width: 700px) {
+    font-size: 1rem;
+    padding: 0 0.6rem;
+  }
+`;
+
+const NavLinkContainer = styled.div`
+  text-align: right;
+  justify-content: end;
+`;
+
+const NavLink = styled.a`
+  display: inline-block;
+  font-size: 1.2rem;
+  padding: 0rem 1rem;
+  color: ${({ theme }) => theme.colors.darkText};
+  &:hover {
+    cursor: pointer;
+  }
+  @media (max-width: 700px) {
+    font-size: 0.8rem;
+    padding: 0 0.4rem;
+  }
+`;
+
+export default function Navbar() {
   return (
     <Navigation>
-      {/* TODO: Fix the right side of the nav */}
-      <p>Here's the nav sucka</p>
+      <div>
+        <Link href='/'>
+          <NavLogo>Today ✓</NavLogo>
+        </Link>
+      </div>
+      <NavLinkContainer>
+        <Link href='/styles'>
+          <NavLink>Style Guide</NavLink>
+        </Link>
+        <Link href='/about'>
+          <NavLink>About</NavLink>
+        </Link>
+        <Link href='/habits'>
+          <NavLink>Your Habits</NavLink>
+        </Link>
+        <Link href='/tasks'>
+          <NavLink>Your Tasks</NavLink>
+        </Link>
+      </NavLinkContainer>
     </Navigation>
   );
 }

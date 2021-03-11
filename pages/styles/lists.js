@@ -6,12 +6,20 @@ import {
 import {
   Container,
   GridColumnsContainer,
+  SplitPanel,
 } from '../../components/layout/Wrappers';
 
 const ListContainer = styled.div`
-  width: 100%;
   /* border: 1px solid ${({ theme }) => theme.colors.midGrey}; */
   text-align: left;
+  background-color: ${(props) =>
+    props.primary
+      ? props.theme.colors.primary
+      : props.secondary
+      ? props.theme.colors.secondary
+      : props.offwhite
+      ? props.theme.colors.lightGrey
+      : props.theme.colors.background};
 `;
 
 const ListItem = styled.li`
@@ -44,7 +52,6 @@ const PlusMinusText = styled.span`
 const PlusMinusListItem = (props) => {
   let plusStyle = 'primary';
   let minusStyle = 'secondary';
-
   if (props.muted) {
     plusStyle = '';
     minusStyle = '';
@@ -60,6 +67,21 @@ const PlusMinusListItem = (props) => {
     </IconListItem>
   );
 };
+
+const leftPanel = (
+  <ListContainer primary>
+    <PlusMinusListItem muted>Hello There</PlusMinusListItem>
+    <PlusMinusListItem>Hello Again</PlusMinusListItem>
+    <PlusMinusListItem disabled>One Last Time</PlusMinusListItem>
+  </ListContainer>
+);
+const rightPanel = (
+  <ListContainer secondary>
+    <ListItem>Hello</ListItem>
+    <ListItem>Bonjour</ListItem>
+    <ListItem>Hola</ListItem>
+  </ListContainer>
+);
 
 export default function lists(params) {
   return (
@@ -77,6 +99,7 @@ export default function lists(params) {
           <ListItem>Hola</ListItem>
         </ListContainer>
       </GridColumnsContainer>
+      <SplitPanel left={leftPanel} right={rightPanel} />
     </Container>
   );
 }

@@ -26,15 +26,19 @@ const ListItem = styled.li`
 const IconListItem = styled.div`
   display: grid;
   grid-template-columns: auto 1fr auto;
-  grid-gap: 0.2rem;
+  grid-gap: 0.4rem;
   justify-content: center;
-  padding: 0.2rem;
+  align-items: center;
   &:hover {
     background-color: ${({ theme }) => theme.colors.midGrey};
   }
   > * {
     place-self: center;
   }
+`;
+
+const PlusMinusText = styled.span`
+  padding: 0.2rem;
 `;
 
 const PlusMinusListItem = (props) => {
@@ -50,9 +54,9 @@ const PlusMinusListItem = (props) => {
   }
   return (
     <IconListItem>
-      <PlusOutlineButton buttonstyle={plusStyle}></PlusOutlineButton>
-      <p>{props.children}</p>
-      <MinusOutlineButton buttonstyle={minusStyle}></MinusOutlineButton>
+      <PlusOutlineButton buttonstyle={plusStyle} small></PlusOutlineButton>
+      <PlusMinusText>{props.children}</PlusMinusText>
+      <MinusOutlineButton buttonstyle={minusStyle} small></MinusOutlineButton>
     </IconListItem>
   );
 };

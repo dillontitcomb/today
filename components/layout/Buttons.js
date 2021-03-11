@@ -69,9 +69,9 @@ const handleOutlineTextColor = ({ buttonstyle, theme }) => {
 export const Button = styled.button`
   display: inline-block;
   background-color: ${(props) => handleBgColorType(props)};
-  font-size: 1rem;
+  font-size: ${(props) => (props.small ? 0.8 : props.large ? 1.2 : 1)}rem;
   color: ${(props) => handleTextColorType(props)};
-  padding: 0.5rem;
+  padding: ${(props) => (props.small ? 0.3 : props.large ? 0.7 : 0.5)}rem;
   border: none;
   cursor: pointer;
   outline: none;
@@ -85,7 +85,8 @@ export const Button = styled.button`
 
 export const OutlineButton = styled.button`
   display: inline-block;
-  padding: 0.5rem;
+  font-size: ${(props) => (props.small ? 0.8 : props.large ? 1.2 : 1)}rem;
+  padding: ${(props) => (props.small ? 0.3 : props.large ? 0.7 : 0.5)}rem;
   border-radius: 5px;
   background-color: ${({ theme }) => theme.colors.background};
   cursor: pointer;
@@ -103,8 +104,8 @@ export const IconButton = styled(Button)`
   min-width: 0px;
   padding: 0;
   margin: 0;
-  height: 2rem;
-  width: 2rem;
+  height: ${(props) => (props.small ? 1.5 : props.large ? 2.5 : 2)}rem;
+  width: ${(props) => (props.small ? 1.5 : props.large ? 2.5 : 2)}rem;
   border-radius: 100%;
 `;
 
@@ -113,8 +114,8 @@ export const IconOutlineButton = styled(OutlineButton)`
   min-width: 0px;
   padding: 0;
   margin: 0;
-  height: 2rem;
-  width: 2rem;
+  height: ${(props) => (props.small ? 1.5 : props.large ? 2.5 : 2)}rem;
+  width: ${(props) => (props.small ? 1.5 : props.large ? 2.5 : 2)}rem;
   border-radius: 100%;
 `;
 

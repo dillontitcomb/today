@@ -34,6 +34,14 @@ export default function buttons(props) {
           <PlusOutlineButton buttonstyle='primary' />
           <MinusOutlineButton buttonstyle='secondary' />
           <MinusOutlineButton buttonstyle='disabled' />
+          <Button small>Small</Button>
+          <PlusButton buttonstyle='secondary' small></PlusButton>
+          <OutlineButton buttonstyle='primary' small>
+            Small
+          </OutlineButton>
+          <Button buttonstyle='primary' large>
+            Large
+          </Button>
         </GridColumnsContainer>
       </Container>
     </>

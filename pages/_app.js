@@ -1,7 +1,7 @@
 import { Provider } from 'next-auth/client';
 import Head from 'next/head';
-import Link from 'next/link';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import Footer from '../components/layout/Footer';
 import Navbar from '../components/layout/Navbar';
 import '../css/_app.css';
 
@@ -28,10 +28,10 @@ const theme = {
 };
 
 const GlobalStyle = createGlobalStyle`
-  .app {
-    min-height: 100vh;
-  }
   body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -41,6 +41,9 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${theme.colors.lightGrey};
     color:  ${theme.colors.darkText};
   }
+  .content {
+    flex: 1 0 auto;
+  }
   a {
     text-decoration: none;
   }
@@ -48,25 +51,20 @@ const GlobalStyle = createGlobalStyle`
 
 function today({ Component, pageProps }) {
   return (
-    <div className='app'>
+    <div>
       <GlobalStyle />
       <Provider session={pageProps.session}>
         <ThemeProvider theme={theme}>
           <Head>
             <title>Today</title>
           </Head>
-
-          {/* TODO: Create Nav Component */}
-          <Navbar>
-            <Link href='/'>
-              <a>Today</a>
-            </Link>
-          </Navbar>
-
-          <div>
-            <Component {...pageProps} />
-          </div>
-          {/* TODO: Create Footer Component */}
+          <body>
+            <Navbar />
+            <div className='content'>
+              <Component {...pageProps} />
+            </div>
+            <Footer />
+          </body>
         </ThemeProvider>
       </Provider>
     </div>

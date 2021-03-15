@@ -29,9 +29,6 @@ const theme = {
 
 const GlobalStyle = createGlobalStyle`
   body {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -40,6 +37,12 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.6;
     background-color: ${theme.colors.lightGrey};
     color:  ${theme.colors.darkText};
+
+  }
+  .app {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
   .content {
     flex: 1 0 auto;
@@ -58,13 +61,13 @@ function today({ Component, pageProps }) {
           <Head>
             <title>Today</title>
           </Head>
-          <body>
+          <div className='app'>
             <Navbar />
             <div className='content'>
               <Component {...pageProps} />
             </div>
             <Footer />
-          </body>
+          </div>
         </ThemeProvider>
       </Provider>
     </div>

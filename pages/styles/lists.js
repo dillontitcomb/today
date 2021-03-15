@@ -69,14 +69,14 @@ const PlusMinusListItem = (props) => {
 };
 
 const leftPanel = (
-  <ListContainer primary>
+  <ListContainer offwhite>
     <PlusMinusListItem muted>Hello There</PlusMinusListItem>
     <PlusMinusListItem>Hello Again</PlusMinusListItem>
     <PlusMinusListItem disabled>One Last Time</PlusMinusListItem>
   </ListContainer>
 );
 const rightPanel = (
-  <ListContainer secondary>
+  <ListContainer>
     <ListItem>Hello</ListItem>
     <ListItem>Bonjour</ListItem>
     <ListItem>Hola</ListItem>

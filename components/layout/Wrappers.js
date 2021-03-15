@@ -37,11 +37,16 @@ export const GridRowsContainer = styled(Container)`
   justify-content: center;
 `;
 
+const StyledSplitPane = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+`;
+
 export const SplitPanel = ({ left, right }) => {
   return (
-    <GridColumnsContainer cols='2'>
-      <Container nopad>{left}</Container>
-      <Container nopad>{right}</Container>
-    </GridColumnsContainer>
+    <StyledSplitPane>
+      <div>{left}</div>
+      <div>{right}</div>
+    </StyledSplitPane>
   );
 };

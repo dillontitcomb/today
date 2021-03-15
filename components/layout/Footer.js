@@ -4,12 +4,12 @@ const StyledFooter = styled.div`
   flex-shrink: 0;
   height: 100px;
   text-align: center;
-  background-color: ${({ theme }) => theme.colors.background};
-  color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.lightText};
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-top: 2px solid ${({ theme }) => theme.colors.lightGrey};
+  /* border-top: 2px solid ${({ theme }) => theme.colors.lightGrey}; */
 `;
 
 export default function Footer(params) {

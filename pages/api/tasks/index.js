@@ -32,10 +32,10 @@ export default async function handler(req, res) {
     // Private create task
     case 'POST':
       console.log('Attempting to POST to api/tasks');
-      let reqBody = JSON.parse(req.body);
-      reqBody.user = session.user.userId;
+      let requestBody = JSON.parse(req.body);
+      requestBody.user = session.user.userId;
       try {
-        const task = await Task.create(reqBody);
+        const task = await Task.create(requestBody);
         res.status(201).json({ success: true, data: task });
       } catch (error) {
         console.log(error);

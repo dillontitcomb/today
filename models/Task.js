@@ -31,6 +31,10 @@ const TaskSchema = new mongoose.Schema({
     ref: 'user',
     required: [true, 'Who does this task belong to?'],
   },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 export default mongoose.models.Task || mongoose.model('Task', TaskSchema);

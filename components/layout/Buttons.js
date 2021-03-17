@@ -81,6 +81,9 @@ export const Button = styled.button`
     cursor: ${(props) =>
       props.buttonstyle == 'disabled' ? 'not-allowed' : 'pointer'};
   }
+  > * {
+    color: ${(props) => handleTextColorType(props)};
+  }
 `;
 
 export const OutlineButton = styled.button`
@@ -96,6 +99,9 @@ export const OutlineButton = styled.button`
     opacity: ${(props) => (props.buttonstyle == 'disabled' ? 1 : 0.8)};
     cursor: ${(props) =>
       props.buttonstyle == 'disabled' ? 'not-allowed' : 'pointer'};
+  }
+  > * {
+    color: ${(props) => handleOutlineTextColor(props)};
   }
 `;
 

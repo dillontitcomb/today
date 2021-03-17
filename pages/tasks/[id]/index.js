@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import EditTask from '../../../components/EditTask';
+import EditTask from '../../../components/tasks/EditTask';
 import useTask from '../../../hooks/useTask';
 
 export default function taskPage() {

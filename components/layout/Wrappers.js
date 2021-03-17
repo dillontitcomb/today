@@ -9,6 +9,13 @@ export const Container = styled.div`
       : props.offwhite
       ? props.theme.colors.lightGrey
       : props.theme.colors.background};
+
+  color: ${(props) =>
+    props.primary || props.secondary
+      ? props.theme.colors.lightText
+      : props.offwhite
+      ? props.theme.colors.darkText
+      : props.theme.colors.darkText};
   max-width: 1200px;
   margin: auto;
   height: 100%;

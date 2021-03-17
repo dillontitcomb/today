@@ -15,8 +15,8 @@ export default function tasks() {
   if (!loading && !session) return <p>Access Denied</p>;
 
   const leftPanel = (
-    <Container nopad leftalign offwhite>
-      <Title>Your Tasks</Title>
+    <Container nopad leftalign>
+      <Title secondary>Your Tasks</Title>
       <TasksList tasks={tasks}></TasksList>
     </Container>
   );
@@ -28,7 +28,7 @@ export default function tasks() {
   );
 
   return (
-    <Container nopad offwhite>
+    <Container nopad primary>
       <Title>Welcome to your Tasks dashboard.</Title>
       <SplitPanel left={leftPanel} right={rightPanel}></SplitPanel>
     </Container>

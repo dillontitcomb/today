@@ -7,11 +7,9 @@ export const Form = styled.form`
       : props.secondary
       ? props.theme.colors.secondary
       : props.background};
-  width: 500px;
   display: block;
   margin: 1rem auto;
   padding-bottom: 1rem;
-  border: 2px solid ${({ theme }) => theme.colors.midGrey};
   border-radius: 10px;
 `;
 
@@ -40,5 +38,5 @@ export const Select = styled.select`
 `;
 
 export const Option = styled.option`
-  color: black;
+  color: ${({ theme }) => theme.colors.darkText};
 `;

@@ -11,9 +11,11 @@ export const Container = styled.div`
       : props.theme.colors.background};
   max-width: 1200px;
   margin: auto;
+  height: 100%;
   overflow: hidden;
   padding: ${(props) => (props.nopad ? 0 : 1)}rem;
-  text-align: center;
+  text-align: ${(props) =>
+    props.leftalign ? 'left' : props.rightalign ? 'right' : 'center'};
 `;
 
 export const GridColumnsContainer = styled(Container)`
@@ -40,6 +42,9 @@ export const GridRowsContainer = styled(Container)`
 const StyledSplitPane = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  > * {
+    place-self: stretch;
+  }
 `;
 
 export const SplitPanel = ({ left, right }) => {

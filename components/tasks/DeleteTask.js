@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import { useSession } from 'next-auth/client';
-import useTasks from '../hooks/useTasks';
-import { fetcher } from '../utils/helperFunctions';
+import useTasks from '../../hooks/useTasks';
+import { fetcher } from '../../utils/helperFunctions';
 
 export default function DeleteTask() {
   const [session, loading] = useSession();

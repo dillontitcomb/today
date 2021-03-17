@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import { fetcher } from '../utils/helperFunctions';
+import { fetcher } from '../../utils/helperFunctions';
 
 export default function EditTask({ task }) {
   console.log(task);

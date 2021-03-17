@@ -1,8 +1,9 @@
 import { useFormik } from 'formik';
-import { fetcher } from '../utils/helperFunctions';
-import { OutlineButton } from './layout/Buttons';
-import { Form, NumberInput, Option, Select, TextInput } from './layout/Forms';
-import { Lead } from './layout/Typography';
+import { mutate } from 'swr';
+import { fetcher } from '../../utils/helperFunctions';
+import { OutlineButton } from '../layout/Buttons';
+import { Form, NumberInput, Option, Select, TextInput } from '../layout/Forms';
+import { Lead } from '../layout/Typography';
 
 export default function AddTask() {
   const formik = useFormik({
@@ -17,13 +18,13 @@ export default function AddTask() {
 
     onSubmit: async (values) => {
       console.log('trying to submit from addtask form');
-      console.log(values);
       const newTask = await fetcher('http://localhost:3000/api/tasks', {
         method: 'POST',
         body: JSON.stringify(values),
       });
       let task = newTask.data;
       console.log(`New task, ${task.name} added`);
+      mutate('/api/tasks');
     },
   });
   function onSelect(e) {
@@ -89,7 +90,7 @@ export default function AddTask() {
           do this task again in the future.
         </p>
         <OutlineButton primary type='submit'>
-          Submit Form
+          Add Task
         </OutlineButton>
       </Form>
     </div>

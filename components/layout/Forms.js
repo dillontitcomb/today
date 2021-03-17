@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Form = styled.form`
+  text-align: center;
   background-color: ${(props) =>
     props.primary
       ? props.theme.colors.primary

@@ -16,7 +16,7 @@ export default function tasks() {
 
   const leftPanel = (
     <Container nopad leftalign>
-      <Title secondary>Your Tasks</Title>
+      <Title primary>Your Tasks</Title>
       <TasksList tasks={tasks}></TasksList>
     </Container>
   );
@@ -28,7 +28,7 @@ export default function tasks() {
   );
 
   return (
-    <Container nopad primary>
+    <Container nopad offwhite expand>
       <Title>Welcome to your Tasks dashboard.</Title>
       <SplitPanel left={leftPanel} right={rightPanel}></SplitPanel>
     </Container>

@@ -16,7 +16,7 @@ const leftPanel = (
   </ListContainer>
 );
 const rightPanel = (
-  <ListContainer>
+  <ListContainer secondary>
     <ListItem>Hello</ListItem>
     <ListItem>Bonjour</ListItem>
     <ListItem>Hola</ListItem>

@@ -13,6 +13,10 @@ export const ListContainer = styled.div`
       : props.offwhite
       ? props.theme.colors.lightGrey
       : props.theme.colors.background};
+  color: ${(props) =>
+    props.primary || props.secondary
+      ? props.theme.colors.lightText
+      : props.theme.colors.darkText};
 `;
 
 export const ListItem = styled.li`

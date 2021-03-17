@@ -16,7 +16,7 @@ export const Container = styled.div`
       : props.offwhite
       ? props.theme.colors.darkText
       : props.theme.colors.darkText};
-  max-width: 1200px;
+  max-width: ${(props) => (props.expand ? 4000 : 1200)}px;
   margin: auto;
   height: 100%;
   overflow: hidden;

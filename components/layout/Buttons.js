@@ -75,7 +75,7 @@ export const Button = styled.button`
   border: none;
   cursor: pointer;
   outline: none;
-  border-radius: 5px;
+  border-radius: ${(props) => (props.noradius ? 0 : 5)}px;
   &:hover {
     background-color: ${(props) => handleBgHoverColorType(props)};
     cursor: ${(props) =>
@@ -90,7 +90,7 @@ export const OutlineButton = styled.button`
   display: inline-block;
   font-size: ${(props) => (props.small ? 0.8 : props.large ? 1.2 : 1)}rem;
   padding: ${(props) => (props.small ? 0.3 : props.large ? 0.7 : 0.5)}rem;
-  border-radius: 5px;
+  border-radius: ${(props) => (props.noradius ? 0 : 5)}px;
   background-color: ${({ theme }) => theme.colors.background};
   cursor: pointer;
   border: 2px solid ${(props) => handleOutlineBgHoverColor(props)};

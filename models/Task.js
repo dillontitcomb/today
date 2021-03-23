@@ -18,22 +18,39 @@ const TaskSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'Please indicate the urgency of this task.'],
   },
-  recurring: {
-    type: Boolean,
-    required: [true, 'Do you do this task regularly?'],
-  },
-  status: {
+  complete: {
     type: String,
-    required: [true, 'What is the status of this task?'],
+    required: [false, 'Is this task complete or incomplete?'],
+    default: false,
+  },
+  active: {
+    type: Boolean,
+    required: [false, 'Is this task active or inactive?'],
+    default: true,
+  },
+  habit: {
+    type: Schema.Types.ObjectId,
+    ref: 'Habit',
+    required: [false, 'Is this task attached to a habit?'],
   },
   user: {
     type: Schema.Types.ObjectId,
     ref: 'user',
     required: [true, 'Who does this task belong to?'],
   },
-  date: {
+  dateCreated: {
     type: Date,
     default: Date.now,
+  },
+  dateAssigned: {
+    type: Date,
+    required: [false, 'When was this task assigned to a day?'],
+    default: null,
+  },
+  dateCompleted: {
+    type: Date,
+    required: [false, 'When was this task completed?'],
+    default: null,
   },
 });
 

@@ -12,8 +12,6 @@ export default function AddTask() {
       time: 20,
       resistance: 0,
       urgency: 0,
-      recurring: false,
-      status: 'incomplete',
     },
 
     onSubmit: async (values) => {
@@ -29,8 +27,7 @@ export default function AddTask() {
   });
   function onSelect(e) {
     e.preventDefault();
-    const urgency = e.target.value;
-    formik.setFieldValue(e.target.name, urgency);
+    formik.setFieldValue(e.target.name, e.target.value);
   }
 
   return (
@@ -80,14 +77,6 @@ export default function AddTask() {
             <Option value='3'>Terrified</Option>
           </Select>{' '}
           about completing this task.
-        </p>
-        <p>
-          I probably
-          <Select>
-            <Option value='false'>Will not</Option>
-            <Option value='true'>Will</Option>
-          </Select>{' '}
-          do this task again in the future.
         </p>
         <OutlineButton primary type='submit'>
           Add Task

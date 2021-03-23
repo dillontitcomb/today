@@ -34,6 +34,11 @@ export default async function handler(req, res) {
       console.log('Attempting to POST to api/tasks');
       // Add logged in user's session credentials to request body
       let requestBody = JSON.parse(req.body);
+
+
+      // TODO: Add additional fields to req body
+
+
       requestBody.user = session.user.userId;
       try {
         const task = await Task.create(requestBody);

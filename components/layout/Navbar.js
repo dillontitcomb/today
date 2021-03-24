@@ -67,6 +67,9 @@ export default function Navbar() {
         <Link href='/tasks'>
           <NavLink>Your Tasks</NavLink>
         </Link>
+        <Link href='/profile'>
+          <NavLink>Your Profile</NavLink>
+        </Link>
       </NavLinkContainer>
     </Navigation>
   );

@@ -4,7 +4,7 @@ import dbConnect from '../../../utils/dbConnect';
 
 export default async function handler(req, res) {
   console.log('Request has been sent to api/tasks');
-  // Make all endpoints require signin
+  // Verify Sign In
   const session = await getSession({ req });
   if (!session)
     return res.status(404).json({
@@ -12,11 +12,12 @@ export default async function handler(req, res) {
       message: 'User must be signed in to access tasks.',
     });
 
-  const { method } = req;
-
   await dbConnect();
 
+  const { method } = req;
   switch (method) {
+    // GET by ID
+    // Returns all user's tasks
     case 'GET':
       try {
         const tasks = await Task.find({ user: session.user.userId });
@@ -28,15 +29,11 @@ export default async function handler(req, res) {
         });
       }
       break;
-
-    // Private create task
+    // POST
+    // Creates a new task linked to user's ID
     case 'POST':
       console.log('Attempting to POST to api/tasks');
-      // Add logged in user's session credentials to request body
       let requestBody = JSON.parse(req.body);
-
-      // TODO: Add additional fields to req body
-
       requestBody.user = session.user.userId;
       try {
         const task = await Task.create(requestBody);

@@ -1,42 +1,47 @@
 import { getSession } from 'next-auth/client';
-import Habit from '../../../models/Habit';
+import Day from '../../../models/Day';
 import dbConnect from '../../../utils/dbConnect';
 
 export default async function handler(req, res) {
+  // Verify Session
+
   const session = await getSession({ req });
   if (!session)
     return res.status(404).json({
       success: false,
-      message: 'User must be signed in to access habits.',
+      message: 'User must be signed in to access days.',
     });
-  console.log('Request made to api/habits');
-  const { method } = req;
+  console.log('Request made to api/days');
 
   await dbConnect();
 
+  //Handle request based on request.method
+
+  const { method } = req;
   switch (method) {
+    // Get current user's days
     case 'GET':
       try {
-        const habits = await Habit.find({});
+        const days = await Day.find({ user: session.user.userId });
         res.status(200).json({
           success: true,
-          data: habits,
-          message: 'All habits retrieved.',
+          data: days,
+          message: 'All days retrieved.',
         });
       } catch (error) {
-        return res
+        res
           .status(404)
-          .json({ success: false, message: 'Habits could not be found.' });
+          .json({ success: false, message: 'Days could not be found.' });
       }
       break;
+    // Create new day for current user
     case 'POST':
       const requestBody = JSON.parse(req.body);
-      // Add logged in user's session credentials to request body
       requestBody.user = session.user.userId;
       console.log(requestBody);
       try {
-        const habit = await Habit.create(requestBody);
-        res.status(201).json({ success: true, data: habit });
+        const day = await Day.create(requestBody);
+        res.status(201).json({ success: true, data: day });
       } catch (error) {
         console.log(error.message);
         return res.status(400).json({ success: false, message: error });

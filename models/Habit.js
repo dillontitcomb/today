@@ -49,4 +49,4 @@ const HabitSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.models.Habit || mongoose.model('Habit', HabitSchema);
+export default mongoose.models.Habit || mongoose.model('habit', HabitSchema);

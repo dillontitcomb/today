@@ -40,4 +40,4 @@ const DaySchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.models.Day || mongoose.model('Day', DaySchema);
+export default mongoose.models.Day || mongoose.model('day', DaySchema);

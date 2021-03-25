@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import useToday from '../../hooks/useToday';
 
 const TodayContainer = styled.div`
   display: grid;
@@ -6,6 +7,8 @@ const TodayContainer = styled.div`
 `;
 
 export default function today() {
+  const [today, todayLoading, todayError] = useToday();
+
   return (
     <TodayContainer>
       <div>

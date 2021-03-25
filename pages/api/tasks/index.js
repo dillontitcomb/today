@@ -22,7 +22,7 @@ export default async function handler(req, res) {
         const tasks = await Task.find({ user: session.user.userId });
         res.status(200).json({ success: true, data: tasks });
       } catch (error) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           message: 'Tasks could not be found',
         });
@@ -35,9 +35,7 @@ export default async function handler(req, res) {
       // Add logged in user's session credentials to request body
       let requestBody = JSON.parse(req.body);
 
-
       // TODO: Add additional fields to req body
-
 
       requestBody.user = session.user.userId;
       try {
@@ -45,7 +43,7 @@ export default async function handler(req, res) {
         res.status(201).json({ success: true, data: task });
       } catch (error) {
         console.log(error);
-        return res.status(400).json({ success: false });
+        res.status(400).json({ success: false });
       }
       break;
     default:

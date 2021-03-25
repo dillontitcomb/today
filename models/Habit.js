@@ -12,7 +12,7 @@ const HabitSchema = new mongoose.Schema({
       ref: 'Task',
     },
   ],
-  frequency  : {
+  frequency: {
     type: Number,
     required: [true, 'How often will you do this habit?'],
   },

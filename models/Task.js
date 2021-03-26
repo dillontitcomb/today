@@ -19,7 +19,7 @@ const TaskSchema = new mongoose.Schema({
     required: [true, 'Please indicate the urgency of this task.'],
   },
   complete: {
-    type: String,
+    type: Boolean,
     required: [false, 'Is this task complete or incomplete?'],
     default: false,
   },

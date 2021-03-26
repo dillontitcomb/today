@@ -1,5 +1,6 @@
 import { useFormik } from 'formik';
 import { useSession } from 'next-auth/client';
+import { mutate } from 'swr';
 import useTasks from '../../hooks/useTasks';
 import { fetcher } from '../../utils/helperFunctions';
 
@@ -15,7 +16,7 @@ export default function DeleteTask() {
     enableReinitialize: true,
     initialValues: {
       tasks: tasks ? tasks : [],
-      selectedTaskId: '',
+      selectedTaskId: tasks?.length ? tasks[0]._id : '',
     },
     onSubmit: async (values) => {
       console.log(values);
@@ -25,6 +26,7 @@ export default function DeleteTask() {
           method: 'DELETE',
         }
       );
+      mutate('/api/tasks');
       console.log(res.message);
     },
   });

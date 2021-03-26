@@ -22,7 +22,7 @@ export default function TasksList({ tasks }) {
       {tasks &&
         tasks.map((task) => {
           return (
-            <StyledTask>
+            <StyledTask key={task._id}>
               <TaskName>{task.name}</TaskName>
               <TaskButton>
                 <Button buttonstyle='primary' small>

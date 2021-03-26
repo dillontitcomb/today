@@ -52,7 +52,7 @@ export default async function handler(req, res) {
           message: 'Task was successfully deleted.',
         });
       } catch (error) {
-        res.status(400).json({ success: false });
+        res.status(400).json({ success: false, message: error.message });
       }
       break;
 

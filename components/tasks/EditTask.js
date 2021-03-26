@@ -1,8 +1,20 @@
 import { useFormik } from 'formik';
+import styled from 'styled-components';
 import { fetcher } from '../../utils/helperFunctions';
+import { Button } from '../layout/Buttons';
+import { Form, NumberInput, Option, Select, TextInput } from '../layout/Forms';
+import { Lead } from '../layout/Typography';
+
+const ButtonContainer = styled.div`
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center;
+  grid-gap: 0.5rem;
+  max-width: 400px;
+`;
 
 export default function EditTask({ task }) {
-  console.log(task);
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -10,8 +22,8 @@ export default function EditTask({ task }) {
       time: task.time ? task.time : 0,
       resistance: task.resistance ? task.resistance : 0,
       urgency: task.urgency ? task.urgency : 0,
-      recurring: task.recurring ? task.recurring : false,
-      status: task.status ? task.status : '',
+      complete: task.complete ? task.complete : false,
+      active: task.active ? task.active : true,
       _id: task._id ? task._id : '',
     },
     onSubmit: async (values) => {
@@ -27,60 +39,78 @@ export default function EditTask({ task }) {
     },
   });
 
+  function onSelect(e) {
+    e.preventDefault();
+    formik.setFieldValue(e.target.name, e.target.value);
+  }
+
+  function handleMarkComplete(e) {
+    e.preventDefault();
+    console.log(formik.values);
+    formik.setFieldValue('complete', true);
+    console.log(formik.values);
+  }
+
   return (
     <div>
       <h1>Edit Task</h1>
-      <form onSubmit={formik.handleSubmit}>
-        <label htmlFor='name'>Name</label>
-        <input
-          type='text'
-          name='name'
-          id='name'
-          onChange={formik.handleChange}
-          value={formik.values.name}
-        />
-        <label htmlFor='time'>Time</label>
-        <input
-          type='number'
-          name='time'
-          id='time'
-          onChange={formik.handleChange}
-          value={formik.values.time}
-        />
-        <label htmlFor='resistance'>Resistance</label>
-        <input
-          type='number'
-          name='resistance'
-          id='resistance'
-          onChange={formik.handleChange}
-          value={formik.values.resistance}
-        />
-        <label htmlFor='urgency'>Urgency</label>
-        <input
-          type='number'
-          name='urgency'
-          id='urgency'
-          onChange={formik.handleChange}
-          value={formik.values.urgency}
-        />
-        <label htmlFor='recurring'>Recurring</label>
-        <input
-          type='checkbox'
-          name='recurring'
-          id='recurring'
-          onChange={formik.handleChange}
-          value={formik.values.recurring}
-        />
-        <label htmlFor='status'>Status</label>
-        <input
-          type='text'
-          name='status'
-          id='status'
-          onChange={formik.handleChange}
-          value={formik.values.status}
-        />
-        <button type='submit'>Submit Form</button>
-      </form>
+      <Form onSubmit={formik.handleSubmit}>
+        <Lead primary>Update Task</Lead>
+        <p>
+          I
+          <Select name='urgency' id='urgency' onChange={onSelect}>
+            <Option value='0'>at some point</Option>
+            <Option value='1'>soon</Option>
+            <Option value='2'>urgently</Option>
+            <Option value='3'>very urgently</Option>
+          </Select>
+          want to{' '}
+          <TextInput
+            type='text'
+            name='name'
+            id='name'
+            onChange={formik.handleChange}
+            value={formik.values.name}
+          ></TextInput>
+          .
+        </p>
+        <p>
+          This should take about
+          <NumberInput
+            placeholder='0'
+            name='time'
+            id='time'
+            onChange={formik.handleChange}
+            value={formik.values.time}
+          ></NumberInput>
+          minutes.
+        </p>
+        <p>
+          I feel{' '}
+          <Select
+            name='resistance'
+            id='resistance'
+            onChange={onSelect}
+            value={formik.values.resistance}
+          >
+            <Option value='0'>Good</Option>
+            <Option value='1'>Hesitant</Option>
+            <Option value='2'>Very Stressed</Option>
+            <Option value='3'>Terrified</Option>
+          </Select>{' '}
+          about completing this task.
+        </p>
+
+        <ButtonContainer>
+          <Button buttonstyle='primary' onClick={handleMarkComplete}>
+            Mark Complete
+          </Button>
+          <Button buttonstyle='secondary' type='button'>
+            Delete Task
+          </Button>
+          <Button type='submit'>Update Task</Button>
+        </ButtonContainer>
+      </Form>
     </div>
   );
 }

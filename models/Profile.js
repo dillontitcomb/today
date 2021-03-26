@@ -29,4 +29,4 @@ const ProfileSchema = new mongoose.Schema({
 });
 
 export default mongoose.models.Profile ||
-  mongoose.model('profile', ProfileSchema);
+  mongoose.model('Profile', ProfileSchema);

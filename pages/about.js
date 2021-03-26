@@ -23,6 +23,15 @@ const fakeDayData = {
   tasks: ['6052484cc9e100196407fc99', '605252c48bacdb2c603ffd75'],
 };
 
+const fakeHabitData = {
+  name: 'Dancing Routine',
+  startDate: new Date().setDate(10),
+  endDate: new Date().setDate(30),
+  frequencyValue: 2,
+  frequencyPeriod: 'week',
+  tasks: ['6052484cc9e100196407fc99', '605252c48bacdb2c603ffd75'],
+};
+
 export default function about() {
   async function handleAddProfile() {
     console.log('trying to add profile');
@@ -38,6 +47,15 @@ export default function about() {
     const data = await fetcher('/api/tasks', {
       method: 'POST',
       body: JSON.stringify(fakeTaskData),
+    });
+    console.log(data);
+  }
+
+  async function handleAddHabit() {
+    console.log('trying to add habit');
+    const data = await fetcher('/api/habits', {
+      method: 'POST',
+      body: JSON.stringify(fakeHabitData),
     });
     console.log(data);
   }
@@ -61,6 +79,9 @@ export default function about() {
         Add Task
       </Button>
       <Button onClick={handleAddDay}>Add Day</Button>
+      <Button buttonstyle='primary' onClick={handleAddHabit}>
+        Add Habit
+      </Button>
     </div>
   );
 }

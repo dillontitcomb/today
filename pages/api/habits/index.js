@@ -33,6 +33,8 @@ export default async function handler(req, res) {
       const requestBody = JSON.parse(req.body);
       // Add logged in user's session credentials to request body
       requestBody.user = session.user.userId;
+      // TODO: Calculate totalGoal based on frequencyValue, frequencyPeriod, and start/end dates
+      requestBody.totalGoal = 20;
       console.log(requestBody);
       try {
         const habit = await Habit.create(requestBody);

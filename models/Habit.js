@@ -36,7 +36,7 @@ const HabitSchema = new mongoose.Schema({
   },
   currentTotal: {
     type: Number,
-    required: [true, 'How many times have you completed this habit?'],
+    required: [false, 'How many times have you completed this habit?'],
     default: 0,
   },
   habitScore: {
@@ -55,4 +55,4 @@ const HabitSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.models.Habit || mongoose.model('habit', HabitSchema);
+export default mongoose.models.Habit || mongoose.model('Habit', HabitSchema);

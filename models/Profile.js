@@ -19,7 +19,7 @@ const ProfileSchema = new mongoose.Schema({
   habits: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Habit',
+      ref: 'habit',
     },
   ],
   date: {

@@ -9,24 +9,25 @@ const HabitSchema = new mongoose.Schema({
   tasks: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Task',
+      ref: 'task',
     },
   ],
-  frequency: {
+  startDate: {
+    type: Date,
+    required: [true, 'When will this habit begin?'],
+    default: Date.now,
+  },
+  endDate: {
+    type: Date,
+    required: [true, 'When will this habit be complete?'],
+  },
+  frequencyValue: {
     type: Number,
     required: [true, 'How often will you do this habit?'],
   },
-  period: {
+  frequencyPeriod: {
     type: String,
     required: [true, 'Is this a daily, weekly, or monthly goal?'],
-  },
-  durationLength: {
-    type: Number,
-    required: [true, 'For how long will you continue this habit?'],
-  },
-  durationType: {
-    type: String,
-    required: [true, 'Is this duration in days, weeks, or months?'],
   },
   totalGoal: {
     type: Number,
@@ -37,6 +38,11 @@ const HabitSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'How many times have you completed this habit?'],
     default: 0,
+  },
+  habitScore: {
+    type: String,
+    required: [false, 'What is the overall score for this habit?'],
+    default: null,
   },
   user: {
     type: Schema.Types.ObjectId,

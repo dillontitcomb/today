@@ -11,9 +11,28 @@ const StyledTask = styled.div`
 const TaskName = styled.div`
   text-align: left;
   justify-self: start;
+  display: flex;
+  align-items: center;
 `;
+
 const TaskButton = styled.div`
   justify-self: end;
+`;
+
+const TaskScore = styled.div`
+  margin: auto 0.5rem auto 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: ${(props) =>
+    props.score > 0 && props.score < 3
+      ? props.theme.colors.midGrey
+      : props.score >= 3 && props.score < 6
+      ? props.theme.colors.dangerDulled
+      : props.theme.colors.danger};
 `;
 
 export default function TasksList({ tasks }) {
@@ -23,9 +42,12 @@ export default function TasksList({ tasks }) {
         tasks.map((task) => {
           return (
             <StyledTask key={task._id}>
-              <TaskName>{task.name}</TaskName>
+              <TaskName>
+                <TaskScore score={task.score}>{task.score}</TaskScore>
+                <span>{task.name}</span>
+              </TaskName>
               <TaskButton>
-                <Button buttonstyle='primary' small>
+                <Button small>
                   <Link href={`/tasks/${task._id}`}>
                     <a>More</a>
                   </Link>

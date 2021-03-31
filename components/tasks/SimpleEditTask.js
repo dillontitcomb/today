@@ -90,7 +90,9 @@ export default function EditTask({ task }) {
       <Form onSubmit={formik.handleSubmit}>
         <FormContainer>
           <h1>Edit Task</h1>
-          <h3>{task.name}</h3>
+          <h3>
+            {task.name}, {task.score} point(s).
+          </h3>
           <FormGroup>
             <InputGroup>
               <label htmlFor='name'>Name</label>

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import EditTask from '../../../components/tasks/EditTask';
+import SimpleEditTask from '../../../components/tasks/SimpleEditTask';
 import useTask from '../../../hooks/useTask';
 
 export default function taskPage() {
@@ -13,9 +13,7 @@ export default function taskPage() {
 
   return (
     <div>
-      <p>Hi this is where the task goes!</p>
-      <p>{task?.name}</p>
-      <EditTask task={task}></EditTask>
+      <SimpleEditTask task={task}></SimpleEditTask>
     </div>
   );
 }

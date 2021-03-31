@@ -29,3 +29,10 @@ export const Lead = styled.h3`
       ? props.theme.colors.secondary
       : props.darkText};
 `;
+
+export const SubText = styled.p`
+  margin: 0;
+  padding: 0;
+  font-size: 0.8rem;
+  color: ${({ theme }) => theme.colors.darkGrey};
+`;

@@ -1,4 +1,5 @@
 import { useFormik } from 'formik';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { mutate } from 'swr';
@@ -38,6 +39,7 @@ const InputGroup = styled.div`
 `;
 
 export default function EditTask({ task }) {
+  const router = useRouter();
   const [message, setMessage] = useState('');
   const [messageStyle, setMessageStyle] = useState('');
 
@@ -79,6 +81,8 @@ export default function EditTask({ task }) {
     setMessageStyle('danger');
     setMessage(deleted.message);
     mutate('/api/tasks');
+    router.push('/tasks');
+    // TODO: Add message on tasks dashboard that task has been deleted
   }
 
   return (

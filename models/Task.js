@@ -43,6 +43,11 @@ const TaskSchema = new mongoose.Schema({
     ref: 'user',
     required: [true, 'Who does this task belong to?'],
   },
+  score: {
+    type: Number,
+    required: [false, 'How much is this task worth?'],
+    default: 1,
+  },
   dateCreated: {
     type: Date,
     default: Date.now,

@@ -15,6 +15,7 @@
     "next": "latest",
     "next-auth": "^3.7.0",
     "react": "^16.13.1",
+    "react-day-picker": "^7.4.10",
     "react-dom": "^16.13.1",
     "styled-components": "^5.2.1",
     "swr": "^0.4.2"

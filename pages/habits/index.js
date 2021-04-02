@@ -1,23 +1,27 @@
 import { useState } from 'react';
 import AddHabit from '../../components/habits/AddHabit';
+import HabitsList from '../../components/habits/HabitsList';
 import SimpleAddHabit from '../../components/habits/SimpleAddHabit';
 import { Button } from '../../components/layout/Buttons';
 import Modal from '../../components/layout/Modal';
-import { Container } from '../../components/layout/Wrappers';
+import { Container, SplitPanel } from '../../components/layout/Wrappers';
+import useHabits from '../../hooks/useHabits';
 
 export default function habits() {
   // TODO: Create UseModal hook!
   const [showModal, setShowModal] = useState(false);
+  const { habits, habitsLoading, habitsError } = useHabits();
 
   const openModal = () => {
     console.log('Trying to display modal.');
     setShowModal((prev) => !prev);
   };
 
+  const leftPanel = <HabitsList habits={habits}></HabitsList>;
+  const rightPanel = <SimpleAddHabit />;
   return (
     <div>
-      <h1>Habits Page</h1>
-      <AddHabit></AddHabit>
+      <h1>Habits Dashboard</h1>
       <Container center>
         <Button onClick={openModal}>Show Modal</Button>
         {showModal && (
@@ -26,7 +30,7 @@ export default function habits() {
           </Modal>
         )}
       </Container>
-      <SimpleAddHabit />
+      <SplitPanel left={leftPanel} right={rightPanel}></SplitPanel>
     </div>
   );
 }

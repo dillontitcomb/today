@@ -8,6 +8,7 @@ import { Form, NumberInput, Option, Select, TextInput } from '../layout/Forms';
 import { SubText } from '../layout/Typography';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
+import SimpleAddTask from '../tasks/SimpleAddTask';
 
 // Fields to include/add:
 // name, tasks, startDate, endDate, frequencyValue, frequencyPeriod
@@ -47,13 +48,13 @@ export default function SimpleAddHabit() {
       console.log('Trying to submit!');
       console.log(values);
 
-      // const newHabit = await fetcher('/api/habits', {
-      //   method: 'POST',
-      //   body: JSON.stringify(values),
-      // });
-      // let habit = newHabit.data;
-      // console.log(`New habit, ${habit.name} added`);
-      // mutate('/api/habits');
+      const newHabit = await fetcher('/api/habits', {
+        method: 'POST',
+        body: JSON.stringify(values),
+      });
+      let habit = newHabit.data;
+      console.log(`New habit, ${habit.name} added`);
+      mutate('/api/habits');
     },
   });
   function onSelect(e) {
@@ -75,7 +76,7 @@ export default function SimpleAddHabit() {
     <div>
       <Form onSubmit={formik.handleSubmit}>
         <FormContainer>
-          <h3>Develop a new habit.</h3>
+          <h1>Add Habit</h1>
           <FormGroup>
             <label htmlFor='name'>Name</label>
             <TextInput
@@ -138,13 +139,13 @@ export default function SimpleAddHabit() {
           </FormGroup>
           {/* TODO: Add Logic for adding tasks to habit   */}
           {/* TODO: Add Modal! */}
+          <OutlineButton buttonstyle='secondary' type='submit'>
+            Create New Habit
+          </OutlineButton>
 
           <Button onClick={handleShowTaskForm}>Add Tasks</Button>
 
-          {/* <OutlineButton buttonstyle='secondary' type='submit'>
-            Create New Habit
-          </OutlineButton> */}
-          {showTaskForm && <h1>Here's the task form!</h1>}
+          {showTaskForm && <h1>This is the task form!</h1>}
         </FormContainer>
       </Form>
     </div>

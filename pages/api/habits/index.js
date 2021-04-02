@@ -17,7 +17,7 @@ export default async function handler(req, res) {
   switch (method) {
     case 'GET':
       try {
-        const habits = await Habit.find({});
+        const habits = await Habit.find({ user: session.user.userId });
         res.status(200).json({
           success: true,
           data: habits,

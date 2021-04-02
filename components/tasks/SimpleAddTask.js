@@ -38,6 +38,7 @@ const InputGroup = styled.div`
   display: flex;
 `;
 
+// TODO: take as props: habitId (attach to habit array), inactive (change active to false), and updateHabit (make second API request to add this task's ID to the habit that created it)
 export default function SimpleAddTask() {
   const [message, setMessage] = useState('');
   const [messageStyle, setMessageStyle] = useState('');
@@ -55,6 +56,7 @@ export default function SimpleAddTask() {
         method: 'POST',
         body: JSON.stringify(values),
       });
+      // TODO: If there's a habit ID, update the habit to have this task
       setMessage(`Task created: ${newTask.data.name}`);
       setMessageStyle('success');
     },

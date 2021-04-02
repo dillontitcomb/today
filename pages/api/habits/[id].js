@@ -23,6 +23,7 @@ export default async function handler(req, res) {
 
     case 'PUT':
       try {
+        // TODO: Calculate currentTotal and habitScore with new information
         const habit = await Habit.findByIdAndUpdate(
           id,
           JSON.parse(JSON.stringify(req.body)),

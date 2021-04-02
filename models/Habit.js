@@ -31,7 +31,7 @@ const HabitSchema = new mongoose.Schema({
   },
   totalGoal: {
     type: Number,
-    required: [true, 'How many days constitutes success for this habit?'],
+    required: [false, 'How many days constitutes success for this habit?'],
     default: 0,
   },
   currentTotal: {

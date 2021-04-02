@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import AddHabit from '../../components/habits/AddHabit';
+import SimpleAddHabit from '../../components/habits/SimpleAddHabit';
 import { Button } from '../../components/layout/Buttons';
 import Modal from '../../components/layout/Modal';
 import { Container } from '../../components/layout/Wrappers';
@@ -25,6 +26,7 @@ export default function habits() {
           </Modal>
         )}
       </Container>
+      <SimpleAddHabit />
     </div>
   );
 }

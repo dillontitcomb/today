@@ -1,4 +1,5 @@
 import { Button } from '../components/layout/Buttons';
+import SimpleAddTask from '../components/tasks/SimpleAddTask';
 import { fetcher } from '../utils/helperFunctions';
 
 const fakeProfileData = {
@@ -82,6 +83,7 @@ export default function about() {
       <Button buttonstyle='primary' onClick={handleAddHabit}>
         Add Habit
       </Button>
+      <SimpleAddTask></SimpleAddTask>
     </div>
   );
 }

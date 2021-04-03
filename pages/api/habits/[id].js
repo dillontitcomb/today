@@ -14,26 +14,29 @@ export default async function handler(req, res) {
       try {
         const habit = await Habit.findById(id);
         if (!habit)
-          return res.status(400).json({ success: false, message: error });
+          return res
+            .status(400)
+            .json({ success: false, message: 'Habit could not be found.' });
         res.status(200).json({ success: true, data: habit });
       } catch (error) {
-        return res.status(400).json({ success: false, message: error });
+        return res.status(400).json({ success: false, message: error.message });
       }
       break;
 
     case 'PUT':
       try {
         // TODO: Calculate currentTotal and habitScore with new information
-        const habit = await Habit.findByIdAndUpdate(
-          id,
-          JSON.parse(JSON.stringify(req.body)),
-          { new: true, runValidators: false }
-        );
+        console.log('ATTEMPTING TO UPDATE HABIT');
+        console.log(JSON.stringify(req.body));
+        const habit = await Habit.findByIdAndUpdate(id, JSON.parse(req.body), {
+          new: true,
+          runValidators: false,
+        });
         if (!habit)
           return res.status(400).json({ success: false, message: error });
         res.status(200).json({ success: true, data: habit });
       } catch (error) {
-        return res.status(400).json({ success: false, message: error });
+        return res.status(400).json({ success: false, message: error.message });
       }
       break;
 

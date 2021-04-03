@@ -39,7 +39,7 @@ const InputGroup = styled.div`
 `;
 
 // TODO: take as props: habitId (attach to habit array), inactive (change active to false), and updateHabit (make second API request to add this task's ID to the habit that created it)
-export default function SimpleAddTask() {
+export default function SimpleAddTask(props) {
   const [message, setMessage] = useState('');
   const [messageStyle, setMessageStyle] = useState('');
 
@@ -49,6 +49,8 @@ export default function SimpleAddTask() {
       time: 0,
       resistance: 0,
       urgency: 0,
+      habit: props.habitId ? props.habitId : '',
+      active: props.inactive ? false : true,
     },
     onSubmit: async (values) => {
       console.log('Trying to submit form to add task!');
@@ -56,7 +58,16 @@ export default function SimpleAddTask() {
         method: 'POST',
         body: JSON.stringify(values),
       });
-      // TODO: If there's a habit ID, update the habit to have this task
+      // TODO: If prop updateHabit, make API call to add this task to that habit
+      console.log(newTask);
+      if (props.updateHabit) {
+        console.log('Updating habit!');
+        const updatedHabit = await fetcher(`/api/habits/${props.habitId}`, {
+          method: 'PUT',
+          body: JSON.stringify({ $push: { tasks: [newTask.data._id] } }),
+        });
+        console.log('Habit Updated: ', updatedHabit.data);
+      }
       setMessage(`Task created: ${newTask.data.name}`);
       setMessageStyle('success');
     },

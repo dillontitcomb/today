@@ -1,15 +1,41 @@
 import { useRouter } from 'next/router';
 import useHabit from '../../../hooks/useHabit';
+import { SplitPanel } from '../../../components/layout/Wrappers';
+import SimpleAddTask from '../../../components/tasks/SimpleAddTask';
+
+// TODO:
+// Add ability to add task to habit
+// Change API to get all tasks for this habit
+// Add deleteHabit functionality
+// List habit properties
+// SimpleEditHabit Form
 
 export default function habitPage(params) {
   const router = useRouter();
   const { id } = router.query;
   const { habit, habitLoading, habitError } = useHabit(id);
 
+  if (!habit) return <p>Loading...</p>;
+  if (habitError) return <p>Failed to load.</p>;
+
+  const leftPanel = (
+    <div>
+      <h3>Habit: {habit.name}</h3>
+      <p>
+        Beginning {new Date(habit.startDate).toDateString()}, ending{' '}
+        {new Date(habit.endDate).toDateString()}
+      </p>
+    </div>
+  );
+
+  const rightPanel = (
+    <SimpleAddTask habitId={id} inactive updateHabit></SimpleAddTask>
+  );
+
   return (
     <div>
       <h1>This is the single habit page</h1>
-      <h3>Habit: {habit?.name}</h3>
+      <SplitPanel left={leftPanel} right={rightPanel} />
     </div>
   );
 }

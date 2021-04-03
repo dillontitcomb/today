@@ -59,14 +59,12 @@ export default function SimpleAddTask(props) {
         body: JSON.stringify(values),
       });
       // TODO: If prop updateHabit, make API call to add this task to that habit
-      console.log(newTask);
       if (props.updateHabit) {
-        console.log('Updating habit!');
         const updatedHabit = await fetcher(`/api/habits/${props.habitId}`, {
           method: 'PUT',
           body: JSON.stringify({ $push: { tasks: [newTask.data._id] } }),
         });
-        console.log('Habit Updated: ', updatedHabit.data);
+        console.log('Habit Updated: ', updatedHabit.data.name);
       }
       setMessage(`Task created: ${newTask.data.name}`);
       setMessageStyle('success');

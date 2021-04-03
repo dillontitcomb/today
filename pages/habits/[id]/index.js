@@ -4,8 +4,9 @@ import { SplitPanel } from '../../../components/layout/Wrappers';
 import SimpleAddTask from '../../../components/tasks/SimpleAddTask';
 
 // TODO:
-// Add ability to add task to habit
-// Change API to get all tasks for this habit
+// Add ability to add task to habit DONE
+// Change GET Habit API to popualate tasks
+// Show tasks on single habit page
 // Add deleteHabit functionality
 // List habit properties
 // SimpleEditHabit Form

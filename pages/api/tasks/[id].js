@@ -1,4 +1,5 @@
 import Task from '../../../models/Task';
+import Habit from '../../../models/Habit';
 import dbConnect from '../../../utils/dbConnect';
 
 export default async function handler(req, res) {
@@ -40,11 +41,21 @@ export default async function handler(req, res) {
 
     case 'DELETE' /* Delete a task by its ID */:
       try {
-        const deletedtask = await Task.deleteOne({ _id: id });
-        if (!deletedtask) {
+        const deletedTask = await Task.deleteOne({ _id: id });
+        if (!deletedTask) {
           return res
             .status(400)
             .json({ success: false, message: 'Task could not be deleted' });
+        }
+        // If task has a habit attached, find that habit and remove the task from tasks array
+        if (deletedTask.habit) {
+          let changedHabit = await Habit.findByIdAndUpdate(
+            { _id: deletedTask.habit },
+            { $pull: { tasks: id } }
+          );
+          console.log(
+            `Habit ${changedHabit.name} has been updated. Task id ${id} removed.`
+          );
         }
         res.status(200).json({
           success: true,

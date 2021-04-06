@@ -64,6 +64,11 @@ export default function SimpleAddTask(props) {
           method: 'PUT',
           body: JSON.stringify({ $push: { tasks: [newTask.data._id] } }),
         });
+        // TODO: Figure out how to update local data with mutate
+        // mutate('/api/habits', {
+        //   ...updatedHabit,
+        //   tasks: [...updatedHabit.tasks, newTask.data],
+        // });
         console.log('Habit Updated: ', updatedHabit.data.name);
       }
       setMessage(`Task created: ${newTask.data.name}`);

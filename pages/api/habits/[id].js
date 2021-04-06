@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   switch (method) {
     case 'GET':
       try {
-        const habit = await Habit.findById(id);
+        const habit = await Habit.findById(id).populate('tasks');
         if (!habit)
           return res
             .status(400)

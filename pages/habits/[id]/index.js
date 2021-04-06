@@ -26,6 +26,9 @@ export default function habitPage(params) {
         Beginning {new Date(habit.startDate).toDateString()}, ending{' '}
         {new Date(habit.endDate).toDateString()}
       </p>
+      <h3>Tasks to complete this habit</h3>
+      {habit.tasks &&
+        habit.tasks.map((task, key) => <p key={task._id}>{task.name}</p>)}
     </div>
   );
 

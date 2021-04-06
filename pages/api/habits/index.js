@@ -17,16 +17,20 @@ export default async function handler(req, res) {
   switch (method) {
     case 'GET':
       try {
-        const habits = await Habit.find({ user: session.user.userId });
+        // TODO: Populate tasks
+        const habits = await Habit.find({ user: session.user.userId }).populate(
+          'tasks'
+        );
         res.status(200).json({
           success: true,
           data: habits,
           message: 'All habits retrieved.',
         });
       } catch (error) {
-        return res
-          .status(404)
-          .json({ success: false, message: 'Habits could not be found.' });
+        return res.status(404).json({
+          success: false,
+          message: 'Habits could not be found.',
+        });
       }
       break;
     case 'POST':

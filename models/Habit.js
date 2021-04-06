@@ -9,7 +9,7 @@ const HabitSchema = new mongoose.Schema({
   tasks: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'task',
+      ref: 'Task',
     },
   ],
   startDate: {

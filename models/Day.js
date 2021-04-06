@@ -19,7 +19,7 @@ const DaySchema = new mongoose.Schema({
   tasks: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'task',
+      ref: 'Task',
       required: [false, 'What tasks are assigned to this day?'],
     },
   ],

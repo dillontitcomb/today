@@ -30,7 +30,7 @@ const TaskSchema = new mongoose.Schema({
   },
   habit: {
     type: Schema.Types.ObjectId,
-    ref: 'habit',
+    ref: 'Habit',
     required: [false, 'Is this task attached to a habit?'],
   },
   day: {

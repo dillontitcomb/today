@@ -49,7 +49,7 @@ export default function SimpleAddTask(props) {
       time: 0,
       resistance: 0,
       urgency: 0,
-      habit: props.habitId ? props.habitId : '',
+      habit: props.habitId ? props.habitId : null,
       active: props.inactive ? false : true,
     },
     onSubmit: async (values) => {
@@ -71,6 +71,7 @@ export default function SimpleAddTask(props) {
         // });
         console.log('Habit Updated: ', updatedHabit.data.name);
       }
+      mutate('/api/tasks');
       setMessage(`Task created: ${newTask.data.name}`);
       setMessageStyle('success');
     },

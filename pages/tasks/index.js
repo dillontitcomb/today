@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/client';
 import { Title } from '../../components/layout/Typography';
 import { Container, SplitPanel } from '../../components/layout/Wrappers';
-import AddTask from '../../components/tasks/AddTask';
+import SimpleAddTask from '../../components/tasks/SimpleAddTask';
 import TasksList from '../../components/tasks/TasksList';
 import useTasks from '../../hooks/useTasks';
 
@@ -21,7 +21,7 @@ export default function tasks() {
   );
   const rightPanel = (
     <Container nopad offwhite>
-      <AddTask></AddTask>
+      <SimpleAddTask></SimpleAddTask>
     </Container>
   );
 

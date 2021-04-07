@@ -1,5 +1,5 @@
 import { useSession } from 'next-auth/client';
-import AddTask from '../components/addTask';
+import AddTask from '../components/AddTask';
 import EditTask from '../components/EditTask';
 import useTask from '../hooks/useTask';
 import useTasks from '../hooks/useTasks';

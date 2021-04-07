@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import { Button } from '../layout/Buttons';
+import { fetcher } from '../../utils/helperFunctions';
+import { mutate } from 'swr';
 
 const StyledTask = styled.div`
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 3fr auto;
   padding: 0.2rem 1rem;
 `;
 
@@ -36,6 +38,16 @@ const TaskScore = styled.div`
 `;
 
 export default function TasksList({ tasks }) {
+  async function handleDeleteTask(e) {
+    console.log('Trying to delete task');
+    e.preventDefault();
+    const deletedTask = await fetcher(`/api/tasks/${e.target.value}`, {
+      method: 'DELETE',
+      body: {},
+    });
+    mutate('/api/tasks');
+  }
+
   return (
     <>
       {tasks &&
@@ -52,7 +64,16 @@ export default function TasksList({ tasks }) {
                     <a>More</a>
                   </Link>
                 </Button>
+                <Button
+                  onClick={handleDeleteTask}
+                  small
+                  buttonstyle='secondary'
+                  value={task._id}
+                >
+                  Delete
+                </Button>
               </TaskButton>
+              {/* Add Delete Button */}
             </StyledTask>
           );
         })}

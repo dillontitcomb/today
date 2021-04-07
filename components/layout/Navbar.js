@@ -1,8 +1,9 @@
+import { signIn, signOut, useSession } from 'next-auth/client';
 import Link from 'next/link';
 import styled from 'styled-components';
 
 const Navigation = styled.nav`
-  padding: 1.2rem;
+  padding: 0.8rem;
   border: none;
   height: 50px;
   display: grid;
@@ -11,6 +12,7 @@ const Navigation = styled.nav`
   align-items: center;
   box-shadow: 0px 1px 5px 0 ${({ theme }) => theme.colors.darkGrey};
   background-color: ${({ theme }) => theme.colors.background};
+  z-index: 0;
 `;
 
 const NavLogo = styled.a`
@@ -47,6 +49,8 @@ const NavLink = styled.a`
 `;
 
 export default function Navbar() {
+  const [session, loading] = useSession();
+
   return (
     <Navigation>
       <div>
@@ -55,21 +59,34 @@ export default function Navbar() {
         </Link>
       </div>
       <NavLinkContainer>
-        <Link href='/styles'>
+        {/* <Link href='/styles'>
           <NavLink>Style Guide</NavLink>
-        </Link>
-        <Link href='/about'>
+        </Link> */}
+        {/* <Link href='/about'>
           <NavLink>About</NavLink>
+        </Link> */}
+        <Link href='/today'>
+          <NavLink>Today</NavLink>
         </Link>
         <Link href='/habits'>
-          <NavLink>Your Habits</NavLink>
+          <NavLink>Habits</NavLink>
         </Link>
         <Link href='/tasks'>
-          <NavLink>Your Tasks</NavLink>
+          <NavLink>Tasks</NavLink>
         </Link>
-        <Link href='/profile'>
-          <NavLink>Your Profile</NavLink>
-        </Link>
+        {session && (
+          <>
+            <Link href='/profile'>
+              <NavLink>Settings</NavLink>
+            </Link>
+            <NavLink onClick={signOut}>Log Out</NavLink>
+          </>
+        )}
+        {!session && (
+          <>
+            <NavLink onClick={signIn}>Log In</NavLink>
+          </>
+        )}
       </NavLinkContainer>
     </Navigation>
   );

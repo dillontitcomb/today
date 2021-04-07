@@ -45,6 +45,8 @@ const GlobalStyle = createGlobalStyle`
     flex-direction: column;
   }
   .content {
+    margin: 0;
+    padding: 0;
     flex: 1 0 auto;
   }
   a {

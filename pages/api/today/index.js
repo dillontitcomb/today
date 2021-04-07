@@ -25,19 +25,28 @@ export default async function handler(req, res) {
   let todaysDateToIso = todaysDate.toISOString();
 
   switch (method) {
-    // GET Today object if it exists
+    // GET Today object if it exists - if it doesn't create one
     case 'GET':
       try {
-        const days = await Day.findOne({
+        let day = await Day.findOne({
           user: session.user.userId,
           dateCreated: { $gte: todaysDateToIso },
-        }).populate('tasks');
-        console.log(days);
-        res.status(200).json({
-          success: true,
-          data: days,
-          message: 'Day retrieved.',
         });
+        console.log(day);
+        // If no day was found, create one.
+        if (!day) {
+          day = await Day.create({
+            user: session.user.userId,
+            tasks: [],
+          });
+          console.log(`New day created: ${day}`);
+        }
+        if (day)
+          res.status(200).json({
+            success: true,
+            data: day,
+            message: 'Day retrieved.',
+          });
       } catch (error) {
         console.log(error.message);
         res.status(404).json({ success: false, message: error.message });

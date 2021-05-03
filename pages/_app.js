@@ -7,23 +7,24 @@ import '../css/_app.css';
 
 const theme = {
   colors: {
-    primary: '#225649',
-    primaryLight: '#edf8f5',
-    primaryDulled: '#007C5D',
-    secondary: '#9C4F5D',
-    secondaryDulled: '#BB7682',
-    background: 'white',
-    accent: '#E08A00',
-    darkText: '#212121',
-    lightText: '#fafafa',
-    lightGrey: '#F5F5F5',
-    midGrey: '#E0E0E0',
+    primary: '#1B4965',
+    primaryLight: '#8EC1E1',
+    primaryDulled: '#2B74A1',
+    secondary: '#B1598A',
+    secondaryLight: '#E5C8D8',
+    secondaryDulled: '#C482A7',
+    background: '#ffffff',
+    accent: '#2CB547',
+    darkText: '#091720',
+    lightText: '#F5F9FD',
+    lightGrey: '#F7FBFF',
+    midGrey: '#EFF6FB',
     darkGrey: '#9E9E9E',
     darkestGrey: '#616161',
-    success: 'green',
-    danger: '#dc3545',
-    dangerDulled: '#F25B69',
-    warning: 'yellow',
+    success: '#23CE6B',
+    danger: '#F25A5A',
+    dangerDulled: '#F7A1A1',
+    warning: '#F6F740',
   },
 };
 
@@ -32,7 +33,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 1rem;
     line-height: 1.6;
     background-color: ${theme.colors.lightGrey};

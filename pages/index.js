@@ -15,7 +15,8 @@ const HeaderText = styled.h1`
   margin: 0;
   text-align: center;
   font-size: 4rem;
-  font-weight: 200;
+  font-weight: bold;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 const SubHeaderText = styled.p`
@@ -28,7 +29,7 @@ const SubHeaderText = styled.p`
 
 const HeroText = styled.span`
   font-weight: bold;
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.secondary};
 `;
 
 const ButtonContainer = styled.div`
@@ -52,7 +53,7 @@ const index = () => {
       <ButtonContainer>
         {session ? (
           <Link href='/today'>
-            <Button buttonstyle='primary' large>
+            <Button buttonstyle='secondary' large>
               Plan Your Day
             </Button>
           </Link>

@@ -9,16 +9,8 @@ export const Container = styled.div`
       : props.offwhite
       ? props.theme.colors.lightGrey
       : props.theme.colors.background};
-
-  color: ${(props) =>
-    props.primary || props.secondary
-      ? props.theme.colors.lightText
-      : props.offwhite
-      ? props.theme.colors.darkText
-      : props.theme.colors.darkText};
   max-width: ${(props) => (props.expand ? 4000 : 1200)}px;
   margin: auto;
-  height: 100%;
   overflow: hidden;
   padding: ${(props) => (props.nopad ? 0 : 1)}rem;
   text-align: ${(props) =>
@@ -46,19 +38,9 @@ export const GridRowsContainer = styled(Container)`
   justify-content: center;
 `;
 
-const StyledSplitPane = styled.div`
+export const SplitPane = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  > * {
-    place-self: stretch;
-  }
 `;
 
-export const SplitPanel = ({ left, right }) => {
-  return (
-    <StyledSplitPane>
-      <div>{left}</div>
-      <div>{right}</div>
-    </StyledSplitPane>
-  );
-};
+export const Pane = styled.div``;

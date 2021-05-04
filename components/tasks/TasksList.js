@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import { Button } from '../layout/Buttons';
+import { List } from '../layout/Lists';
 import { fetcher } from '../../utils/helperFunctions';
 import { mutate } from 'swr';
 
@@ -49,7 +50,7 @@ export default function TasksList({ tasks }) {
   }
 
   return (
-    <>
+    <List>
       {tasks &&
         tasks.map((task) => {
           return (
@@ -73,10 +74,9 @@ export default function TasksList({ tasks }) {
                   Delete
                 </Button>
               </TaskButton>
-              {/* Add Delete Button */}
             </StyledTask>
           );
         })}
-    </>
+    </List>
   );
 }

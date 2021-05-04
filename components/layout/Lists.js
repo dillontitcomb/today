@@ -1,31 +1,25 @@
 import styled from 'styled-components';
 import { MinusOutlineButton, PlusOutlineButton } from './Buttons';
 
-export const ListContainer = styled.div`
-  text-align: left;
-  height: 100%;
-  background-color: ${(props) =>
-    props.primary
-      ? props.theme.colors.primary
-      : props.secondary
-      ? props.theme.colors.secondary
-      : props.offwhite
-      ? props.theme.colors.lightGrey
-      : props.theme.colors.background};
-  color: ${(props) =>
-    props.primary || props.secondary
-      ? props.theme.colors.lightText
-      : props.theme.colors.darkText};
-`;
-
-export const ListItem = styled.li`
-  display: block;
-  width: 100%;
-  padding: 0.2rem 1rem;
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.midGrey};
+export const List = styled.div`
+  margin: ${(props) =>
+    props.marginsm ? 0.5 : props.marginmd ? 1 : props.marginlg ? 2 : 0}rem;
+  background-color: ${({ theme }) => theme.colors.background};
+  border-radius: 20px;
+  border: 2px solid ${({ theme }) => theme.colors.midGrey};
+  > div:not(:last-child) {
+    border-bottom: 2px solid ${({ theme }) => theme.colors.midGrey};
   }
 `;
+
+export const ListItem = styled.div`
+  padding: 1rem;
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.lightGrey};
+    cursor: pointer;
+  }
+`;
+
 export const IconListItem = styled.div`
   display: grid;
   grid-template-columns: auto 1fr auto;

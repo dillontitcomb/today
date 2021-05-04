@@ -2,6 +2,7 @@ import { signIn, signOut, useSession } from 'next-auth/client';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { Button } from '../components/layout/Buttons';
+import { List, ListItem } from '../components/layout/Lists';
 
 const LandingContainer = styled.div`
   height: 100%;
@@ -40,24 +41,6 @@ const ButtonContainer = styled.div`
 const ListDisplayContainer = styled.div`
   width: 400px;
   margin: 2rem auto 0 auto;
-`;
-
-const List = styled.div`
-  background-color: ${({ theme }) => theme.colors.background};
-  border-radius: 20px;
-  border: 2px solid ${({ theme }) => theme.colors.midGrey};
-  div:not(:last-child) {
-    border-bottom: 2px solid ${({ theme }) => theme.colors.midGrey};
-  }
-`;
-
-// TODO: Use last-child to add bottom borders to all list items except the final one
-const ListItem = styled.div`
-  padding: 1rem;
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.lightGrey};
-    cursor: pointer;
-  }
 `;
 
 const index = () => {

@@ -12,7 +12,6 @@ const LandingContainer = styled.div`
 `;
 
 const HeaderText = styled.h1`
-  margin: 0;
   text-align: center;
   font-size: 4rem;
   font-weight: bold;
@@ -20,9 +19,9 @@ const HeaderText = styled.h1`
 `;
 
 const SubHeaderText = styled.p`
-  width: 500px;
+  max-width: 500px;
   margin: 0 auto;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   text-align: center;
   font-weight: lighter;
 `;
@@ -35,7 +34,30 @@ const HeroText = styled.span`
 const ButtonContainer = styled.div`
   max-width: 400px;
   margin: 0 auto;
+  padding: 2rem 0;
+`;
+
+const ListDisplayContainer = styled.div`
+  width: 400px;
+  margin: 2rem auto 0 auto;
+`;
+
+const List = styled.div`
+  background-color: ${({ theme }) => theme.colors.background};
+  border-radius: 20px;
+  border: 2px solid ${({ theme }) => theme.colors.midGrey};
+  div:not(:last-child) {
+    border-bottom: 2px solid ${({ theme }) => theme.colors.midGrey};
+  }
+`;
+
+// TODO: Use last-child to add bottom borders to all list items except the final one
+const ListItem = styled.div`
   padding: 1rem;
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.lightGrey};
+    cursor: pointer;
+  }
 `;
 
 const index = () => {
@@ -63,6 +85,14 @@ const index = () => {
           </Button>
         )}
       </ButtonContainer>
+      <ListDisplayContainer>
+        <List>
+          <ListItem>Learn to use TodayApp</ListItem>
+          <ListItem>Add my tasks and habits</ListItem>
+          <ListItem>Create detailed daily plans</ListItem>
+          <ListItem>Get more stuff done</ListItem>
+        </List>
+      </ListDisplayContainer>
     </LandingContainer>
   );
 };

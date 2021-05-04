@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { MinusOutlineButton, PlusOutlineButton } from './Buttons';
 
 export const ListContainer = styled.div`
-  /* border: 1px solid ${({ theme }) => theme.colors.midGrey}; */
   text-align: left;
   height: 100%;
   background-color: ${(props) =>

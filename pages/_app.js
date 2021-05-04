@@ -29,25 +29,26 @@ const theme = {
 };
 
 const GlobalStyle = createGlobalStyle`
-  body {
+  * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+  }
+  body { 
     font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.7;
     background-color: ${theme.colors.lightGrey};
     color:  ${theme.colors.darkText};
-
+    padding: 2rem;
   }
   .app {
-    height: 100vh;
+    height: 95vh;
     display: flex;
     flex-direction: column;
   }
   .content {
-    margin: 0;
-    padding: 0;
     flex: 1 0 auto;
   }
   a {

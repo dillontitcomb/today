@@ -3,9 +3,9 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 const Navigation = styled.nav`
-  padding: 0.8rem;
   border: none;
-  height: 50px;
+  height: 60px;
+  padding: 0 1.5rem;
   display: grid;
   grid-template-columns: 1fr 3fr;
   justify-content: center;
@@ -13,15 +13,17 @@ const Navigation = styled.nav`
   box-shadow: 0px 1px 5px 0 ${({ theme }) => theme.colors.darkGrey};
   background-color: ${({ theme }) => theme.colors.background};
   z-index: 0;
+  border-radius: 20px;
 `;
 
 const NavLogo = styled.a`
   display: inline-block;
   font-size: 1.6rem;
-  font-weight: 300;
-  color: ${({ theme }) => theme.colors.primary};
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.secondary};
   &:hover {
     cursor: pointer;
+    color: ${(props) => props.theme.colors.secondaryDulled};
   }
   @media (max-width: 700px) {
     font-size: 1rem;
@@ -37,10 +39,11 @@ const NavLinkContainer = styled.div`
 const NavLink = styled.a`
   display: inline-block;
   font-size: 1.2rem;
-  padding: 0rem 1rem;
-  color: ${({ theme }) => theme.colors.darkText};
+  padding: 0rem 0.8rem;
+  color: ${({ theme }) => theme.colors.primary};
   &:hover {
     cursor: pointer;
+    color: ${({ theme }) => theme.colors.primaryDulled};
   }
   @media (max-width: 700px) {
     font-size: 0.8rem;
@@ -59,12 +62,6 @@ export default function Navbar() {
         </Link>
       </div>
       <NavLinkContainer>
-        {/* <Link href='/styles'>
-          <NavLink>Style Guide</NavLink>
-        </Link> */}
-        {/* <Link href='/about'>
-          <NavLink>About</NavLink>
-        </Link> */}
         <Link href='/today'>
           <NavLink>Today</NavLink>
         </Link>

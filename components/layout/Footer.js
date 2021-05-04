@@ -1,21 +1,23 @@
 import styled from 'styled-components';
+import { Lead } from '../layout/Typography';
 
 const StyledFooter = styled.div`
   flex-shrink: 0;
-  height: 100px;
+  height: 60px;
   text-align: center;
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.lightText};
+  background-color: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.primary};
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* border-top: 2px solid ${({ theme }) => theme.colors.lightGrey}; */
+  border-radius: 20px;
+  box-shadow: 0px 1px 5px 0 ${({ theme }) => theme.colors.darkGrey};
 `;
 
 export default function Footer(params) {
   return (
     <StyledFooter>
-      <p>TodayApp | Dillon Titcomb | 2021</p>
+      <Lead>TodayApp | Dillon Titcomb | 2021</Lead>
     </StyledFooter>
   );
 }

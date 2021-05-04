@@ -2,7 +2,7 @@ import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 
-const handleBgColorType = ({ buttonstyle, theme }) => {
+const handleBgColor = ({ buttonstyle, theme }) => {
   switch (buttonstyle) {
     case 'primary':
       return theme.colors.primary;
@@ -15,7 +15,7 @@ const handleBgColorType = ({ buttonstyle, theme }) => {
   }
 };
 
-const handleTextColorType = ({ buttonstyle, theme }) => {
+const handleTextColor = ({ buttonstyle, theme }) => {
   switch (buttonstyle) {
     case 'primary':
       return theme.colors.lightText;
@@ -28,7 +28,7 @@ const handleTextColorType = ({ buttonstyle, theme }) => {
   }
 };
 
-const handleBgHoverColorType = ({ buttonstyle, theme }) => {
+const handleBgHoverColor = ({ buttonstyle, theme }) => {
   switch (buttonstyle) {
     case 'primary':
       return theme.colors.primaryDulled;
@@ -67,27 +67,24 @@ const handleOutlineTextColor = ({ buttonstyle, theme }) => {
 };
 
 export const Button = styled.button`
-  display: inline-block;
-  background-color: ${(props) => handleBgColorType(props)};
+  background-color: ${(props) => handleBgColor(props)};
   font-size: ${(props) => (props.small ? 0.8 : props.large ? 1.2 : 1)}rem;
-  color: ${(props) => handleTextColorType(props)};
+  color: ${(props) => handleTextColor(props)};
   padding: ${(props) => (props.small ? 0.3 : props.large ? 0.7 : 0.5)}rem;
   border: none;
   cursor: pointer;
-  outline: none;
   border-radius: ${(props) => (props.noradius ? 0 : 5)}px;
   &:hover {
-    background-color: ${(props) => handleBgHoverColorType(props)};
+    background-color: ${(props) => handleBgHoverColor(props)};
     cursor: ${(props) =>
       props.buttonstyle == 'disabled' ? 'not-allowed' : 'pointer'};
   }
   > * {
-    color: ${(props) => handleTextColorType(props)};
+    color: ${(props) => handleTextColor(props)};
   }
 `;
 
 export const OutlineButton = styled.button`
-  display: inline-block;
   font-size: ${(props) => (props.small ? 0.8 : props.large ? 1.2 : 1)}rem;
   padding: ${(props) => (props.small ? 0.3 : props.large ? 0.7 : 0.5)}rem;
   border-radius: ${(props) => (props.noradius ? 0 : 5)}px;

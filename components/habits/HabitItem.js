@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
+import { Container } from '../layout/Wrappers';
 
 const HabitItemContainer = styled.div`
   display: flex;
@@ -34,30 +35,24 @@ const TaskItem = styled.span`
   margin-left: 2rem;
 `;
 
-const Wrapper = styled.div`
-  margin-bottom: 1rem;
-`;
-
 export default function HabitItem({ habit }) {
   return (
-    <Wrapper>
+    <Container offwhite>
       <Link href={`/habits/${habit._id}`}>
         <HabitItemContainer>
           <HabitText>{habit.name}</HabitText>
-          <WarningContainer>
-            {habit.tasks.length == 0 && (
-              <div>
-                <FontAwesomeIcon icon={faTimes} />
-                <WarningText>Needs Task</WarningText>
-              </div>
-            )}
-          </WarningContainer>
+          {habit.tasks.length == 0 && (
+            <WarningContainer>
+              <FontAwesomeIcon icon={faTimes} />
+              <WarningText>Needs Task</WarningText>
+            </WarningContainer>
+          )}
         </HabitItemContainer>
       </Link>
       {habit.tasks &&
         habit.tasks.map((task) => (
           <TaskItem key={task._id}>{task.name}</TaskItem>
         ))}
-    </Wrapper>
+    </Container>
   );
 }

@@ -14,7 +14,13 @@ export const Container = styled.div`
   overflow: hidden;
   padding: ${(props) => (props.nopad ? 0 : 1)}rem;
   text-align: ${(props) =>
-    props.leftalign ? 'left' : props.rightalign ? 'right' : 'center'};
+    props.leftalign
+      ? 'left'
+      : props.rightalign
+      ? 'right'
+      : props.centeralign
+      ? 'center'
+      : 'initial'};
 `;
 
 export const GridColumnsContainer = styled(Container)`
@@ -25,7 +31,6 @@ export const GridColumnsContainer = styled(Container)`
   );
   grid-gap: ${(props) => (props.gridgap ? props.gridgap : 0)}rem;
   justify-content: center;
-
   > * {
     place-self: center;
   }
@@ -41,6 +46,11 @@ export const GridRowsContainer = styled(Container)`
 export const SplitPane = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+`;
+
+export const TriplePane = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 `;
 
 export const Pane = styled.div``;

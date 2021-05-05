@@ -10,6 +10,12 @@ export const List = styled.div`
   > div:not(:last-child) {
     border-bottom: 2px solid ${({ theme }) => theme.colors.midGrey};
   }
+  p {
+    padding: 0.5rem;
+  }
+  > p:not(:last-child) {
+    border-bottom: 2px solid ${({ theme }) => theme.colors.midGrey};
+  }
 `;
 
 export const ListItem = styled.div`

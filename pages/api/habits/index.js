@@ -17,7 +17,6 @@ export default async function handler(req, res) {
   switch (method) {
     case 'GET':
       try {
-        // TODO: Populate tasks
         const habits = await Habit.find({ user: session.user.userId }).populate(
           'tasks'
         );
@@ -37,7 +36,6 @@ export default async function handler(req, res) {
       const requestBody = JSON.parse(req.body);
       // Add logged in user's session credentials to request body
       requestBody.user = session.user.userId;
-      // TODO: Calculate totalGoal, currentTotal, habitScore
       try {
         const habit = await Habit.create(requestBody);
         res.status(201).json({ success: true, data: habit });

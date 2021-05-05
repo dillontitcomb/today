@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import useHabit from '../../../hooks/useHabit';
-import { SplitPanel } from '../../../components/layout/Wrappers';
+import { SplitPane } from '../../../components/layout/Wrappers';
 import SimpleAddTask from '../../../components/tasks/SimpleAddTask';
 import { Button } from '../../../components/layout/Buttons';
 import styled from 'styled-components';
@@ -65,44 +65,40 @@ export default function habitPage(params) {
     router.push('/habits');
   }
 
-  const leftPanel = (
-    <div>
-      <HabitNameContainer>
-        <span>Habit: {habit.name}</span>{' '}
-        <Button buttonstyle='secondary' onClick={handleDeleteHabit}>
-          Delete Habit
-        </Button>
-      </HabitNameContainer>
-      <p>
-        Beginning {new Date(habit.startDate).toDateString()}, ending{' '}
-        {new Date(habit.endDate).toDateString()}
-      </p>
-      <h3>Tasks to complete this habit</h3>
-      {habit.tasks &&
-        habit.tasks.map((task) => (
-          <TaskContainer key={task._id}>
-            <span>{task.name}</span>
-            <Button
-              small
-              buttonstyle='secondary'
-              onClick={handleDeleteHabitTask}
-              value={task._id}
-            >
-              Remove
-            </Button>
-          </TaskContainer>
-        ))}
-    </div>
-  );
-
-  const rightPanel = (
-    <SimpleAddTask habitId={id} inactive updateHabit></SimpleAddTask>
-  );
-
   return (
     <div>
       <h1>This is the single habit page</h1>
-      <SplitPanel left={leftPanel} right={rightPanel} />
+      <SplitPane>
+        <div>
+          <HabitNameContainer>
+            <span>Habit: {habit.name}</span>{' '}
+            <Button buttonstyle='secondary' onClick={handleDeleteHabit}>
+              Delete Habit
+            </Button>
+          </HabitNameContainer>
+          <p>
+            Beginning {new Date(habit.startDate).toDateString()}, ending{' '}
+            {new Date(habit.endDate).toDateString()}
+          </p>
+          <h3>Tasks to complete this habit</h3>
+          {habit.tasks &&
+            habit.tasks.map((task) => (
+              <TaskContainer key={task._id}>
+                <span>{task.name}</span>
+                <Button
+                  small
+                  buttonstyle='secondary'
+                  onClick={handleDeleteHabitTask}
+                  value={task._id}
+                >
+                  Remove
+                </Button>
+              </TaskContainer>
+            ))}
+        </div>
+
+        <SimpleAddTask habitId={id} inactive updateHabit></SimpleAddTask>
+      </SplitPane>
     </div>
   );
 }

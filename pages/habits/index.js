@@ -4,7 +4,7 @@ import HabitsList from '../../components/habits/HabitsList';
 import SimpleAddHabit from '../../components/habits/SimpleAddHabit';
 import { Button } from '../../components/layout/Buttons';
 import Modal from '../../components/layout/Modal';
-import { Container, SplitPanel } from '../../components/layout/Wrappers';
+import { Container, SplitPane, Pane } from '../../components/layout/Wrappers';
 import useHabits from '../../hooks/useHabits';
 
 export default function habits() {
@@ -17,8 +17,6 @@ export default function habits() {
     setShowModal((prev) => !prev);
   };
 
-  const leftPanel = <HabitsList habits={habits}></HabitsList>;
-  const rightPanel = <SimpleAddHabit />;
   return (
     <div>
       <h1>Habits Dashboard</h1>
@@ -30,7 +28,15 @@ export default function habits() {
           </Modal>
         )}
       </Container>
-      <SplitPanel left={leftPanel} right={rightPanel}></SplitPanel>
+      <SplitPane>
+        <Pane>
+ 
+          <HabitsList habits={habits}></HabitsList>
+        </Pane>
+        <Pane>
+          <SimpleAddHabit />
+        </Pane>
+      </SplitPane>
     </div>
   );
 }

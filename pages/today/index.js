@@ -2,17 +2,12 @@ import styled from 'styled-components';
 import useHabits from '../../hooks/useHabits';
 import useTasks from '../../hooks/useTasks';
 import useToday from '../../hooks/useToday';
-import HabitItem from '../../components/habits/HabitItem';
+import { TriplePane } from '../../components/layout/Wrappers';
+import { List } from '../../components/layout/Lists';
 
-const TodayContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-`;
-
-const DayContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.background};
-`;
-
+const DayContainer = styled.div``;
+const HabitsContainer = styled.div``;
+const TasksContainer = styled.div``;
 export default function today() {
   const { today, todayLoading, todayError } = useToday();
   const { habits, habitsLoading, habitsError } = useHabits();
@@ -24,23 +19,29 @@ export default function today() {
   console.log(tasks);
 
   return (
-    <TodayContainer>
-      <div>
+    <TriplePane>
+      <HabitsContainer>
         <h3>Habits</h3>
-        {habits && habits.map((habit) => <p key={habit._id}>{habit.name}</p>)}
-      </div>
+        <List marginsm>
+          {habits && habits.map((habit) => <p key={habit._id}>{habit.name}</p>)}
+        </List>
+      </HabitsContainer>
       <DayContainer>
         <h3>Assigned Today</h3>
-        <p>Item One</p>
-        <p>Item Two</p>
-        <p>Item Three</p>
+        <List marginsm>
+          <p>Item One</p>
+          <p>Item Two</p>
+          <p>Item Three</p>
+        </List>
       </DayContainer>
-      <div>
+      <TasksContainer>
         <h3>Tasks</h3>
-        <p>Item One</p>
-        <p>Item Two</p>
-        <p>Item Three</p>
-      </div>
-    </TodayContainer>
+        <List marginsm>
+          <p>Item One</p>
+          <p>Item Two</p>
+          <p>Item Three</p>
+        </List>
+      </TasksContainer>
+    </TriplePane>
   );
 }

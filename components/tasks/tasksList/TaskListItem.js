@@ -1,17 +1,19 @@
 import styled from 'styled-components';
 import Link from 'next/link';
-import { Button } from '../layout/Buttons';
-import { List } from '../layout/Lists';
-import { fetcher } from '../../utils/helperFunctions';
+import { Button } from '../../layout/Buttons';
+import { fetcher } from '../../../utils/helperFunctions';
 import { mutate } from 'swr';
+import TaskScore from './TaskScore';
+import { Lead } from '../../layout/Typography';
+import { ListItem } from '../../layout/Lists';
 
-const StyledTask = styled.div`
+const TaskContainer = styled.div`
   display: grid;
-  grid-template-columns: 3fr auto;
-  padding: 0.2rem 1rem;
+  grid-template-columns: 3fr 1fr;
+  grid-gap: 0.2rem;
 `;
 
-const TaskName = styled.div`
+const TaskInfo = styled.div`
   text-align: left;
   justify-self: start;
   display: flex;
@@ -20,22 +22,6 @@ const TaskName = styled.div`
 
 const TaskButton = styled.div`
   justify-self: end;
-`;
-
-const TaskScore = styled.div`
-  margin: auto 0.5rem auto 0;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: ${(props) =>
-    props.score > 0 && props.score < 3
-      ? props.theme.colors.midGrey
-      : props.score >= 3 && props.score < 6
-      ? props.theme.colors.dangerDulled
-      : props.theme.colors.danger};
 `;
 
 export default function TaskListItem({ task }) {
@@ -50,12 +36,12 @@ export default function TaskListItem({ task }) {
   }
 
   return (
-    <div>
-      <StyledTask key={task._id}>
-        <TaskName>
-          <TaskScore score={task.score}>{task.score}</TaskScore>
+    <ListItem>
+      <TaskContainer key={task._id}>
+        <TaskInfo>
+          <TaskScore score={task.score} />
           <span>{task.name}</span>
-        </TaskName>
+        </TaskInfo>
         <TaskButton>
           <Button small>
             <Link href={`/tasks/${task._id}`}>
@@ -71,7 +57,7 @@ export default function TaskListItem({ task }) {
             Delete
           </Button>
         </TaskButton>
-      </StyledTask>
-    </div>
+      </TaskContainer>
+    </ListItem>
   );
 }

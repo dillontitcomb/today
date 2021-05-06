@@ -7,6 +7,7 @@ export const List = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
   border-radius: 20px;
   border: 2px solid ${({ theme }) => theme.colors.midGrey};
+  overflow: hidden;
   > div:not(:last-child) {
     border-bottom: 2px solid ${({ theme }) => theme.colors.midGrey};
   }

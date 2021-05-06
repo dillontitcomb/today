@@ -1,4 +1,4 @@
-import { List } from '../layout/Lists';
+import { List } from '../../layout/Lists';
 
 import TaskListItem from './TaskListItem';
 

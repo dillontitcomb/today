@@ -21,10 +21,12 @@ const theme = {
     midGrey: '#EFF6FB',
     darkGrey: '#9E9E9E',
     darkestGrey: '#616161',
-    success: '#23CE6B',
+    success: '#188C48',
+    successLight: '#23CE6B',
     danger: '#F25A5A',
     dangerDulled: '#F7A1A1',
-    warning: '#F6F740',
+    warning: '#FF9F1C',
+    neutral: '#F6F740',
   },
 };
 

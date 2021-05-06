@@ -2,7 +2,7 @@ import { useSession } from 'next-auth/client';
 import { Title } from '../../components/layout/Typography';
 import { Container, SplitPane } from '../../components/layout/Wrappers';
 import SimpleAddTask from '../../components/tasks/SimpleAddTask';
-import TasksList from '../../components/tasks/TasksList';
+import TasksList from '../../components/tasks/tasksList/TasksList';
 import useTasks from '../../hooks/useTasks';
 
 export default function tasks() {
@@ -15,10 +15,11 @@ export default function tasks() {
 
   return (
     <Container nopad offwhite expand>
-      <Title>Welcome to your Tasks dashboard.</Title>
       <SplitPane>
-        <Container nopad leftalign>
-          <Title primary>Your Tasks</Title>
+        <Container offwhite centeralign>
+          <Title weight='bolder' primary>
+            Your Tasks
+          </Title>
           <TasksList tasks={tasks}></TasksList>
         </Container>
         <Container nopad offwhite>

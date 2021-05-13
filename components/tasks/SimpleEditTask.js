@@ -63,6 +63,9 @@ export default function EditTask({ task }) {
       console.log(`Task updated: ${newTask.data.name}`);
       setMessage(`Task updated: ${newTask.data.name}`);
       setMessageStyle('');
+      setTimeout(() => {
+        router.push('/tasks');
+      }, 800);
     },
   });
 
@@ -81,7 +84,9 @@ export default function EditTask({ task }) {
     setMessageStyle('danger');
     setMessage(deleted.message);
     mutate('/api/tasks');
-    router.push('/tasks');
+    setTimeout(() => {
+      router.push('/tasks');
+    }, 800);
     // TODO: Add message on tasks dashboard that task has been deleted
   }
 

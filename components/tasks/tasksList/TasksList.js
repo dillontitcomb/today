@@ -1,13 +1,20 @@
 import { List } from '../../layout/Lists';
-
-import TaskListItem from './TaskListItem';
+import Accordion from '../../layout/Accordion';
+import TaskTitle from './TaskTitle';
+import TaskDetails from './TaskDetails';
 
 export default function TasksList({ tasks }) {
   return (
     <List>
       {tasks &&
         tasks.map((task) => {
-          return <TaskListItem task={task} key={task._id}></TaskListItem>;
+          const title = <TaskTitle task={task}></TaskTitle>;
+
+          return (
+            <Accordion title={title} key={task._id}>
+              <TaskDetails task={task}></TaskDetails>
+            </Accordion>
+          );
         })}
     </List>
   );

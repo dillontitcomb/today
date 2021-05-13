@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const StyledAccordion = styled.div`
   /* For some reason, aria-expanded doesn't work when put inside Header or Details elements, seems to require use of classes. */
   .icon {
-    transition: all 0.35s ease;
+    transition: all 0.3s ease;
   }
   .icon[aria-expanded='true'] {
     transform: rotateZ(90deg);
@@ -16,7 +16,7 @@ const StyledAccordion = styled.div`
   .details {
     overflow: hidden;
     max-height: 300px;
-    transition: max-height 1s ease-in-out;
+    transition: max-height 0.5s ease-in-out;
   }
   .details[aria-expanded='true'] {
     max-height: 0px;

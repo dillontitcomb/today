@@ -3,15 +3,19 @@ import { Title } from '../../components/layout/Typography';
 import { Container, SplitPane } from '../../components/layout/Wrappers';
 import SimpleAddTask from '../../components/tasks/SimpleAddTask';
 import TasksList from '../../components/tasks/tasksList/TasksList';
-import useTasks from '../../hooks/useTasks';
+import useTasksContext from '../../hooks/useTasksContext';
+import { useEffect } from 'react';
+import UseTasksContext from '../../hooks/useTasksContext';
 
 export default function tasks() {
   const [session, loading] = useSession();
-  const { tasks, error } = useTasks();
-  if (error) console.log(error);
-
-  if (loading) return 'Loading...';
   if (!loading && !session) return <p>Access Denied</p>;
+
+  const { tasks, getTasks } = useTasksContext();
+
+  useEffect(() => {
+    getTasks();
+  }, []);
 
   return (
     <Container nopad offwhite expand>
@@ -20,10 +24,10 @@ export default function tasks() {
           <Title weight='bolder' primary>
             Your Tasks
           </Title>
-          <TasksList tasks={tasks} />
+          <TasksList tasks={tasks}></TasksList>
         </Container>
         <Container nopad offwhite>
-          <SimpleAddTask />
+          <SimpleAddTask></SimpleAddTask>
         </Container>
       </SplitPane>
     </Container>

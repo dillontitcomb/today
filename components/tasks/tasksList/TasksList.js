@@ -4,9 +4,10 @@ import TaskTitle from './TaskTitle';
 import TaskDetails from './TaskDetails';
 
 export default function TasksList({ tasks }) {
+  console.log(tasks);
   return (
     <List>
-      {tasks &&
+      {tasks.length > 0 &&
         tasks.map((task) => {
           return (
             <Accordion title={<TaskTitle task={task} />} key={task._id}>

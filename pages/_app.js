@@ -4,6 +4,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import Footer from '../components/layout/Footer';
 import Navbar from '../components/layout/Navbar';
 import '../css/_app.css';
+import TasksState from '../context/tasks/TasksState';
 
 const theme = {
   colors: {
@@ -60,23 +61,26 @@ const GlobalStyle = createGlobalStyle`
 
 function today({ Component, pageProps }) {
   return (
-    <div>
+    <>
       <GlobalStyle />
+
       <Provider session={pageProps.session}>
-        <ThemeProvider theme={theme}>
-          <Head>
-            <title>Today</title>
-          </Head>
-          <div className='app'>
-            <Navbar />
-            <div className='content'>
-              <Component {...pageProps} />
+        <TasksState>
+          <ThemeProvider theme={theme}>
+            <Head>
+              <title>Today</title>
+            </Head>
+            <div className='app'>
+              <Navbar />
+              <div className='content'>
+                <Component {...pageProps} />
+              </div>
+              <Footer />
             </div>
-            <Footer />
-          </div>
-        </ThemeProvider>
+          </ThemeProvider>
+        </TasksState>
       </Provider>
-    </div>
+    </>
   );
 }
 

@@ -67,6 +67,7 @@ const handleOutlineTextColor = ({ buttonstyle, theme }) => {
 };
 
 export const Button = styled.button`
+  width: ${(props) => (props.fill ? '100%' : 'inherit')};
   background-color: ${(props) => handleBgColor(props)};
   font-size: ${(props) => (props.small ? 0.8 : props.large ? 1.2 : 1)}rem;
   color: ${(props) => handleTextColor(props)};

@@ -30,6 +30,7 @@ const Header = styled.div`
   align-items: center;
 `;
 const OpenChevron = styled.div`
+  padding-left: 0.2rem;
   margin: 0 0.5rem 0 0;
 `;
 const Details = styled.div``;

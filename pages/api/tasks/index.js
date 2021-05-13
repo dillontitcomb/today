@@ -20,7 +20,9 @@ export default async function handler(req, res) {
     // Returns all user's tasks
     case 'GET':
       try {
-        const tasks = await Task.find({ user: session.user.userId });
+        const tasks = await Task.find({ user: session.user.userId }).sort({
+          score: 'asc',
+        });
         res.status(200).json({ success: true, data: tasks });
       } catch (error) {
         res.status(404).json({

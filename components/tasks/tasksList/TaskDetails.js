@@ -1,27 +1,19 @@
 import styled from 'styled-components';
-import { SubText } from '../../layout/Typography';
+import TaskDetailsActions from './TaskDetailsActions';
+import TaskDetailsContent from './TaskDetailsContent';
 
 const DetailsContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  grid-gap: 0.5rem;
+  margin-top: 0.2rem;
 `;
-
-// const DetailsText = styled.span`
-//   font-size: .;
-// `;
-
-// Add DetailsContent for urgency, resistance, and time indicators
-// Add DetailsActions for interaction buttons (edit, delete)
 
 export default function TaskDetails({ task }) {
   return (
     <DetailsContainer>
-      <SubText>{task.resistance} res</SubText>
-      <SubText>{task.urgency} urg</SubText>
-      <SubText>{task.time} minutes</SubText>
+      <TaskDetailsContent task={task} />
+      <TaskDetailsActions task={task} />
     </DetailsContainer>
   );
 }

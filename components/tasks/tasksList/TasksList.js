@@ -8,10 +8,8 @@ export default function TasksList({ tasks }) {
     <List>
       {tasks &&
         tasks.map((task) => {
-          const title = <TaskTitle task={task}></TaskTitle>;
-
           return (
-            <Accordion title={title} key={task._id}>
+            <Accordion title={<TaskTitle task={task} />} key={task._id}>
               <TaskDetails task={task}></TaskDetails>
             </Accordion>
           );

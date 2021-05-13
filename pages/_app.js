@@ -18,7 +18,7 @@ const theme = {
     darkText: '#091720',
     lightText: '#F5F9FD',
     lightGrey: '#F7FBFF',
-    midGrey: '#EFF6FB',
+    midGrey: '#DEEDF7',
     darkGrey: '#9E9E9E',
     darkestGrey: '#616161',
     success: '#188C48',

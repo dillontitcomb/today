@@ -1,7 +1,5 @@
 import { useSession } from 'next-auth/client';
-import Accordion from '../../components/layout/Accordion';
 import { Title } from '../../components/layout/Typography';
-import { List } from '../../components/layout/Lists';
 import { Container, SplitPane } from '../../components/layout/Wrappers';
 import SimpleAddTask from '../../components/tasks/SimpleAddTask';
 import TasksList from '../../components/tasks/tasksList/TasksList';
@@ -22,15 +20,10 @@ export default function tasks() {
           <Title weight='bolder' primary>
             Your Tasks
           </Title>
-          <List>
-            <Accordion title='Samwise Gamgee'>
-              <p>This is a task's information</p>
-            </Accordion>
-          </List>
-          <TasksList tasks={tasks}></TasksList>
+          <TasksList tasks={tasks} />
         </Container>
         <Container nopad offwhite>
-          <SimpleAddTask></SimpleAddTask>
+          <SimpleAddTask />
         </Container>
       </SplitPane>
     </Container>

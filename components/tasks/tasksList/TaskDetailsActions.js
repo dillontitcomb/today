@@ -15,10 +15,22 @@ const DeleteButton = styled(Button)`
     background-color: ${(props) => props.theme.colors.dangerDulled};
   }
 `;
+const SuccessButton = styled(Button)`
+  background-color: ${(props) => props.theme.colors.success};
+  color: ${(props) => props.theme.colors.lightText};
+  &:hover {
+    background-color: ${(props) => props.theme.colors.successLight};
+  }
+`;
+
+//TODO: Add functionality to buttons once context is added
 
 export default function TaskDetailsActions({ task }) {
   return (
     <ButtonContainer>
+      <SuccessButton small fill>
+        Complete
+      </SuccessButton>
       <Button small fill>
         Edit
       </Button>

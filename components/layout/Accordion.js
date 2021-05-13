@@ -43,6 +43,8 @@ export default function Accordion(props) {
     setIsActive(!isActive);
   }
 
+  // TODO: Make sure the toggleAccordion click handler allows for buttons in the Details section of the accordion to be clicked.
+
   return (
     <ListItem>
       <StyledAccordion onClick={toggleAccordion}>

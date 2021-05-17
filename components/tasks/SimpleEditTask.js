@@ -38,7 +38,7 @@ const InputGroup = styled.div`
   display: flex;
 `;
 
-export default function EditTask({ task }) {
+export default function SimpleEditTask({ task }) {
   const router = useRouter();
   const [message, setMessage] = useState('');
   const [messageStyle, setMessageStyle] = useState('');
@@ -55,6 +55,7 @@ export default function EditTask({ task }) {
       _id: task._id ? task._id : '',
     },
     onSubmit: async (values) => {
+      // TODO: Add context func to update task
       console.log('Trying to submit form to edit task!');
       const newTask = await fetcher(`/api/tasks/${values._id}`, {
         method: 'PUT',

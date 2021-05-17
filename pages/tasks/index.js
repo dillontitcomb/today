@@ -5,7 +5,6 @@ import SimpleAddTask from '../../components/tasks/SimpleAddTask';
 import TasksList from '../../components/tasks/tasksList/TasksList';
 import useTasksContext from '../../hooks/useTasksContext';
 import { useEffect } from 'react';
-import UseTasksContext from '../../hooks/useTasksContext';
 
 export default function tasks() {
   const [session, loading] = useSession();

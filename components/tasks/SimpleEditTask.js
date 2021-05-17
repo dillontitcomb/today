@@ -2,8 +2,7 @@ import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { mutate } from 'swr';
-import { fetcher } from '../../utils/helperFunctions';
+import useTasksContext from '../../hooks/useTasksContext';
 import { Button } from '../layout/Buttons';
 import {
   Checkbox,
@@ -40,6 +39,7 @@ const InputGroup = styled.div`
 
 export default function SimpleEditTask({ task }) {
   const router = useRouter();
+  const { updateTask, deleteTask } = useTasksContext();
   const [message, setMessage] = useState('');
   const [messageStyle, setMessageStyle] = useState('');
 
@@ -56,13 +56,9 @@ export default function SimpleEditTask({ task }) {
     },
     onSubmit: async (values) => {
       // TODO: Add context func to update task
-      console.log('Trying to submit form to edit task!');
-      const newTask = await fetcher(`/api/tasks/${values._id}`, {
-        method: 'PUT',
-        body: JSON.stringify(values),
-      });
-      console.log(`Task updated: ${newTask.data.name}`);
-      setMessage(`Task updated: ${newTask.data.name}`);
+      console.log('Trying to submit form to edit task!', values._id);
+      updateTask(values);
+      setMessage(`Task updated!`);
       setMessageStyle('');
       setTimeout(() => {
         router.push('/tasks');
@@ -78,13 +74,9 @@ export default function SimpleEditTask({ task }) {
 
   async function handleDeleteTask() {
     console.log('Trying to delete task!');
-    const deleted = await fetcher(`/api/tasks/${task._id}`, {
-      method: 'DELETE',
-    });
-    console.log(deleted.message);
+    deleteTask(task._id);
     setMessageStyle('danger');
-    setMessage(deleted.message);
-    mutate('/api/tasks');
+    setMessage('Message deleted');
     setTimeout(() => {
       router.push('/tasks');
     }, 800);

@@ -1,32 +1,45 @@
 import {
   GET_TASKS_SUCCESS,
   GET_TASKS_FAILURE,
+  ADD_TASK_SUCCESS,
+  ADD_TASK_FAILURE,
   GET_TASK_SUCCESS,
   GET_TASK_FAILURE,
   UPDATE_TASK_SUCCESS,
   UPDATE_TASK_FAILURE,
+  DELETE_TASK_FAILURE,
+  DELETE_TASK_SUCCESS,
+  MARK_TASK_COMPLETE_SUCCESS,
+  MARK_TASK_COMPLETE_FAILURE,
 } from '../types';
 
-export default (state, action) => {
+export default function tasksReducer(state, action) {
   switch (action.type) {
     // In case of success
-    case GET_TASKS_SUCCESS:
-      return { ...state, tasks: action.payload, loading: false };
+
     case UPDATE_TASK_SUCCESS:
+    case MARK_TASK_COMPLETE_SUCCESS:
+    case ADD_TASK_SUCCESS:
       return {
         ...state,
         task: action.payload.task,
         tasks: action.payload.tasks,
         loading: false,
       };
+    case GET_TASKS_SUCCESS:
+      return { ...state, tasks: action.payload, loading: false };
     case GET_TASK_SUCCESS:
+    case DELETE_TASK_SUCCESS:
       return { ...state, task: action.payload, loading: false };
     // In case of failure
     case GET_TASKS_FAILURE:
     case GET_TASK_FAILURE:
     case UPDATE_TASK_FAILURE:
+    case DELETE_TASK_FAILURE:
+    case MARK_TASK_COMPLETE_FAILURE:
+    case ADD_TASK_FAILURE:
       return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }
-};
+}

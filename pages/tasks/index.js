@@ -16,6 +16,7 @@ export default function tasks() {
     getTasks();
   }, []);
 
+  console.log(tasks);
   return (
     <Container nopad offwhite expand>
       <SplitPane>

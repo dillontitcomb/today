@@ -22,6 +22,7 @@ export default async function handler(req, res) {
       try {
         const tasks = await Task.find({
           user: session.user.userId,
+          active: true,
           complete: false,
         }).sort({
           score: 'asc',

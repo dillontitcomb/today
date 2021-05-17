@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import { mutate } from 'swr';
-import { fetcher } from '../../../utils/helperFunctions';
+import useTasksContext from '../../../hooks/useTasksContext';
 import { Button } from '../../layout/Buttons';
 
 const ButtonContainer = styled.div`
@@ -27,29 +26,21 @@ const SuccessButton = styled(Button)`
 `;
 
 export default function TaskDetailsActions({ task }) {
+  const { deleteTask, markTaskComplete } = useTasksContext();
+
   async function handleDeleteTask(e) {
     console.log('Trying to delete task');
-    e.preventDefault();
-    const deletedTask = await fetcher(`/api/tasks/${task._id}`, {
-      method: 'DELETE',
-      body: {},
-    });
-    mutate('/api/tasks');
+    deleteTask(task._id);
   }
 
-  //TODO: Put request to mark a task completed
-  async function handleCompleteTask() {
+  async function handleMarkTaskComplete() {
     console.log('Trying to mark task complete');
-    const updatedTask = await fetcher(`/api/tasks/${task._id}`, {
-      method: 'PUT',
-      body: JSON.stringify({ complete: true, dateComplete: Date.now() }),
-    });
-    mutate('/api/tasks');
+    markTaskComplete(task._id);
   }
 
   return (
     <ButtonContainer>
-      <SuccessButton small $fill onClick={handleCompleteTask}>
+      <SuccessButton small $fill onClick={handleMarkTaskComplete}>
         Complete
       </SuccessButton>
       <Button small $fill>

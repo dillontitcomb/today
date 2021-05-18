@@ -24,6 +24,8 @@ export default async function handler(req, res) {
   todaysDate.setUTCHours(0, 0, 0, 0);
   let todaysDateToIso = todaysDate.toISOString();
 
+  // TODO: Add PUT and POST routes
+
   switch (method) {
     // GET Today object if it exists - if it doesn't create one
     case 'GET':

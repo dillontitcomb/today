@@ -30,7 +30,7 @@ export default function today() {
       <DayContainer>
         <h3>Assigned Today</h3>
         <List marginsm>
-          <p>Empty :(</p>
+          <p>Item one :)</p>
         </List>
       </DayContainer>
       <TasksContainer>

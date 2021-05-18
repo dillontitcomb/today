@@ -199,7 +199,22 @@ const GlobalState = (props) => {
     }
   };
 
-  const addTaskToToday = async () => {};
+  // INCOMPLETE. TODO: Add PUT and POST endpoints to /api/days to allow for updating today's tasks
+  const moveTaskToToday = async (task, today) => {
+    // 1. Uupdate task's dateAssigned and day properties
+    const res = await fetcher(`${server}/api/tasks/${task._id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ dateAssigned: Date.now(), day: today._id }),
+    });
+    const updatedTask = res.data;
+    // 2. Add updated task to Today's tasks array
+    const todayRes = await fetcher(`${server}/api/days/${today._id}`, {
+      method: 'POST',
+      body: JSON.stringify({ $push: { tasks: [updatedTask._id] } }),
+    });
+    const newDay = todayRes.data;
+    // 3. dispatch action updating today and updating tasks list
+  };
 
   return (
     <GlobalContext.Provider
@@ -220,6 +235,7 @@ const GlobalState = (props) => {
         deleteTask,
         getHabits,
         getToday,
+        moveTaskToToday
       }}
     >
       {props.children}

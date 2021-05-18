@@ -24,6 +24,7 @@ export default async function handler(req, res) {
           user: session.user.userId,
           active: true,
           complete: false,
+          dateAssigned: null,
         }).sort({
           score: 'asc',
         });

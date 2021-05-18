@@ -3,6 +3,7 @@ import { TriplePane } from '../../components/layout/Wrappers';
 import { List } from '../../components/layout/Lists';
 import useGlobalContext from '../../hooks/useGlobalContext';
 import { useEffect } from 'react';
+import { Button } from '../../components/layout/Buttons';
 
 const DayContainer = styled.div``;
 const HabitsContainer = styled.div``;
@@ -18,6 +19,12 @@ export default function today() {
   }, []);
 
   console.log(day);
+
+  function checkState() {
+    console.log('TODAY:', day);
+    console.log('TASKS:', tasks);
+    console.log('HABITS:', habits);
+  }
 
   function handleMoveTask(e) {
     const taskId = e.currentTarget.getAttribute('id');
@@ -35,7 +42,6 @@ export default function today() {
       <DayContainer>
         <h3>Assigned Today</h3>
         <List marginsm>
-          {/* TODO: Create variable in context "dayTasks" so that map stays intact when day object changes */}
           {day.tasks &&
             day.tasks.map((task) => <p key={task._id}>{task.name}</p>)}
         </List>
@@ -51,6 +57,7 @@ export default function today() {
             ))}
         </List>
       </TasksContainer>
+      <Button onClick={checkState}>Check State</Button>
     </TriplePane>
   );
 }

@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     // Get a day by its ID
     case 'GET':
       try {
-        const day = await Day.findById(id);
+        const day = await Day.findById(id).populate('tasks');
         if (!day) {
           return res
             .status(400)
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
         const day = await Day.findByIdAndUpdate(id, JSON.parse(req.body), {
           new: true,
           runValidators: false,
-        });
+        }).populate('tasks');
         if (!day) {
           return res.status(400).json({ success: false });
         }

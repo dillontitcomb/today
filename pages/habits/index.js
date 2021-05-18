@@ -30,7 +30,6 @@ export default function habits() {
       </Container>
       <SplitPane>
         <Pane>
- 
           <HabitsList habits={habits}></HabitsList>
         </Pane>
         <Pane>

@@ -8,6 +8,10 @@ import {
   GET_TASKS_SUCCESS,
   GET_TASK_FAILURE,
   GET_TASK_SUCCESS,
+  GET_HABITS_FAILURE,
+  GET_HABITS_SUCCESS,
+  GET_TODAY_SUCCESS,
+  GET_TODAY_FAILURE,
   UPDATE_TASK_FAILURE,
   UPDATE_TASK_SUCCESS,
   MARK_TASK_COMPLETE_FAILURE,
@@ -20,6 +24,9 @@ const GlobalState = (props) => {
   const initialState = {
     tasks: [],
     task: {},
+    habits: [],
+    habit: {},
+    today: {},
     loading: false,
     errors: {},
     error: {},
@@ -27,13 +34,11 @@ const GlobalState = (props) => {
 
   const [state, dispatch] = useReducer(globalReducer, initialState);
 
-  // TODO: Replace existing API calls with context calls
-  //
-  // Mark Task Complete
-  // Delete Task
-  // Edit/Update Task
-  // Add Task to Today
-  // Remove Task from Today
+  //        //
+  //        //
+  // TASKS  //
+  //        //
+  //        //
 
   // Get all tasks
   const getTasks = async () => {
@@ -144,7 +149,7 @@ const GlobalState = (props) => {
   // Delete Task
   const deleteTask = async (id) => {
     try {
-      console.log('TASK CONTEXT: DELETE TASK');
+      console.log('CONTEXT: DELETE TASK');
       // Delete task, then get all tasks with this task deleted
       await fetcher(`${server}/api/tasks/${id}`, {
         method: 'DELETE',
@@ -158,20 +163,63 @@ const GlobalState = (props) => {
     }
   };
 
+  //        //
+  //        //
+  // HABITS //
+  //        //
+  //        //
+
+  const getHabits = async () => {
+    try {
+      console.log('CONTEXT: GET HABITS');
+      const res = await fetcher(`${server}/api/habits`);
+      const habits = res.data;
+      dispatch({ type: GET_HABITS_SUCCESS, payload: habits });
+    } catch (err) {
+      console.log(err);
+      dispatch({ type: GET_HABITS_FAILURE, payload: err });
+    }
+  };
+
+  //        //
+  //        //
+  // TODAY  //
+  //        //
+  //        //
+
+  const getToday = async () => {
+    try {
+      console.log('CONTEXT: GET TODAYS TASKS');
+      const res = await fetcher(`${server}/api/today`);
+      const today = res.data;
+      dispatch({ type: GET_TODAY_SUCCESS, payload: today });
+    } catch (err) {
+      console.log(err);
+      dispatch({ type: GET_TODAY_FAILURE, payload: err });
+    }
+  };
+
+  const addTaskToToday = async () => {};
+
   return (
     <GlobalContext.Provider
       value={{
         tasks: state.tasks,
         task: state.task,
+        habits: state.habits,
+        habit: state.habit,
+        today: state.today,
         loading: state.loading,
         errors: state.errors,
         error: state.error,
         getTasks,
-        updateTask,
         getTask,
+        addTask,
+        updateTask,
         markTaskComplete,
         deleteTask,
-        addTask,
+        getHabits,
+        getToday,
       }}
     >
       {props.children}

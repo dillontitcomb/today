@@ -18,6 +18,8 @@ import {
   MARK_TASK_COMPLETE_SUCCESS,
   DELETE_TASK_FAILURE,
   DELETE_TASK_SUCCESS,
+  MOVE_TASK_TO_DAY_FAILURE,
+  MOVE_TASK_TO_DAY_SUCCESS,
 } from '../types';
 
 const GlobalState = (props) => {
@@ -26,7 +28,7 @@ const GlobalState = (props) => {
     task: {},
     habits: [],
     habit: {},
-    today: {},
+    day: {},
     loading: false,
     errors: {},
     error: {},
@@ -71,7 +73,7 @@ const GlobalState = (props) => {
   // Add Task
   const addTask = async (task, updateHabit = false) => {
     try {
-      console.log('TASK CONTEXT: ADD TASK');
+      console.log('CONTEXT: ADD TASK');
       const res = await fetcher(`${server}/api/tasks/`, {
         method: 'POST',
         body: JSON.stringify(task),
@@ -105,7 +107,7 @@ const GlobalState = (props) => {
   // Update single task
   const updateTask = async (task) => {
     try {
-      console.log('TASK CONTEXT: UPDATE TASK BY ID,');
+      // console.log('CONTEXT: UPDATE TASK BY ID,');
       // Update task
       const res = await fetcher(`${server}/api/tasks/${task._id}`, {
         method: 'PUT',
@@ -127,7 +129,7 @@ const GlobalState = (props) => {
   // Mark task complete
   const markTaskComplete = async (id) => {
     try {
-      console.log('TASK CONTEXT: MARK TASK COMPLETE');
+      // console.log('TASK CONTEXT: MARK TASK COMPLETE');
       // Update task
       const res = await fetcher(`${server}/api/tasks/${id}`, {
         method: 'PUT',
@@ -149,7 +151,7 @@ const GlobalState = (props) => {
   // Delete Task
   const deleteTask = async (id) => {
     try {
-      console.log('CONTEXT: DELETE TASK');
+      // console.log('CONTEXT: DELETE TASK');
       // Delete task, then get all tasks with this task deleted
       await fetcher(`${server}/api/tasks/${id}`, {
         method: 'DELETE',
@@ -171,7 +173,7 @@ const GlobalState = (props) => {
 
   const getHabits = async () => {
     try {
-      console.log('CONTEXT: GET HABITS');
+      // console.log('CONTEXT: GET HABITS');
       const res = await fetcher(`${server}/api/habits`);
       const habits = res.data;
       dispatch({ type: GET_HABITS_SUCCESS, payload: habits });
@@ -189,7 +191,7 @@ const GlobalState = (props) => {
 
   const getToday = async () => {
     try {
-      console.log('CONTEXT: GET TODAYS TASKS');
+      // console.log('CONTEXT: GET TODAYS TASKS');
       const res = await fetcher(`${server}/api/today`);
       const today = res.data;
       dispatch({ type: GET_TODAY_SUCCESS, payload: today });
@@ -199,21 +201,37 @@ const GlobalState = (props) => {
     }
   };
 
-  // INCOMPLETE. TODO: Add PUT and POST endpoints to /api/days to allow for updating today's tasks
-  const moveTaskToToday = async (task, today) => {
-    // 1. Uupdate task's dateAssigned and day properties
-    const res = await fetcher(`${server}/api/tasks/${task._id}`, {
-      method: 'PUT',
-      body: JSON.stringify({ dateAssigned: Date.now(), day: today._id }),
-    });
-    const updatedTask = res.data;
-    // 2. Add updated task to Today's tasks array
-    const todayRes = await fetcher(`${server}/api/days/${today._id}`, {
-      method: 'POST',
-      body: JSON.stringify({ $push: { tasks: [updatedTask._id] } }),
-    });
-    const newDay = todayRes.data;
-    // 3. dispatch action updating today and updating tasks list
+  // On today page, move a task from the tasks list to day's tasks list
+  const moveTaskToToday = async (taskId, day) => {
+    console.log('TASKID: ', taskId);
+    console.log('DAY OBJECT', day);
+    try {
+      // 1. Update task's dateAssigned and day properties
+      const taskRes = await fetcher(`${server}/api/tasks/${taskId}`, {
+        method: 'PUT',
+        body: JSON.stringify({ dateAssigned: Date.now(), day: day._id }),
+      });
+      const updatedTask = taskRes.data;
+      // 2. Get updated tasks list to update global state
+      const tasksRes = await fetcher(`${server}/api/tasks/`);
+      const updatedTasks = tasksRes.data;
+      // 3. Update day's tasks array with new task
+      const dayRes = await fetcher(`${server}/api/days/${day._id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ $push: { tasks: [updatedTask._id] } }),
+      });
+      const updatedDay = dayRes.data;
+      const payload = {
+        task: updatedTask,
+        tasks: updatedTasks,
+        day: updatedDay,
+      };
+      // 4. dispatch action updating today and updating tasks list
+      dispatch({ type: MOVE_TASK_TO_DAY_SUCCESS, payload: payload });
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: MOVE_TASK_TO_DAY_FAILURE, payload: error });
+    }
   };
 
   return (
@@ -223,7 +241,7 @@ const GlobalState = (props) => {
         task: state.task,
         habits: state.habits,
         habit: state.habit,
-        today: state.today,
+        day: state.day,
         loading: state.loading,
         errors: state.errors,
         error: state.error,
@@ -235,7 +253,7 @@ const GlobalState = (props) => {
         deleteTask,
         getHabits,
         getToday,
-        moveTaskToToday
+        moveTaskToToday,
       }}
     >
       {props.children}

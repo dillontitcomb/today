@@ -8,7 +8,7 @@ const DayContainer = styled.div``;
 const HabitsContainer = styled.div``;
 const TasksContainer = styled.div``;
 export default function today() {
-  const { getTasks, tasks, getHabits, habits, getToday, today } =
+  const { getTasks, tasks, getHabits, habits, getToday, day, moveTaskToToday } =
     useGlobalContext();
 
   useEffect(() => {
@@ -17,7 +17,12 @@ export default function today() {
     getToday();
   }, []);
 
-  console.log('Today?', today);
+  console.log(day);
+
+  function handleMoveTask(e) {
+    const taskId = e.currentTarget.getAttribute('id');
+    moveTaskToToday(taskId, day);
+  }
 
   return (
     <TriplePane>
@@ -30,13 +35,20 @@ export default function today() {
       <DayContainer>
         <h3>Assigned Today</h3>
         <List marginsm>
-          <p>Item one :)</p>
+          {/* TODO: Create variable in context "dayTasks" so that map stays intact when day object changes */}
+          {day.tasks &&
+            day.tasks.map((task) => <p key={task._id}>{task.name}</p>)}
         </List>
       </DayContainer>
       <TasksContainer>
         <h3>Tasks</h3>
         <List marginsm>
-          {tasks && tasks.map((task) => <p key={task._id}>{task.name}</p>)}
+          {tasks &&
+            tasks.map((task) => (
+              <p onClick={handleMoveTask} id={task._id} key={task._id}>
+                {task.name}
+              </p>
+            ))}
         </List>
       </TasksContainer>
     </TriplePane>

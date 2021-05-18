@@ -15,8 +15,8 @@ import {
   MARK_TASK_COMPLETE_FAILURE,
   GET_TODAY_SUCCESS,
   GET_TODAY_FAILURE,
-  MOVE_TASK_TO_TODAY_SUCCESS,
-  MOVE_TASK_TO_TODAY_FAILURE,
+  MOVE_TASK_TO_DAY_SUCCESS,
+  MOVE_TASK_TO_DAY_FAILURE,
 } from '../types';
 
 export default function globalReducer(state, action) {
@@ -54,17 +54,18 @@ export default function globalReducer(state, action) {
 
     // TODAY: In case of success
     case GET_TODAY_SUCCESS:
-      return { ...state, loading: false, today: action.payload };
-    case MOVE_TASK_TO_TODAY_SUCCESS:
+      return { ...state, loading: false, day: action.payload };
+    case MOVE_TASK_TO_DAY_SUCCESS:
       return {
         ...state,
         loading: false,
-        today: action.payload.today,
+        task: action.payload.task,
         tasks: action.payload.tasks,
+        day: action.payload.day,
       };
     // TODAY: In case of failure
     case GET_TODAY_FAILURE:
-    case MOVE_TASK_TO_TODAY_FAILURE:
+    case MOVE_TASK_TO_DAY_FAILURE:
       return { ...state, loading: false, error: action.payload };
     default:
       return state;

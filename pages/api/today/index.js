@@ -24,8 +24,6 @@ export default async function handler(req, res) {
   todaysDate.setUTCHours(0, 0, 0, 0);
   let todaysDateToIso = todaysDate.toISOString();
 
-  // TODO: Add PUT and POST routes
-
   switch (method) {
     // GET Today object if it exists - if it doesn't create one
     case 'GET':
@@ -33,7 +31,7 @@ export default async function handler(req, res) {
         let day = await Day.findOne({
           user: session.user.userId,
           dateCreated: { $gte: todaysDateToIso },
-        });
+        }).populate('tasks');
         console.log(day);
         // If no day was found, create one.
         if (!day) {

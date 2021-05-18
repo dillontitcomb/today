@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router';
 import SimpleEditTask from '../../../components/tasks/SimpleEditTask';
-import useTasksContext from '../../../hooks/useTasksContext';
+import useGlobalContext from '../../../hooks/useGlobalContext';
 import { useEffect } from 'react';
 
 export default function taskPage() {
   const router = useRouter();
   const { id } = router.query;
 
-  const { task, getTask } = useTasksContext();
+  const { task, getTask } = useGlobalContext();
 
   // When router query object becomes available, get Task
   useEffect(() => {

@@ -3,14 +3,14 @@ import { Title } from '../../components/layout/Typography';
 import { Container, SplitPane } from '../../components/layout/Wrappers';
 import SimpleAddTask from '../../components/tasks/SimpleAddTask';
 import TasksList from '../../components/tasks/tasksList/TasksList';
-import useTasksContext from '../../hooks/useTasksContext';
+import useGlobalContext from '../../hooks/useGlobalContext';
 import { useEffect } from 'react';
 
 export default function tasks() {
   const [session, loading] = useSession();
   if (!loading && !session) return <p>Access Denied</p>;
 
-  const { tasks, getTasks } = useTasksContext();
+  const { tasks, getTasks } = useGlobalContext();
 
   useEffect(() => {
     getTasks();

@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import styled from 'styled-components';
-import useTasksContext from '../../hooks/useTasksContext';
+import useGlobalContext from '../../hooks/useGlobalContext';
 import { Button } from '../layout/Buttons';
 import {
   Checkbox,
@@ -39,7 +39,7 @@ const InputGroup = styled.div`
 
 export default function SimpleEditTask({ task }) {
   const router = useRouter();
-  const { updateTask, deleteTask } = useTasksContext();
+  const { updateTask, deleteTask } = useGlobalContext();
   const [message, setMessage] = useState('');
   const [messageStyle, setMessageStyle] = useState('');
 

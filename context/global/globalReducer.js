@@ -13,7 +13,7 @@ import {
   MARK_TASK_COMPLETE_FAILURE,
 } from '../types';
 
-export default function tasksReducer(state, action) {
+export default function globalReducer(state, action) {
   switch (action.type) {
     // In case of success
 

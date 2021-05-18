@@ -37,7 +37,7 @@ const ColoredSection = styled.div`
   color: white;
 `;
 
-export default function colorscheme(params) {
+export default function colorscheme() {
   return (
     <Wrapper>
       <Title>

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import useTasksContext from '../../../hooks/useTasksContext';
+import useGlobalContext from '../../../hooks/useGlobalContext';
 import { Button } from '../../layout/Buttons';
 
 const ButtonContainer = styled.div`
@@ -26,7 +26,7 @@ const SuccessButton = styled(Button)`
 `;
 
 export default function TaskDetailsActions({ task }) {
-  const { deleteTask, markTaskComplete } = useTasksContext();
+  const { deleteTask, markTaskComplete } = useGlobalContext();
 
   async function handleDeleteTask(e) {
     console.log('Trying to delete task');

@@ -1,7 +1,7 @@
 import { server } from '../../config';
 import { fetcher } from '../../utils/helperFunctions';
-import TasksContext from './tasksContext';
-import TasksReducer from './tasksReducer';
+import GlobalContext from './GlobalContext';
+import globalReducer from './globalReducer';
 import { useReducer } from 'react';
 import {
   GET_TASKS_FAILURE,
@@ -16,7 +16,7 @@ import {
   DELETE_TASK_SUCCESS,
 } from '../types';
 
-const TasksState = (props) => {
+const GlobalState = (props) => {
   const initialState = {
     tasks: [],
     task: {},
@@ -25,7 +25,7 @@ const TasksState = (props) => {
     error: {},
   };
 
-  const [state, dispatch] = useReducer(TasksReducer, initialState);
+  const [state, dispatch] = useReducer(globalReducer, initialState);
 
   // TODO: Replace existing API calls with context calls
   //
@@ -159,7 +159,7 @@ const TasksState = (props) => {
   };
 
   return (
-    <TasksContext.Provider
+    <GlobalContext.Provider
       value={{
         tasks: state.tasks,
         task: state.task,
@@ -175,8 +175,8 @@ const TasksState = (props) => {
       }}
     >
       {props.children}
-    </TasksContext.Provider>
+    </GlobalContext.Provider>
   );
 };
 
-export default TasksState;
+export default GlobalState;

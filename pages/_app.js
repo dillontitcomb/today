@@ -4,7 +4,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import Footer from '../components/layout/Footer';
 import Navbar from '../components/layout/Navbar';
 import '../css/_app.css';
-import TasksState from '../context/tasks/TasksState';
+import GlobalState from '../context/global/globalState';
 
 const theme = {
   colors: {
@@ -65,7 +65,7 @@ function today({ Component, pageProps }) {
       <GlobalStyle />
 
       <Provider session={pageProps.session}>
-        <TasksState>
+        <GlobalState>
           <ThemeProvider theme={theme}>
             <Head>
               <title>Today</title>
@@ -78,7 +78,7 @@ function today({ Component, pageProps }) {
               <Footer />
             </div>
           </ThemeProvider>
-        </TasksState>
+        </GlobalState>
       </Provider>
     </>
   );

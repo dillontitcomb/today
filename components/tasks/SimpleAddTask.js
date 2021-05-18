@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { mutate } from 'swr';
-import useTasksContext from '../../hooks/useTasksContext';
+import useGlobalContext from '../../hooks/useGlobalContext';
 import { fetcher } from '../../utils/helperFunctions';
 import { Button } from '../layout/Buttons';
 import {
@@ -41,7 +41,7 @@ const InputGroup = styled.div`
 
 // TODO: take as props: habitId (attach to habit array), inactive (change active to false), and updateHabit (make second API request to add this task's ID to the habit that created it)
 export default function SimpleAddTask(props) {
-  const { addTask } = useTasksContext();
+  const { addTask } = useGlobalContext();
   const [message, setMessage] = useState('');
   const [messageStyle, setMessageStyle] = useState('');
 

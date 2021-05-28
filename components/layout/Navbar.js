@@ -10,10 +10,7 @@ const Navigation = styled.nav`
   grid-template-columns: 1fr 3fr;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 1px 5px 0 ${({ theme }) => theme.colors.darkGrey};
-  background-color: ${({ theme }) => theme.colors.background};
   z-index: 0;
-  border-radius: 20px;
 `;
 
 const NavLogo = styled.a`

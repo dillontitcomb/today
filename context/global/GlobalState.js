@@ -18,8 +18,8 @@ import {
   MARK_TASK_COMPLETE_SUCCESS,
   DELETE_TASK_FAILURE,
   DELETE_TASK_SUCCESS,
-  MOVE_TASK_TO_DAY_FAILURE,
-  MOVE_TASK_TO_DAY_SUCCESS,
+  ASSIGN_TASK_TO_DAY_FAILURE,
+  ASSIGN_TASK_TO_DAY_SUCCESS,
 } from '../types';
 
 const GlobalState = (props) => {
@@ -35,6 +35,8 @@ const GlobalState = (props) => {
   };
 
   const [state, dispatch] = useReducer(globalReducer, initialState);
+
+  // TODO: Add pre-render functions that run before the actual API calls that update local state to make the UI update instantly
 
   //        //
   //        //
@@ -201,8 +203,8 @@ const GlobalState = (props) => {
     }
   };
 
-  // On today page, move a task from the tasks list to day's tasks list
-  const moveTaskToToday = async (taskId, day) => {
+  // Assign a task to today
+  const assignTaskToDay = async (taskId, day) => {
     console.log('TASKID: ', taskId);
     console.log('DAY OBJECT', day);
     try {
@@ -227,11 +229,19 @@ const GlobalState = (props) => {
         day: updatedDay,
       };
       // 4. dispatch action updating today and updating tasks list
-      dispatch({ type: MOVE_TASK_TO_DAY_SUCCESS, payload: payload });
+      dispatch({ type: ASSIGN_TASK_TO_DAY_SUCCESS, payload: payload });
     } catch (error) {
       console.log(error);
-      dispatch({ type: MOVE_TASK_TO_DAY_FAILURE, payload: error });
+      dispatch({ type: ASSIGN_TASK_TO_DAY_FAILURE, payload: error });
     }
+  };
+
+  //TODO: unassign task from day
+  const unassignTask = async (taskId) => {
+    // 1. Update task: remove dateAssigned, remove day field
+    // 2. Get updated task list
+    // 3. Update day: remove task from tasks list
+    // 4. Dispatch action to update task, tasks, and day state objects
   };
 
   return (
@@ -253,7 +263,7 @@ const GlobalState = (props) => {
         deleteTask,
         getHabits,
         getToday,
-        moveTaskToToday,
+        assignTaskToDay,
       }}
     >
       {props.children}

@@ -44,10 +44,9 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.7;
     background-color: ${theme.colors.lightGrey};
     color:  ${theme.colors.darkText};
-    padding: 2rem;
   }
   .app {
-    height: 95vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
   }

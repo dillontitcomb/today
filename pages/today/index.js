@@ -9,7 +9,7 @@ const DayContainer = styled.div``;
 const HabitsContainer = styled.div``;
 const TasksContainer = styled.div``;
 export default function today() {
-  const { getTasks, tasks, getHabits, habits, getToday, day, moveTaskToToday } =
+  const { getTasks, tasks, getHabits, habits, getToday, day, assignTaskToDay } =
     useGlobalContext();
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function today() {
 
   function handleMoveTask(e) {
     const taskId = e.currentTarget.getAttribute('id');
-    moveTaskToToday(taskId, day);
+    assignTaskToDay(taskId, day);
   }
 
   return (

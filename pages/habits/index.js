@@ -1,16 +1,19 @@
-import { useState } from 'react';
-import AddHabit from '../../components/habits/AddHabit';
+import { useEffect, useState } from 'react';
 import HabitsList from '../../components/habits/HabitsList';
 import SimpleAddHabit from '../../components/habits/SimpleAddHabit';
 import { Button } from '../../components/layout/Buttons';
 import Modal from '../../components/layout/Modal';
 import { Container, SplitPane, Pane } from '../../components/layout/Wrappers';
-import useHabits from '../../hooks/useHabits';
+import useGlobalContext from '../../hooks/useGlobalContext';
 
 export default function habits() {
   // TODO: Create UseModal hook!
   const [showModal, setShowModal] = useState(false);
-  const { habits, habitsLoading, habitsError } = useHabits();
+  const { habits, getHabits } = useGlobalContext();
+
+  useEffect(() => {
+    getHabits();
+  }, []);
 
   const openModal = () => {
     console.log('Trying to display modal.');

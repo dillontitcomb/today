@@ -1,18 +1,14 @@
 import { useRouter } from 'next/router';
-import useHabit from '../../../hooks/useHabit';
 import { SplitPane } from '../../../components/layout/Wrappers';
 import SimpleAddTask from '../../../components/tasks/SimpleAddTask';
 import { Button } from '../../../components/layout/Buttons';
 import styled from 'styled-components';
 import { fetcher } from '../../../utils/helperFunctions';
 import { mutate } from 'swr';
+import useGlobalContext from '../../../hooks/useGlobalContext';
+import { useEffect } from 'react';
 
 // TODO:
-// Add ability to add task to habit DONE
-// Change GET Habit API to popualate tasks DONE
-// Show tasks on single habit page DONE
-// Add deleteHabit functionality
-// Remove task from habit
 // List habit properties
 // SimpleEditHabit Form
 
@@ -37,13 +33,15 @@ const TaskContainer = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.lightGrey};
 `;
 
-export default function habitPage(params) {
+export default function habitPage() {
   const router = useRouter();
   const { id } = router.query;
-  const { habit, habitLoading, habitError } = useHabit(id);
 
-  if (!habit) return <p>Loading...</p>;
-  if (habitError) return <p>Failed to load.</p>;
+  const { habit, getHabit, deleteHabit } = useGlobalContext();
+
+  useEffect(() => {
+    getHabit(id);
+  }, [router]);
 
   async function handleDeleteHabitTask(e) {
     e.preventDefault();
@@ -54,47 +52,50 @@ export default function habitPage(params) {
     });
   }
 
+  // TODO: Fix bug: network error when deleting single habit
   async function handleDeleteHabit(e) {
     e.preventDefault();
     console.log('Trying to delete habit!');
-    await fetcher(`/api/habits/${id}`, {
-      method: 'DELETE',
-      body: {},
-    });
-    mutate('/api/habits');
+    deleteHabit(id);
     router.push('/habits');
   }
+
+  // TODO: Better job of handling loading
+  if (!habit) return <p>Loading...</p>;
 
   return (
     <div>
       <h1>This is the single habit page</h1>
       <SplitPane>
         <div>
-          <HabitNameContainer>
-            <span>Habit: {habit.name}</span>{' '}
-            <Button buttonstyle='secondary' onClick={handleDeleteHabit}>
-              Delete Habit
-            </Button>
-          </HabitNameContainer>
-          <p>
-            Beginning {new Date(habit.startDate).toDateString()}, ending{' '}
-            {new Date(habit.endDate).toDateString()}
-          </p>
+          <div>
+            <HabitNameContainer>
+              <span>Habit: {habit.name}</span>{' '}
+              <Button buttonstyle='secondary' onClick={handleDeleteHabit}>
+                Delete Habit
+              </Button>
+            </HabitNameContainer>
+            <p>
+              Beginning {new Date(habit.startDate).toDateString()}, ending{' '}
+              {new Date(habit.endDate).toDateString()}
+            </p>
+          </div>
           <h3>Tasks to complete this habit</h3>
-          {habit.tasks &&
-            habit.tasks.map((task) => (
-              <TaskContainer key={task._id}>
-                <span>{task.name}</span>
-                <Button
-                  small
-                  buttonstyle='secondary'
-                  onClick={handleDeleteHabitTask}
-                  value={task._id}
-                >
-                  Remove
-                </Button>
-              </TaskContainer>
-            ))}
+          {habit.tasks
+            ? habit.tasks.map((task) => (
+                <TaskContainer key={task._id}>
+                  <span>{task.name}</span>
+                  <Button
+                    small
+                    buttonstyle='secondary'
+                    onClick={handleDeleteHabitTask}
+                    value={task._id}
+                  >
+                    Remove
+                  </Button>
+                </TaskContainer>
+              ))
+            : 'null'}
         </div>
 
         <SimpleAddTask habitId={id} inactive updateHabit></SimpleAddTask>

@@ -8,6 +8,8 @@ import {
   GET_TASKS_SUCCESS,
   GET_TASK_FAILURE,
   GET_TASK_SUCCESS,
+  GET_HABIT_FAILURE,
+  GET_HABIT_SUCCESS,
   GET_HABITS_FAILURE,
   GET_HABITS_SUCCESS,
   GET_TODAY_SUCCESS,
@@ -18,6 +20,8 @@ import {
   MARK_TASK_COMPLETE_SUCCESS,
   DELETE_TASK_FAILURE,
   DELETE_TASK_SUCCESS,
+  DELETE_HABIT_FAILURE,
+  DELETE_HABIT_SUCCESS,
   ASSIGN_TASK_TO_DAY_FAILURE,
   ASSIGN_TASK_TO_DAY_SUCCESS,
 } from '../types';
@@ -184,6 +188,33 @@ const GlobalState = (props) => {
       dispatch({ type: GET_HABITS_FAILURE, payload: err });
     }
   };
+  const getHabit = async (id) => {
+    try {
+      console.log('CONTEXT: GET HABIT');
+      const res = await fetcher(`${server}/api/habits/${id}`);
+      const habit = res.data;
+      dispatch({ type: GET_HABIT_SUCCESS, payload: habit });
+    } catch (err) {
+      console.log(err);
+      dispatch({ type: GET_HABIT_FAILURE, payload: err });
+    }
+  };
+  const deleteHabit = async (id) => {
+    try {
+      // console.log('CONTEXT: DELETE HABIT');
+      const deletedHabitRes = await fetcher(`${server}/api/habits/${id}`, {
+        method: 'DELETE',
+      });
+      const deletedHabit = deletedHabitRes.data;
+      const habitsRes = await fetcher(`${server}/api/habits`);
+      const habits = habitsRes.data;
+      const payload = { habit: deletedHabit, habits: habits };
+      dispatch({ type: DELETE_HABIT_SUCCESS, payload: payload });
+    } catch (err) {
+      console.log(err);
+      dispatch({ type: DELETE_HABIT_FAILURE, payload: err });
+    }
+  };
 
   //        //
   //        //
@@ -262,6 +293,8 @@ const GlobalState = (props) => {
         markTaskComplete,
         deleteTask,
         getHabits,
+        getHabit,
+        deleteHabit,
         getToday,
         assignTaskToDay,
       }}

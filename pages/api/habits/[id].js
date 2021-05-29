@@ -45,7 +45,7 @@ export default async function handler(req, res) {
         const deletedHabit = await Habit.deleteOne({ _id: id });
         if (!deletedHabit)
           return res.status(400).json({ success: false, message: error });
-        res.status(400).json({
+        res.status(200).json({
           success: true,
           data: {},
           message: 'Habit was successfully deleted.',

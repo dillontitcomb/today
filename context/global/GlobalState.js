@@ -272,7 +272,7 @@ const GlobalState = (props) => {
     // 1. Update task: remove dateAssigned, remove day field
     // 2. Get updated task list
     // 3. Update day: remove task from tasks list
-    // 4. Dispatch action to update task, tasks, and day state objects
+  // 4. Dispatch action to update task, tasks, and day state objects
   };
 
   return (

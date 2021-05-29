@@ -1,36 +1,36 @@
 import { useFormik } from 'formik';
 import { useSession } from 'next-auth/client';
+import { useEffect } from 'react';
 import { Button } from '../components/layout/Buttons';
 import { Form, TextInput } from '../components/layout/Forms';
-import useProfile from '../hooks/useProfile';
-import { fetcher } from '../utils/helperFunctions';
+import useGlobalContext from '../hooks/useGlobalContext';
 
 export default function profile() {
   const [session, loading] = useSession();
-  const { profile, profileLoading, profileError } = useProfile();
-  console.log(profile);
+  const { profile, getProfile, updateProfile } = useGlobalContext();
+
+  useEffect(() => {
+    getProfile();
+  }, []);
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      firstName: profile ? profile.firstName : '',
-      lastName: profile ? profile.lastName : '',
+      firstName: profile.firstName ? profile.firstName : '',
+      lastName: profile.lastName ? profile.lastName : '',
     },
 
     onSubmit: async (values) => {
-      const newProfile = await fetcher('/api/profile', {
-        method: 'POST',
-        body: JSON.stringify(values),
-      });
-      const { firstName, lastName } = newProfile.data;
-      console.log(`New profile created by ${firstName} ${lastName}`);
+      await updateProfile(values);
     },
   });
 
   return (
     <div>
       <h1>Your Profile Page</h1>
-      <h4>Welcome, {session ? session.user.email : 'friend'}!</h4>
+      <h4>
+        Welcome, {profile.firstName ? profile.firstName : 'buddy old pal'}!
+      </h4>
       <Form onSubmit={formik.handleSubmit}>
         <h3>
           First Name:

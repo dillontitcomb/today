@@ -31,8 +31,9 @@ export default async function handler(req, res) {
           .json({ success: false, message: 'Profile could not be found.' });
       }
       break;
-    case 'POST':
-      console.log('POST REQUEST');
+    // TODO: change to 'PUT'
+    case 'PUT':
+      console.log('PUT REQUEST');
       const requestBody = JSON.parse(req.body);
       // Add logged in user's session credentials to request body
       requestBody.user = session.user.userId;

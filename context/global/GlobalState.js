@@ -24,6 +24,9 @@ import {
   DELETE_HABIT_SUCCESS,
   ASSIGN_TASK_TO_DAY_FAILURE,
   ASSIGN_TASK_TO_DAY_SUCCESS,
+  GET_PROFILE_SUCCESS,
+  UPDATE_PROFILE_SUCCESS,
+  GET_PROFILE_FAILURE,
 } from '../types';
 
 const GlobalState = (props) => {
@@ -33,6 +36,7 @@ const GlobalState = (props) => {
     habits: [],
     habit: {},
     day: {},
+    profile: {},
     loading: false,
     errors: {},
     error: {},
@@ -272,7 +276,38 @@ const GlobalState = (props) => {
     // 1. Update task: remove dateAssigned, remove day field
     // 2. Get updated task list
     // 3. Update day: remove task from tasks list
-  // 4. Dispatch action to update task, tasks, and day state objects
+    // 4. Dispatch action to update task, tasks, and day state objects
+  };
+
+  //           //
+  //           //
+  //  PROFILE  //
+  //           //
+  //           //
+
+  const getProfile = async () => {
+    try {
+      const res = await fetcher(`${server}/api/profile`);
+      const profile = res.data;
+      dispatch({ type: GET_PROFILE_SUCCESS, payload: profile });
+    } catch (error) {
+      console.error(error);
+      dispatch({ type: GET_PROFILE_FAILURE, payload: error });
+    }
+  };
+
+  const updateProfile = async (profile) => {
+    try {
+      const res = await fetcher(`${server}/api/profile`, {
+        method: 'PUT',
+        body: JSON.stringify(profile),
+      });
+      const updatedProfile = res.data;
+      dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: updatedProfile });
+    } catch (err) {
+      console.log(err);
+      dispatch({ type: UPDATE_PROFILE_FAILURE, payload: err });
+    }
   };
 
   return (
@@ -283,6 +318,7 @@ const GlobalState = (props) => {
         habits: state.habits,
         habit: state.habit,
         day: state.day,
+        profile: state.profile,
         loading: state.loading,
         errors: state.errors,
         error: state.error,
@@ -297,6 +333,8 @@ const GlobalState = (props) => {
         deleteHabit,
         getToday,
         assignTaskToDay,
+        getProfile,
+        updateProfile,
       }}
     >
       {props.children}

@@ -21,11 +21,13 @@ import {
   GET_TODAY_FAILURE,
   ASSIGN_TASK_TO_DAY_SUCCESS,
   ASSIGN_TASK_TO_DAY_FAILURE,
+  GET_PROFILE_SUCCESS,
+  UPDATE_PROFILE_SUCCESS,
 } from '../types';
 
 export default function globalReducer(state, action) {
   switch (action.type) {
-    // TASKS: In case of success
+    // TASKS
     case UPDATE_TASK_SUCCESS:
     case MARK_TASK_COMPLETE_SUCCESS:
     case ADD_TASK_SUCCESS:
@@ -41,16 +43,7 @@ export default function globalReducer(state, action) {
     case GET_TASK_SUCCESS:
       return { ...state, tasks: action.payload, loading: false };
 
-    // TASKS: In case of failure
-    case GET_TASKS_FAILURE:
-    case GET_TASK_FAILURE:
-    case UPDATE_TASK_FAILURE:
-    case DELETE_TASK_FAILURE:
-    case MARK_TASK_COMPLETE_FAILURE:
-    case ADD_TASK_FAILURE:
-      return { ...state, loading: false, error: action.payload };
-
-    // HABITS: In case of success
+    // HABITS
     case GET_HABITS_SUCCESS:
       return { ...state, habits: action.payload, loading: false };
     case GET_HABIT_SUCCESS:
@@ -67,13 +60,7 @@ export default function globalReducer(state, action) {
         loading: false,
       };
 
-    // HABITS: In case of failure
-    case GET_HABITS_FAILURE:
-    case GET_HABIT_FAILURE:
-    case DELETE_HABIT_FAILURE:
-      return { ...state, loading: false, error: action.payload };
-
-    // TODAY: In case of success
+    // TODAY
     case GET_TODAY_SUCCESS:
       return { ...state, loading: false, day: action.payload };
     case ASSIGN_TASK_TO_DAY_SUCCESS:
@@ -85,10 +72,27 @@ export default function globalReducer(state, action) {
         day: action.payload.day,
       };
 
-    // TODAY: In case of failure
+    // PROFILE
+    case GET_PROFILE_SUCCESS:
+    case UPDATE_PROFILE_SUCCESS:
+      return { ...state, profile: action.payload, loading: false };
+
+    // FAILURE
+    case GET_TASKS_FAILURE:
+    case GET_TASK_FAILURE:
+    case UPDATE_TASK_FAILURE:
+    case DELETE_TASK_FAILURE:
+    case MARK_TASK_COMPLETE_FAILURE:
+    case ADD_TASK_FAILURE:
+    case GET_HABITS_FAILURE:
+    case GET_HABIT_FAILURE:
+    case DELETE_HABIT_FAILURE:
     case GET_TODAY_FAILURE:
     case ASSIGN_TASK_TO_DAY_FAILURE:
+    case GET_PROFILE_FAILURE:
+    case UPDATE_PROFILE_FAILURE:
       return { ...state, loading: false, error: action.payload };
+
     default:
       return state;
   }

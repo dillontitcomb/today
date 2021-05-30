@@ -9,8 +9,17 @@ const DayContainer = styled.div``;
 const HabitsContainer = styled.div``;
 const TasksContainer = styled.div``;
 export default function today() {
-  const { getTasks, tasks, getHabits, habits, getToday, day, assignTaskToDay } =
-    useGlobalContext();
+  const {
+    getTasks,
+    tasks,
+    getHabits,
+    habits,
+    getToday,
+    day,
+    assignTaskToDay,
+    assignHabitToToday,
+    unassignTask,
+  } = useGlobalContext();
 
   useEffect(() => {
     getTasks();
@@ -18,17 +27,26 @@ export default function today() {
     getToday();
   }, []);
 
-  console.log(day);
-
   function checkState() {
     console.log('TODAY:', day);
     console.log('TASKS:', tasks);
     console.log('HABITS:', habits);
   }
 
-  function handleMoveTask(e) {
+  function handleAssignTask(e) {
     const taskId = e.currentTarget.getAttribute('id');
     assignTaskToDay(taskId, day);
+  }
+
+  function handleAssignHabit(e) {
+    const habitId = e.currentTarget.getAttribute('id');
+    assignHabitToToday(habitId, day);
+  }
+
+  function handleUnassignTask(e) {
+    const taskId = e.currentTarget.getAttribute('id');
+    console.log('Handling unassign task ', taskId);
+    unassignTask(taskId, tasks, day);
   }
 
   return (
@@ -36,14 +54,23 @@ export default function today() {
       <HabitsContainer>
         <h3>Habits</h3>
         <List marginsm>
-          {habits && habits.map((habit) => <p key={habit._id}>{habit.name}</p>)}
+          {habits &&
+            habits.map((habit) => (
+              <p onClick={handleAssignHabit} id={habit._id} key={habit._id}>
+                {habit.name}
+              </p>
+            ))}
         </List>
       </HabitsContainer>
       <DayContainer>
         <h3>Assigned Today</h3>
         <List marginsm>
           {day.tasks &&
-            day.tasks.map((task) => <p key={task._id}>{task.name}</p>)}
+            day.tasks.map((task) => (
+              <p key={task._id} id={task._id} onClick={handleUnassignTask}>
+                {task.name}
+              </p>
+            ))}
         </List>
       </DayContainer>
       <TasksContainer>
@@ -51,7 +78,7 @@ export default function today() {
         <List marginsm>
           {tasks &&
             tasks.map((task) => (
-              <p onClick={handleMoveTask} id={task._id} key={task._id}>
+              <p onClick={handleAssignTask} id={task._id} key={task._id}>
                 {task.name}
               </p>
             ))}

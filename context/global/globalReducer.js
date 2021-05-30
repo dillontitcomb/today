@@ -23,6 +23,8 @@ import {
   GET_TODAY_FAILURE,
   ASSIGN_TASK_TO_DAY_SUCCESS,
   ASSIGN_TASK_TO_DAY_FAILURE,
+  UNASSIGN_TASK_FAILURE,
+  UNASSIGN_TASK_SUCCESS,
   GET_PROFILE_SUCCESS,
   UPDATE_PROFILE_SUCCESS,
 } from '../types';
@@ -67,6 +69,7 @@ export default function globalReducer(state, action) {
     case GET_TODAY_SUCCESS:
       return { ...state, loading: false, day: action.payload };
     case ASSIGN_TASK_TO_DAY_SUCCESS:
+    case UNASSIGN_TASK_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -93,6 +96,7 @@ export default function globalReducer(state, action) {
     case DELETE_HABIT_FAILURE:
     case GET_TODAY_FAILURE:
     case ASSIGN_TASK_TO_DAY_FAILURE:
+    case UNASSIGN_TASK_FAILURE:
     case GET_PROFILE_FAILURE:
     case UPDATE_PROFILE_FAILURE:
       return { ...state, loading: false, error: action.payload };

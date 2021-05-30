@@ -28,6 +28,8 @@ import {
   DELETE_HABIT_SUCCESS,
   ASSIGN_TASK_TO_DAY_FAILURE,
   ASSIGN_TASK_TO_DAY_SUCCESS,
+  UNASSIGN_TASK_FAILURE,
+  UNASSIGN_TASK_SUCCESS,
   GET_PROFILE_SUCCESS,
   UPDATE_PROFILE_SUCCESS,
   GET_PROFILE_FAILURE,
@@ -62,7 +64,6 @@ const GlobalState = (props) => {
       console.log('TASK CONTEXT: GET TASKS');
       const res = await fetcher(`${server}/api/tasks`);
       const tasks = res.data;
-      console.log('Did we get tasks?', tasks);
       dispatch({ type: GET_TASKS_SUCCESS, payload: tasks });
     } catch (err) {
       console.log(err);
@@ -258,8 +259,6 @@ const GlobalState = (props) => {
 
   // Assign a task to today
   const assignTaskToDay = async (taskId, day) => {
-    console.log('TASKID: ', taskId);
-    console.log('DAY OBJECT', day);
     try {
       // 1. Update task's dateAssigned and day properties
       const taskRes = await fetcher(`${server}/api/tasks/${taskId}`, {
@@ -290,11 +289,60 @@ const GlobalState = (props) => {
   };
 
   //TODO: unassign task from day
-  const unassignTask = async (taskId) => {
-    // 1. Update task: remove dateAssigned, remove day field
-    // 2. Get updated task list
-    // 3. Update day: remove task from tasks list
-    // 4. Dispatch action to update task, tasks, and day state objects
+  const unassignTask = async (taskId, tasks, day) => {
+    console.log('TRYING TO UNASSIGN A TASK IN CONTEXT!');
+    try {
+      // Check if task is a habit task
+      const isHabitTask =
+        tasks.filter((task) => task._id === taskId).length > 0;
+      // If task is a habit task, delete straight away
+      if (isHabitTask) {
+        deleteTask(taskId);
+        return;
+      }
+      // If not,
+      // 1. Update task: remove dateAssigned, remove day field
+      const taskRes = await fetcher(`${server}/api/tasks/${taskId}`, {
+        method: 'PUT',
+        body: JSON.stringify({ dateAssigned: null, day: null }),
+      });
+      const updatedTask = taskRes.data;
+      console.log('This task was updated, ', updatedTask);
+      // 2. Update global tasks list
+      const tasksRes = await fetcher(`${server}/api/tasks/`);
+      const updatedTasks = tasksRes.data;
+      console.log('This tasks list was updated: ', updatedTasks);
+      // 3. Update day's tasks list
+      const dayRes = await fetcher(`${server}/api/days/${day._id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ $pull: { tasks: taskId } }),
+      });
+      const updatedDay = dayRes.data;
+      console.log('This day was updated: ', updatedDay);
+      // 4. Dispatch action to update task, tasks, and day state objects
+      const payload = {
+        task: updatedTask,
+        tasks: updatedTasks,
+        day: updatedDay,
+      };
+      dispatch({ type: UNASSIGN_TASK_SUCCESS, payload: payload });
+    } catch (error) {
+      console.error(error);
+      dispatch({ type: UNASSIGN_TASK_FAILURE, payload: error });
+    }
+  };
+
+  const assignHabitToToday = async (habitId, day) => {
+    try {
+      console.log('Trying to assign habit to today in context!');
+      // Create a new task for every task in habit's tasks array
+      // New tasks should be active, incomplete, have a linked habitId,
+      // a linked dayId, and a dateAssigned of today.
+      // Add those tasks to today array
+      //
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   //           //
@@ -350,10 +398,12 @@ const GlobalState = (props) => {
         getHabit,
         addHabit,
         deleteHabit,
-        getToday,
-        assignTaskToDay,
         getProfile,
         updateProfile,
+        getToday,
+        assignTaskToDay,
+        unassignTask,
+        assignHabitToToday,
       }}
     >
       {props.children}

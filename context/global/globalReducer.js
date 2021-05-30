@@ -1,4 +1,6 @@
 import {
+  ADD_HABIT_SUCCESS,
+  ADD_HABIT_FAILURE,
   GET_TASKS_SUCCESS,
   GET_TASKS_FAILURE,
   GET_HABITS_SUCCESS,
@@ -52,6 +54,7 @@ export default function globalReducer(state, action) {
         habit: action.payload,
         loading: false,
       };
+    case ADD_HABIT_SUCCESS:
     case DELETE_HABIT_SUCCESS:
       return {
         ...state,
@@ -86,6 +89,7 @@ export default function globalReducer(state, action) {
     case ADD_TASK_FAILURE:
     case GET_HABITS_FAILURE:
     case GET_HABIT_FAILURE:
+    case ADD_HABIT_FAILURE:
     case DELETE_HABIT_FAILURE:
     case GET_TODAY_FAILURE:
     case ASSIGN_TASK_TO_DAY_FAILURE:

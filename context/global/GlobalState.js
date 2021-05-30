@@ -4,6 +4,10 @@ import GlobalContext from './GlobalContext';
 import globalReducer from './globalReducer';
 import { useReducer } from 'react';
 import {
+  ADD_HABIT_SUCCESS,
+  ADD_HABIT_FAILURE,
+  ADD_TASK_SUCCESS,
+  ADD_TASK_FAILURE,
   GET_TASKS_FAILURE,
   GET_TASKS_SUCCESS,
   GET_TASK_FAILURE,
@@ -90,10 +94,6 @@ const GlobalState = (props) => {
       });
       const updatedTask = res.data;
 
-      // If updateHabit, this task was created for a specific habit.
-      // Thus, that habit should be updated to have this task's id
-      // TODO: Merge all contexts together!
-
       console.log('UpdateHabit?', updateHabit);
 
       if (updateHabit) {
@@ -107,10 +107,10 @@ const GlobalState = (props) => {
       const tasksRes = await fetcher(`${server}/api/tasks`);
       const updatedTasks = tasksRes.data;
       const payload = { task: updatedTask, tasks: updatedTasks };
-      dispatch({ type: UPDATE_TASK_SUCCESS, payload: payload });
+      dispatch({ type: ADD_TASK_SUCCESS, payload: payload });
     } catch (err) {
       console.log(err);
-      dispatch({ type: UPDATE_TASK_FAILURE, payload: err });
+      dispatch({ type: ADD_TASK_FAILURE, payload: err });
     }
   };
 
@@ -194,7 +194,7 @@ const GlobalState = (props) => {
   };
   const getHabit = async (id) => {
     try {
-      console.log('CONTEXT: GET HABIT');
+      // console.log('CONTEXT: GET HABIT');
       const res = await fetcher(`${server}/api/habits/${id}`);
       const habit = res.data;
       dispatch({ type: GET_HABIT_SUCCESS, payload: habit });
@@ -203,6 +203,24 @@ const GlobalState = (props) => {
       dispatch({ type: GET_HABIT_FAILURE, payload: err });
     }
   };
+  const addHabit = async (habit) => {
+    try {
+      console.log('CONTEXT: ADD HABIT');
+      const res = await fetcher(`${server}/api/habits/`, {
+        method: 'POST',
+        body: JSON.stringify(habit),
+      });
+      const updatedHabit = res.data;
+      const habitsRes = await fetcher(`${server}/api/habits`);
+      const updatedHabits = habitsRes.data;
+      const payload = { habit: updatedHabit, habits: updatedHabits };
+      dispatch({ type: ADD_HABIT_SUCCESS, payload: payload });
+    } catch (err) {
+      console.error(err);
+      dispatch({ type: ADD_HABIT_FAILURE, payload: err });
+    }
+  };
+
   const deleteHabit = async (id) => {
     try {
       // console.log('CONTEXT: DELETE HABIT');
@@ -330,6 +348,7 @@ const GlobalState = (props) => {
         deleteTask,
         getHabits,
         getHabit,
+        addHabit,
         deleteHabit,
         getToday,
         assignTaskToDay,

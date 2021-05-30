@@ -1,13 +1,9 @@
 import { useFormik } from 'formik';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { mutate } from 'swr';
 import useGlobalContext from '../../hooks/useGlobalContext';
-import { fetcher } from '../../utils/helperFunctions';
 import { Button } from '../layout/Buttons';
 import {
-  Checkbox,
   Form,
   FormMessage,
   NumberInput,

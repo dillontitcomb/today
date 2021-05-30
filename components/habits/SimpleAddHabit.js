@@ -1,17 +1,12 @@
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { mutate } from 'swr';
-import { fetcher } from '../../utils/helperFunctions';
-import { Button, OutlineButton } from '../layout/Buttons';
-import { Form, NumberInput, Option, Select, TextInput } from '../layout/Forms';
+import { OutlineButton } from '../layout/Buttons';
+import { Form, Option, Select, TextInput } from '../layout/Forms';
 import { SubText } from '../layout/Typography';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
-import SimpleAddTask from '../tasks/SimpleAddTask';
-
-// Fields to include/add:
-// name, tasks, startDate, endDate, frequencyValue, frequencyPeriod
+import useGlobalContext from '../../hooks/useGlobalContext';
 
 const FormGroup = styled.div`
   margin-bottom: 1rem;
@@ -32,7 +27,7 @@ const DateContainer = styled.div`
 
 export default function SimpleAddHabit() {
   const [habitPeriod, setHabitPeriod] = useState('day');
-  const [showTaskForm, setShowTaskForm] = useState(false);
+  const { addHabit } = useGlobalContext();
 
   const formik = useFormik({
     initialValues: {
@@ -45,16 +40,7 @@ export default function SimpleAddHabit() {
     },
 
     onSubmit: async (values) => {
-      console.log('Trying to submit!');
-      console.log(values);
-
-      const newHabit = await fetcher('/api/habits', {
-        method: 'POST',
-        body: JSON.stringify(values),
-      });
-      let habit = newHabit.data;
-      console.log(`New habit, ${habit.name} added`);
-      mutate('/api/habits');
+      addHabit(values);
     },
   });
   function onSelect(e) {
@@ -67,9 +53,6 @@ export default function SimpleAddHabit() {
   }
   function handleEndDateChange(selectedDay) {
     formik.setFieldValue('endDate', selectedDay);
-  }
-  function handleShowTaskForm() {
-    setShowTaskForm(!showTaskForm);
   }
 
   return (
@@ -137,15 +120,10 @@ export default function SimpleAddHabit() {
             </Select>
             <SubText>How many times per {habitPeriod}?</SubText>
           </FormGroup>
-          {/* TODO: Add Logic for adding tasks to habit   */}
           {/* TODO: Add Modal! */}
           <OutlineButton buttonstyle='secondary' type='submit'>
             Create New Habit
           </OutlineButton>
-
-          <Button onClick={handleShowTaskForm}>Add Tasks</Button>
-
-          {showTaskForm && <h1>This is the task form!</h1>}
         </FormContainer>
       </Form>
     </div>

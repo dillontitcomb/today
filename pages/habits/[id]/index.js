@@ -4,7 +4,6 @@ import SimpleAddTask from '../../../components/tasks/SimpleAddTask';
 import { Button } from '../../../components/layout/Buttons';
 import styled from 'styled-components';
 import { fetcher } from '../../../utils/helperFunctions';
-import { mutate } from 'swr';
 import useGlobalContext from '../../../hooks/useGlobalContext';
 import { useEffect } from 'react';
 

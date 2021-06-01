@@ -2,57 +2,64 @@ import styled from 'styled-components';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
-import { Container } from '../layout/Wrappers';
+import HabitItemTasks from './HabitItemTasks';
+
+const Habit = styled.div`
+  padding: 0.5rem;
+`;
 
 const HabitItemContainer = styled.div`
-  display: flex;
+  display: grid;
   flex-direction: row;
-  justify-content: space-between;
-  padding: 0.2rem 0.5rem;
-  &:hover {
-    background-color: white;
-    cursor: pointer;
-  }
+  grid-template-columns: 2fr 1fr 1fr;
+  justify-content: center;
+  justify-items: stretch;
 `;
 
 const WarningContainer = styled.div`
   color: ${({ theme }) => theme.colors.danger};
+  justify-self: end;
 `;
 
 const WarningText = styled.span`
   padding: 0.4rem;
+  margin-right: 0.2rem;
 `;
 
-const HabitText = styled.p`
-  margin: 0;
-  padding: 0;
-  font-weight: 600;
-`;
-
-const TaskItem = styled.span`
+const HabitMoreText = styled.span`
+  color: ${({ theme }) => theme.colors.darkGrey};
   font-size: 0.8rem;
-  display: block;
-  margin-left: 2rem;
+  align-self: center;
+  text-align: right;
+  padding: 0 0.5rem;
+  &:hover {
+    cursor: pointer;
+    color: ${({ theme }) => theme.colors.primary};
+  }
 `;
 
 export default function HabitItem({ habit }) {
   return (
-    <Container offwhite>
-      <Link href={`/habits/${habit._id}`}>
-        <HabitItemContainer>
-          <HabitText>{habit.name}</HabitText>
-          {habit.tasks.length == 0 && (
-            <WarningContainer>
-              <FontAwesomeIcon icon={faTimes} />
-              <WarningText>Needs Task</WarningText>
-            </WarningContainer>
-          )}
-        </HabitItemContainer>
-      </Link>
-      {habit.tasks &&
-        habit.tasks.map((task) => (
-          <TaskItem key={task._id}>{task.name}</TaskItem>
-        ))}
-    </Container>
+    <Habit>
+      <HabitItemContainer>
+        <span>{habit.name}</span>
+        {habit.tasks.length == 0 ? (
+          <WarningContainer>
+            <FontAwesomeIcon icon={faTimes} />
+            <WarningText>Needs Task</WarningText>
+          </WarningContainer>
+        ) : (
+          <p> </p>
+        )}
+        <Link href={`/habits/${habit._id}`}>
+          <HabitMoreText>More -></HabitMoreText>
+        </Link>
+      </HabitItemContainer>
+      {habit.tasks.length > 0 ? (
+        <HabitItemTasks tasks={habit.tasks}></HabitItemTasks>
+      ) : (
+        ''
+      )}
+    </Habit>
   );
 }

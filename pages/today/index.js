@@ -5,6 +5,11 @@ import useGlobalContext from '../../hooks/useGlobalContext';
 import { useEffect } from 'react';
 import { Button } from '../../components/layout/Buttons';
 
+const HabitTask = styled.span`
+  display: block;
+  padding-left: 3rem;
+`;
+
 const DayContainer = styled.div``;
 const HabitsContainer = styled.div``;
 const TasksContainer = styled.div``;
@@ -12,7 +17,7 @@ export default function today() {
   const {
     getTasks,
     tasks,
-    getHabits,
+    getActiveHabits,
     habits,
     getToday,
     day,
@@ -23,7 +28,7 @@ export default function today() {
 
   useEffect(() => {
     getTasks();
-    getHabits();
+    getActiveHabits();
     getToday();
   }, []);
 
@@ -56,9 +61,14 @@ export default function today() {
         <List marginsm>
           {habits &&
             habits.map((habit) => (
-              <p onClick={handleAssignHabit} id={habit._id} key={habit._id}>
-                {habit.name}
-              </p>
+              <div onClick={handleAssignHabit} id={habit._id} key={habit._id}>
+                <p>{habit.name}</p>
+                {habit.tasks.length > 0
+                  ? habit.tasks.map((task) => (
+                      <HabitTask>- {task.name}</HabitTask>
+                    ))
+                  : ''}
+              </div>
             ))}
         </List>
       </HabitsContainer>

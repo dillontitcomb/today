@@ -193,6 +193,18 @@ const GlobalState = (props) => {
       dispatch({ type: GET_HABITS_FAILURE, payload: err });
     }
   };
+  const getActiveHabits = async () => {
+    try {
+      // console.log('CONTEXT: GET ACTIVE HABITS');
+      const res = await fetcher(`${server}/api/habits/active`);
+      const habits = res.data;
+      dispatch({ type: GET_HABITS_SUCCESS, payload: habits });
+    } catch (err) {
+      console.log(err);
+      dispatch({ type: GET_HABITS_FAILURE, payload: err });
+    }
+  };
+
   const getHabit = async (id) => {
     try {
       // console.log('CONTEXT: GET HABIT');
@@ -395,6 +407,7 @@ const GlobalState = (props) => {
         markTaskComplete,
         deleteTask,
         getHabits,
+        getActiveHabits,
         getHabit,
         addHabit,
         deleteHabit,

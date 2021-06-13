@@ -5,6 +5,18 @@ import useGlobalContext from '../../hooks/useGlobalContext';
 import { useEffect } from 'react';
 import { Button } from '../../components/layout/Buttons';
 
+const TodayPlaceholder = styled.div`
+  padding: 0.8rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: ${({ theme }) => theme.colors.darkGrey};
+  background-color: ${({ theme }) => theme.colors.lightGrey};
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const HabitTask = styled.span`
   display: block;
   padding-left: 3rem;
@@ -75,12 +87,15 @@ export default function today() {
       <DayContainer>
         <h3>Assigned Today</h3>
         <List marginsm>
-          {day.tasks &&
+          {day.tasks?.length > 0 ? (
             day.tasks.map((task) => (
               <p key={task._id} id={task._id} onClick={handleUnassignTask}>
                 {task.name}
               </p>
-            ))}
+            ))
+          ) : (
+            <TodayPlaceholder>No tasks assigned yet :)</TodayPlaceholder>
+          )}
         </List>
       </DayContainer>
       <TasksContainer>

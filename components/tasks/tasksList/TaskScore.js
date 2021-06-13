@@ -17,7 +17,6 @@ const ScoreContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   border-radius: 50%;
-  margin: 0.2rem 0.5rem 0.2rem 0.2rem;
 `;
 
 export default function TaskScore({ score }) {

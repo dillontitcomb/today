@@ -17,6 +17,7 @@ const theme = {
     background: '#ffffff',
     accent: '#2CB547',
     darkText: '#091720',
+    midText: '#333333',
     lightText: '#F5F9FD',
     lightGrey: '#F7FBFF',
     midGrey: '#DEEDF7',
@@ -42,10 +43,10 @@ const GlobalStyle = createGlobalStyle`
     font-size: 16px;
     font-weight: 400;
     line-height: 1.7;
-    background-color: ${theme.colors.lightGrey};
-    color:  ${theme.colors.darkText};
   }
   .app {
+    background-color: ${theme.colors.lightGrey};
+    color:  ${theme.colors.darkText};
     height: 100vh;
     display: flex;
     flex-direction: column;

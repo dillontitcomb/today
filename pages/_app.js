@@ -40,7 +40,7 @@ const GlobalStyle = createGlobalStyle`
   }
   body { 
     font-family: 'Inter', sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     line-height: 1.7;
   }

@@ -12,14 +12,16 @@ const DisplayContainer = styled.div`
   height: 600px;
 `;
 
-const Title = styled.h1`
+const Title = styled.span`
+  font-size: 3em;
+  font-weight: 500;
   text-align: left;
   color: #002346;
 `;
 
 // TODO: Media queries
 const SeparatedList = styled.div`
-  width: 600px;
+  width: 800px;
   display: flex;
   flex-direction: column;
   grid-gap: 0.5rem;
@@ -35,7 +37,7 @@ const SeparatedListItem = styled.div`
 `;
 
 const ItemText = styled.span`
-  font-size: 1rem;
+  font-size: 1em;
   font-weight: 400;
   color: ${({ theme }) => theme.colors.midText};
 `;
@@ -70,19 +72,37 @@ export default function newlists(params) {
   return (
     <DisplayContainer>
       <SeparatedList>
-        <Title>Tasks List</Title>
+        <Title>Today's Tasks</Title>
         <SeparatedListItem>
           <ItemContent>
             <TaskScore score={2}></TaskScore>
             <ItemText>Go to the gym</ItemText>
             <ItemInfo>45mins</ItemInfo>
-            <ItemSuccess>Quick win!</ItemSuccess>
-            <ItemWarning>!Urgent</ItemWarning>
+            <ItemSuccess>Quick</ItemSuccess>
+            <ItemWarning>Urgent</ItemWarning>
             <Checkbox type='checkbox' />
           </ItemContent>
         </SeparatedListItem>
-        <SeparatedListItem>Here is a task item</SeparatedListItem>
-        <SeparatedListItem>Here is a task item</SeparatedListItem>
+        <SeparatedListItem>
+          <ItemContent>
+            <TaskScore score={6}></TaskScore>
+            <ItemText>Schedule doctor's appointment</ItemText>
+            <ItemInfo>5mins</ItemInfo>
+            <ItemSuccess>Quick</ItemSuccess>
+            <ItemWarning>Stressful</ItemWarning>
+            <Checkbox type='checkbox' />
+          </ItemContent>
+        </SeparatedListItem>
+        <SeparatedListItem>
+          <ItemContent>
+            <TaskScore score={1}></TaskScore>
+            <ItemText>Take out the trash</ItemText>
+            <ItemInfo>2mins</ItemInfo>
+            <ItemSuccess>Quick</ItemSuccess>
+            <ItemSuccess>Easy</ItemSuccess>
+            <Checkbox type='checkbox' />
+          </ItemContent>
+        </SeparatedListItem>
         <SeparatedListItem>Here is a task item</SeparatedListItem>
         <SeparatedListItem>Here is a task item</SeparatedListItem>
       </SeparatedList>

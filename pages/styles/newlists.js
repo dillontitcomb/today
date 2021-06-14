@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 import DetailedTask from '../../components/tasks/tasksList/detailedTask/DetailedTask';
+import DetailedTaskButtons from '../../components/tasks/tasksList/detailedTask/DetailedTaskButtons';
 import CompletedDetailedTask from '../../components/tasks/tasksList/detailedTask/CompletedDetailedTask';
 import {
   SeparatedList,
   SeparatedListItem,
 } from '../../components/layout/Lists';
+import Accordion from '../../components/layout/Accordion';
 
 const exampleTask = {
-  score: 4,
+  score: 1,
   _id: 'fakeId',
   name: 'Get phone repaired',
   urgency: 3,
@@ -35,6 +37,10 @@ export default function newlists(params) {
         <SeparatedListItem>
           <DetailedTask task={exampleTask}></DetailedTask>
         </SeparatedListItem>
+
+        <Accordion title={<DetailedTask task={exampleTask}></DetailedTask>}>
+          <DetailedTaskButtons task={exampleTask}></DetailedTaskButtons>
+        </Accordion>
         <SeparatedListItem>
           <CompletedDetailedTask task={exampleTask}></CompletedDetailedTask>
         </SeparatedListItem>

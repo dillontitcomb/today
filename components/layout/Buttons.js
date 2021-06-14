@@ -85,6 +85,21 @@ export const Button = styled.button`
   }
 `;
 
+export const DeleteButton = styled(Button)`
+  background-color: ${(props) => props.theme.colors.danger};
+  color: ${(props) => props.theme.colors.lightText};
+  &:hover {
+    background-color: ${(props) => props.theme.colors.dangerDulled};
+  }
+`;
+export const SuccessButton = styled(Button)`
+  background-color: ${(props) => props.theme.colors.success};
+  color: ${(props) => props.theme.colors.lightText};
+  &:hover {
+    background-color: ${(props) => props.theme.colors.successLight};
+  }
+`;
+
 export const OutlineButton = styled.button`
   font-size: ${(props) => (props.small ? 0.8 : props.large ? 1.2 : 1)}rem;
   padding: ${(props) => (props.small ? 0.3 : props.large ? 0.7 : 0.5)}rem;

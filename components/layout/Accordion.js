@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ListItem } from './Lists';
+import { SeparatedListItem } from './Lists';
 import { useState } from 'react';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,6 +22,9 @@ const StyledAccordion = styled.div`
     max-height: 0px;
     transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
   }
+  &:hover {
+    cursor: pointer;
+  }
 `;
 const Header = styled.div`
   display: flex;
@@ -30,7 +33,7 @@ const Header = styled.div`
   align-items: center;
 `;
 const OpenChevron = styled.div`
-  padding-left: 0.2rem;
+  padding-left: 1rem;
   margin: 0 0.5rem 0 0;
 `;
 const Details = styled.div``;
@@ -43,25 +46,27 @@ export default function Accordion(props) {
     setIsActive(!isActive);
   }
 
-  // TODO: Make sure the toggleAccordion click handler allows for buttons in the Details section of the accordion to be clicked.
-
   return (
-    <ListItem>
+    <SeparatedListItem>
       <StyledAccordion onClick={toggleAccordion}>
         <Header className='header' aria-expanded={isActive}>
           <span>{props.title}</span>
-          <OpenChevron>
-            <FontAwesomeIcon
-              className='icon'
-              icon={faAngleRight}
-              aria-expanded={isActive}
-            />
-          </OpenChevron>
+          {props.hasChevron ? (
+            <OpenChevron>
+              <FontAwesomeIcon
+                className='icon'
+                icon={faAngleRight}
+                aria-expanded={isActive}
+              />
+            </OpenChevron>
+          ) : (
+            ''
+          )}
         </Header>
         <Details className='details' aria-expanded={!isActive}>
           {props.children}
         </Details>
       </StyledAccordion>
-    </ListItem>
+    </SeparatedListItem>
   );
 }

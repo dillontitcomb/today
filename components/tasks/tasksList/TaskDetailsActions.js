@@ -1,28 +1,13 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import useGlobalContext from '../../../hooks/useGlobalContext';
-import { Button } from '../../layout/Buttons';
+import { Button, DeleteButton, SuccessButton } from '../../layout/Buttons';
 
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: stretch;
   grid-gap: 0.5rem;
-`;
-
-const DeleteButton = styled(Button)`
-  background-color: ${(props) => props.theme.colors.danger};
-  color: ${(props) => props.theme.colors.lightText};
-  &:hover {
-    background-color: ${(props) => props.theme.colors.dangerDulled};
-  }
-`;
-const SuccessButton = styled(Button)`
-  background-color: ${(props) => props.theme.colors.success};
-  color: ${(props) => props.theme.colors.lightText};
-  &:hover {
-    background-color: ${(props) => props.theme.colors.successLight};
-  }
 `;
 
 export default function TaskDetailsActions({ task }) {

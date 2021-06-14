@@ -19,6 +19,21 @@ export const List = styled.div`
   }
 `;
 
+export const SeparatedList = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-gap: 0.5rem;
+  padding: 1rem;
+`;
+
+export const SeparatedListItem = styled.div`
+  background-color: ${({ theme }) => theme.colors.lightGrey};
+  padding: 0.8rem;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+`;
+
 export const ListItem = styled.div`
   padding: 1rem;
   &:hover {
@@ -40,6 +55,17 @@ export const IconListItem = styled.div`
   > * {
     place-self: center;
   }
+`;
+
+export const ListInfoLabel = styled.span`
+  padding: 0 0.3rem;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: ${(props) =>
+    props.labelType
+      ? props.theme.colors[props.labelType]
+      : props.theme.colors.midText};
 `;
 
 const PlusMinusText = styled.span`

@@ -8,7 +8,7 @@ import GlobalState from '../context/global/globalState';
 
 const theme = {
   colors: {
-    primary: '#1B4965',
+    primary: '#002346',
     primaryLight: '#8EC1E1',
     primaryDulled: '#2B74A1',
     secondary: '#B1598A',
@@ -40,13 +40,13 @@ const GlobalStyle = createGlobalStyle`
   }
   body { 
     font-family: 'Inter', sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 1.7;
   }
   .app {
     background-color: ${theme.colors.lightGrey};
-    color:  ${theme.colors.darkText};
+    color:  ${theme.colors.midText};
     height: 100vh;
     display: flex;
     flex-direction: column;

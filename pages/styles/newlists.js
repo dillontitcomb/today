@@ -7,6 +7,9 @@ import {
   SeparatedListItem,
 } from '../../components/layout/Lists';
 import Accordion from '../../components/layout/Accordion';
+import { Button } from '../../components/layout/Buttons';
+import { useState } from 'react';
+import Modal from '../../components/layout/Modal';
 
 const exampleTask = {
   score: 1,
@@ -29,11 +32,35 @@ const DisplayContainer = styled.div`
   height: 600px;
 `;
 
-export default function newlists(params) {
+const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: start;
+  align-items: center;
+`;
+
+export default function newlists() {
+  const [showModal, setShowModal] = useState(false);
+
+  function handleAddTask(e) {
+    console.log('Opening modal to add task');
+    setShowModal(true);
+  }
+
+  function handleModalAction() {
+    console.log('Modal action!');
+  }
+
   return (
     <DisplayContainer>
       <SeparatedList>
-        <h1>Today's Tasks</h1>
+        <HeaderContainer>
+          <h1>Today's Tasks</h1>
+          <Button buttonstyle='primary' large onClick={handleAddTask}>
+            Add New Task
+          </Button>
+        </HeaderContainer>
         <SeparatedListItem>
           <DetailedTask task={exampleTask}></DetailedTask>
         </SeparatedListItem>
@@ -45,6 +72,13 @@ export default function newlists(params) {
           <CompletedDetailedTask task={exampleTask}></CompletedDetailedTask>
         </SeparatedListItem>
       </SeparatedList>
+      {showModal ? (
+        <Modal showModal={showModal} setShowModal={setShowModal}>
+          <Button onClick={handleModalAction}>Click me!</Button>
+        </Modal>
+      ) : (
+        ''
+      )}
     </DisplayContainer>
   );
 }

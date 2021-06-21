@@ -4,11 +4,13 @@ const Container = styled.div`
   place-self: end;
 `;
 const Checkbox = styled.input``;
+// TODO: make checkbox a complete button
 
 export default function DetailedTaskComplete({ task }) {
   const [complete, setComplete] = useState(task.complete);
 
-  function handleComplete() {
+  function handleComplete(e) {
+    e.stopPropagation();
     setComplete(!complete);
   }
 

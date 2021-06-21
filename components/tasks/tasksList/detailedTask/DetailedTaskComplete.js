@@ -19,7 +19,8 @@ export default function DetailedTaskComplete({ task }) {
       <Checkbox
         type='checkbox'
         checked={complete}
-        onClick={handleComplete}
+        onChange={handleComplete}
+        onClick={(e) => e.stopPropagation()}
       ></Checkbox>
     </Container>
   );

@@ -15,9 +15,9 @@ const exampleTask = {
   score: 1,
   _id: 'fakeId',
   name: 'Get phone repaired',
-  urgency: 3,
-  resistance: 0,
-  time: 15,
+  urgency: 1,
+  resistance: 1,
+  time: 50,
   complete: false,
 };
 

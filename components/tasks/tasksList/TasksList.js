@@ -1,24 +1,20 @@
-import { List } from '../../layout/Lists';
+import { SeparatedList } from '../../layout/Lists';
+import DetailedTask from './detailedTask/DetailedTask';
+import DetailedTaskButtons from './detailedTask/DetailedTaskButtons';
 import Accordion from '../../layout/Accordion';
-import TaskTitle from './TaskTitle';
-import TaskDetails from './TaskDetails';
 
 export default function TasksList({ tasks }) {
   console.log(tasks);
   return (
-    <List>
+    <SeparatedList>
       {tasks.length > 0 &&
         tasks.map((task) => {
           return (
-            <Accordion
-              hasChevron
-              title={<TaskTitle task={task} />}
-              key={task._id}
-            >
-              <TaskDetails task={task}></TaskDetails>
+            <Accordion title={<DetailedTask task={task}></DetailedTask>}>
+              <DetailedTaskButtons task={task}></DetailedTaskButtons>
             </Accordion>
           );
         })}
-    </List>
+    </SeparatedList>
   );
 }

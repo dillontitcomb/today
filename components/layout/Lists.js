@@ -58,7 +58,10 @@ export const IconListItem = styled.div`
 `;
 
 export const ListInfoLabel = styled.span`
-  padding: 0 0.3rem;
+  background-color: ${(props) => props.theme.colors.midGrey};
+  border-radius: 5px;
+  padding: 0.3rem 0.3rem;
+  margin: 0 0.3rem;
   text-transform: uppercase;
   font-size: 0.8rem;
   font-weight: 600;

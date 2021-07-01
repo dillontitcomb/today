@@ -16,22 +16,17 @@ const StyledAccordion = styled.div`
   .details {
     overflow: hidden;
     max-height: 300px;
-    transition: max-height 0.5s ease-in-out;
+    transition: max-height 0.4s ease-in;
   }
   .details[aria-expanded='true'] {
     max-height: 0px;
-    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+    transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
   }
   &:hover {
     cursor: pointer;
   }
 `;
-const Header = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
+const Header = styled.div``;
 const OpenChevron = styled.div`
   padding-left: 1rem;
   margin: 0 0.5rem 0 0;
@@ -49,8 +44,8 @@ export default function Accordion(props) {
   return (
     <SeparatedListItem>
       <StyledAccordion onClick={toggleAccordion}>
-        <Header className='header' aria-expanded={isActive}>
-          <span>{props.title}</span>
+        <Header aria-expanded={isActive}>
+          {props.title}
           {props.hasChevron ? (
             <OpenChevron>
               <FontAwesomeIcon

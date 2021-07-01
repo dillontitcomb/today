@@ -7,7 +7,7 @@ import DetailedTaskComplete from './DetailedTaskComplete';
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1.2fr 0.8fr 0.5fr;
   align-items: center;
   grid-gap: 0.5rem;
 `;

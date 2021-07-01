@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { ListInfoLabel } from '../../../layout/Lists';
 
 const Centered = styled.div`
-  text-align: center;
+  text-align: left;
 `;
 
 export default function DetailedTaskInfo({ task }) {

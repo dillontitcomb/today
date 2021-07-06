@@ -8,7 +8,7 @@ export const Container = styled.div`
       ? props.theme.colors.secondary
       : props.offwhite
       ? props.theme.colors.lightGrey
-      : props.theme.colors.background};
+      : props.theme.colors.midGrey};
   max-width: ${(props) => (props.expand ? 4000 : 1200)}px;
   margin: auto;
   overflow: hidden;

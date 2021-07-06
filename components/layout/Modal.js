@@ -1,13 +1,15 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
+// TODO: Make modal styling consistent with rest of styles
+
 const ModalBackground = styled.div`
   margin: auto;
   width: 100%;
   height: 100%;
   left: 0;
   top: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 35, 70, 0.9);
   position: fixed;
   display: flex;
   justify-content: center;
@@ -35,6 +37,12 @@ const CloseModalButton = styled.button`
   z-index: 10;
   border: none;
   background-color: #fff;
+`;
+
+const CloseModalX = styled.span`
+  font-size: 2em;
+  display: inline-block;
+  transform: rotate(45deg);
 `;
 
 export default function Modal(props) {
@@ -69,7 +77,7 @@ export default function Modal(props) {
             <CloseModalButton
               onClick={() => props.setShowModal((prev) => !prev)}
             >
-              X
+              <CloseModalX>+</CloseModalX>
             </CloseModalButton>
           </ModalContainer>
         </ModalBackground>

@@ -45,7 +45,7 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.7;
   }
   .app {
-    background-color: ${theme.colors.lightGrey};
+    background-color: ${theme.colors.midGrey};
     color:  ${theme.colors.midText};
     height: 100vh;
     display: flex;

@@ -39,7 +39,7 @@ export default function tasks() {
   }
 
   return (
-    <Container nopad offwhite>
+    <>
       <TasksContainer>
         <TasksTitle>
           <Title weight='bolder' primary>
@@ -58,6 +58,6 @@ export default function tasks() {
       ) : (
         ''
       )}
-    </Container>
+    </>
   );
 }

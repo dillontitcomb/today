@@ -2,11 +2,11 @@ import { signIn, signOut, useSession } from 'next-auth/client';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { Button } from '../components/layout/Buttons';
-import { List, ListItem } from '../components/layout/Lists';
+import { SeparatedList, SeparatedListItem } from '../components/layout/Lists';
 
 const LandingContainer = styled.div`
   height: 100%;
-  background-color: ${({ theme }) => theme.colors.lightGrey};
+  background-color: ${({ theme }) => theme.colors.midGrey};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -69,12 +69,12 @@ const index = () => {
         )}
       </ButtonContainer>
       <ListDisplayContainer>
-        <List>
-          <ListItem>Learn to use TodayApp</ListItem>
-          <ListItem>Add my tasks and habits</ListItem>
-          <ListItem>Create detailed daily plans</ListItem>
-          <ListItem>Get more stuff done</ListItem>
-        </List>
+        <SeparatedList>
+          <SeparatedListItem>Learn to use TodayApp</SeparatedListItem>
+          <SeparatedListItem>Add my tasks and habits</SeparatedListItem>
+          <SeparatedListItem>Create detailed daily plans</SeparatedListItem>
+          <SeparatedListItem>Get more stuff done</SeparatedListItem>
+        </SeparatedList>
       </ListDisplayContainer>
     </LandingContainer>
   );

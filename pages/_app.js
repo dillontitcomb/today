@@ -23,12 +23,13 @@ const theme = {
     midGrey: '#DEEDF7',
     darkGrey: '#9E9E9E',
     darkestGrey: '#616161',
-    success: '#188C48',
-    successLight: '#1EAE5A',
-    danger: '#F25A5A',
-    dangerDulled: '#F68E8E',
-    warning: '#FF9F1C',
-    neutral: '#F6F740',
+    success: '#007E33',
+    successLight: '#00983d',
+    danger: '#CC0000',
+    dangerDulled: '#ff4444',
+    dangerLight: '#ff5e5e',
+    warning: '#FF8800',
+    neutral: '#ffaa00',
   },
 };
 
@@ -52,6 +53,7 @@ const GlobalStyle = createGlobalStyle`
     flex-direction: column;
   }
   .content {
+    background-color: ${theme.colors.midGrey};
     flex: 1 0 auto;
   }
   a {
@@ -63,7 +65,6 @@ function today({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
-
       <Provider session={pageProps.session}>
         <GlobalState>
           <ThemeProvider theme={theme}>

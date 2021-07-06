@@ -5,6 +5,7 @@ const StyledFooter = styled.div`
   flex-shrink: 0;
   height: 60px;
   text-align: center;
+  background-color: ${({ theme }) => theme.colors.midGrey};
   color: ${({ theme }) => theme.colors.primary};
   display: flex;
   flex-direction: column;

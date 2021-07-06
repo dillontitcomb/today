@@ -58,7 +58,7 @@ export const IconListItem = styled.div`
 `;
 
 export const ListInfoLabel = styled.span`
-  background-color: ${(props) => props.theme.colors.midGrey};
+  background-color: ${(props) => props.theme.colors.lightGrey};
   border-radius: 5px;
   padding: 0.3rem 0.3rem;
   margin: 0 0.3rem;

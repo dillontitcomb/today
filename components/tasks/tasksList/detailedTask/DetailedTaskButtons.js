@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { Button, DeleteButton } from '../../../layout/Buttons';
+import useGlobalContext from '../../../../hooks/useGlobalContext';
+import { toastError } from '../../../../utils/toasts';
 
 const ButtonContainer = styled.div`
   padding: 0.5rem 0 0 0;
@@ -9,16 +11,23 @@ const ButtonContainer = styled.div`
 `;
 
 export default function DetailedTaskButtons({ task }) {
-  function handleButtonClick(e) {
+  const { deleteTask } = useGlobalContext();
+
+  function handleDeleteTask(e) {
     console.log(`Trying to edit/delete ${task.name}`);
-    // Stop propagation is necessary to prevent the accordion from closing when the button is clicked.
-    e.stopPropagation();
+    deleteTask(task._id);
+    toastError('Task Successfully Deleted');
+  }
+
+  function handleEditTask(e) {
+    console.log('Trying to edit task');
+    // TODO: Open modal to edit task
   }
 
   return (
     <ButtonContainer>
-      <Button onClick={handleButtonClick}>Edit Task</Button>
-      <DeleteButton buttonstyle='secondary' onClick={handleButtonClick}>
+      <Button onClick={handleEditTask}>Edit Task</Button>
+      <DeleteButton buttonstyle='secondary' onClick={handleDeleteTask}>
         Delete Task
       </DeleteButton>
     </ButtonContainer>

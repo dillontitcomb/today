@@ -1,17 +1,10 @@
 import { useFormik } from 'formik';
-import { useState } from 'react';
 import styled from 'styled-components';
 import useGlobalContext from '../../hooks/useGlobalContext';
 import { Button } from '../layout/Buttons';
-import {
-  Form,
-  FormMessage,
-  NumberInput,
-  Option,
-  Select,
-  TextInput,
-} from '../layout/Forms';
+import { Form, NumberInput, Option, Select, TextInput } from '../layout/Forms';
 import { SubText } from '../layout/Typography';
+import { toastSuccess } from '../../utils/toasts';
 
 const FormContainer = styled.div`
   margin: auto;
@@ -38,8 +31,6 @@ const InputGroup = styled.div`
 // TODO: take as props: habitId (attach to habit array), inactive (change active to false), and updateHabit (make second API request to add this task's ID to the habit that created it)
 export default function SimpleAddTask(props) {
   const { addTask } = useGlobalContext();
-  const [message, setMessage] = useState('');
-  const [messageStyle, setMessageStyle] = useState('');
 
   const formik = useFormik({
     initialValues: {
@@ -53,8 +44,7 @@ export default function SimpleAddTask(props) {
     onSubmit: async (values) => {
       console.log('Trying to submit form to add task!');
       addTask(values, props.updateHabit);
-      setMessage(`Task created!`);
-      setMessageStyle('success');
+      toastSuccess('Task Successfully Created!');
     },
   });
 
@@ -125,9 +115,6 @@ export default function SimpleAddTask(props) {
               Add Task
             </Button>
           </ButtonContainer>
-          {message && (
-            <FormMessage messageStyle={messageStyle}>{message}</FormMessage>
-          )}
         </FormContainer>
       </Form>
     </div>

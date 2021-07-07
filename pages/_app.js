@@ -5,6 +5,8 @@ import Footer from '../components/layout/Footer';
 import Navbar from '../components/layout/Navbar';
 import '../css/_app.css';
 import GlobalState from '../context/global/globalState';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const theme = {
   colors: {
@@ -75,6 +77,17 @@ function today({ Component, pageProps }) {
               <Navbar />
               <div className='content'>
                 <Component {...pageProps} />
+                <ToastContainer
+                  position='top-center'
+                  autoClose={3000}
+                  hideProgressBar
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover={false}
+                />
               </div>
               <Footer />
             </div>

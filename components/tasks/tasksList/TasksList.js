@@ -10,7 +10,10 @@ export default function TasksList({ tasks }) {
       {tasks.length > 0 &&
         tasks.map((task) => {
           return (
-            <Accordion title={<DetailedTask task={task}></DetailedTask>}>
+            <Accordion
+              key={task._id}
+              title={<DetailedTask task={task}></DetailedTask>}
+            >
               <DetailedTaskButtons task={task}></DetailedTaskButtons>
             </Accordion>
           );

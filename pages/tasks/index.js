@@ -1,6 +1,5 @@
 import { useSession } from 'next-auth/client';
 import { Title } from '../../components/layout/Typography';
-import { Container, SplitPane } from '../../components/layout/Wrappers';
 import { Button } from '../../components/layout/Buttons';
 import SimpleAddTask from '../../components/tasks/SimpleAddTask';
 import TasksList from '../../components/tasks/tasksList/TasksList';

@@ -4,6 +4,8 @@ import GlobalContext from './GlobalContext';
 import globalReducer from './globalReducer';
 import { useReducer } from 'react';
 import {
+  TOGGLE_MODAL_SUCCESS,
+  TOGGLE_MODAL_FAILURE,
   ADD_HABIT_SUCCESS,
   ADD_HABIT_FAILURE,
   ADD_TASK_SUCCESS,
@@ -44,19 +46,42 @@ const GlobalState = (props) => {
     day: {},
     profile: {},
     loading: false,
+    showModal: false,
     errors: {},
     error: {},
   };
 
   const [state, dispatch] = useReducer(globalReducer, initialState);
 
-  // TODO: Add pre-render functions that run before the actual API calls that update local state to make the UI update instantly
+  //        //
+  //        //
+  // UX/UI  //
+  //        //
+  //        //
+
+  const openModal = async () => {
+    try {
+      dispatch({ type: TOGGLE_MODAL_SUCCESS, payload: true });
+    } catch (err) {
+      dispatch({ type: TOGGLE_MODAL_FAILURE, payload: err });
+    }
+  };
+
+  const closeModal = async () => {
+    try {
+      dispatch({ type: TOGGLE_MODAL_SUCCESS, payload: false });
+    } catch (err) {
+      dispatch({ type: TOGGLE_MODAL_FAILURE, payload: err });
+    }
+  };
 
   //        //
   //        //
   // TASKS  //
   //        //
   //        //
+
+  // TODO: Add pre-render functions that run before the actual API calls that update local state to make the UI update instantly
 
   // Get all tasks
   const getTasks = async () => {
@@ -398,8 +423,11 @@ const GlobalState = (props) => {
         day: state.day,
         profile: state.profile,
         loading: state.loading,
+        showModal: state.showModal,
         errors: state.errors,
         error: state.error,
+        openModal,
+        closeModal,
         getTasks,
         getTask,
         addTask,

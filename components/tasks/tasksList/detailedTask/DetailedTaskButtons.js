@@ -11,7 +11,7 @@ const ButtonContainer = styled.div`
 `;
 
 export default function DetailedTaskButtons({ task }) {
-  const { deleteTask } = useGlobalContext();
+  const { deleteTask, showModal, openModal } = useGlobalContext();
 
   function handleDeleteTask(e) {
     console.log(`Trying to edit/delete ${task.name}`);
@@ -20,8 +20,7 @@ export default function DetailedTaskButtons({ task }) {
   }
 
   function handleEditTask(e) {
-    console.log('Trying to edit task');
-    // TODO: Open modal to edit task
+    openModal();
   }
 
   return (

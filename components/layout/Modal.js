@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import useGlobalContext from '../../hooks/useGlobalContext';
 
 // TODO: Make modal styling consistent with rest of styles
 
@@ -10,7 +11,7 @@ const ModalBackground = styled.div`
   left: 0;
   top: 0;
   background: rgba(0, 35, 70, 0.9);
-  position: fixed; 
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,22 +47,27 @@ const CloseModalX = styled.span`
 `;
 
 export default function Modal(props) {
+  const { showModal, closeModal } = useGlobalContext();
+
+  console.log(closeModal);
+
   const modalRef = useRef();
 
-  const closeModal = (e) => {
+  const handleCloseModalBackground = (e) => {
     if (modalRef.current === e.target) {
-      props.setShowModal(false);
+      closeModal();
     }
   };
 
-  const keyPress = useCallback(
-    (e) => {
-      if (e.key === 'Escape' && props.showModal === true) {
-        props.setShowModal(false);
-      }
-    },
-    [props.setShowModal, props.showModal]
-  );
+  const keyPress = useCallback((e) => {
+    if (e.key === 'Escape' && showModal === true) {
+      closeModal();
+    }
+  });
+
+  const handleCloseModal = (e) => {
+    closeModal();
+  };
 
   useEffect(() => {
     document.addEventListener('keydown', keyPress);
@@ -70,18 +76,14 @@ export default function Modal(props) {
 
   return (
     <>
-      {props.showModal && (
-        <ModalBackground ref={modalRef} onClick={closeModal}>
-          <ModalContainer>
-            {props.children}
-            <CloseModalButton
-              onClick={() => props.setShowModal((prev) => !prev)}
-            >
-              <CloseModalX>+</CloseModalX>
-            </CloseModalButton>
-          </ModalContainer>
-        </ModalBackground>
-      )}
+      <ModalBackground ref={modalRef} onClick={handleCloseModalBackground}>
+        <ModalContainer>
+          {props.children}
+          <CloseModalButton onClick={handleCloseModal}>
+            <CloseModalX>+</CloseModalX>
+          </CloseModalButton>
+        </ModalContainer>
+      </ModalBackground>
     </>
   );
 }

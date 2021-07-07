@@ -7,7 +7,6 @@ import useGlobalContext from '../../hooks/useGlobalContext';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 import Modal from '../../components/layout/Modal';
-import { useState } from 'react';
 
 const TasksContainer = styled.div`
   max-width: 600px;
@@ -22,19 +21,18 @@ const TasksTitle = styled.div`
 
 export default function tasks() {
   const [session, loading] = useSession();
-  const [showModal, setShowModal] = useState(false);
 
   if (!loading && !session) return <p>Access Denied</p>;
 
-  const { tasks, getTasks } = useGlobalContext();
+  const { tasks, getTasks, showModal, openModal } = useGlobalContext();
 
   useEffect(() => {
     getTasks();
   }, []);
 
-  function handleToggleModal(e) {
-    console.log('Toggling Modal!');
-    setShowModal(!showModal);
+  function handleOpenModal(e) {
+    console.log('Opening Modal!');
+    openModal();
   }
 
   return (
@@ -44,14 +42,14 @@ export default function tasks() {
           <Title weight='bolder' primary>
             Your Tasks
           </Title>
-          <Button buttonstyle='secondary' onClick={handleToggleModal}>
+          <Button buttonstyle='secondary' onClick={handleOpenModal}>
             Add New
           </Button>
         </TasksTitle>
         <TasksList tasks={tasks}></TasksList>
       </TasksContainer>
       {showModal ? (
-        <Modal showModal={showModal} setShowModal={setShowModal}>
+        <Modal>
           <SimpleAddTask></SimpleAddTask>
         </Modal>
       ) : (

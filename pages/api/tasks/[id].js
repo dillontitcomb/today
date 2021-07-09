@@ -1,6 +1,7 @@
 import Task from '../../../models/Task';
 import Habit from '../../../models/Habit';
 import dbConnect from '../../../utils/dbConnect';
+import { getTaskScore } from '../../../utils/helperFunctions';
 
 export default async function handler(req, res) {
   // Get task ID from url params
@@ -25,8 +26,12 @@ export default async function handler(req, res) {
       break;
 
     case 'PUT' /* Edit a task by its ID */:
+      // Calculate task score before updating
+      let requestBody = JSON.parse(req.body);
+      const { time, urgency, resistance } = requestBody;
+      requestBody.score = getTaskScore(time, urgency, resistance);
       try {
-        const task = await Task.findByIdAndUpdate(id, JSON.parse(req.body), {
+        const task = await Task.findByIdAndUpdate(id, requestBody, {
           new: true,
           runValidators: false,
         });

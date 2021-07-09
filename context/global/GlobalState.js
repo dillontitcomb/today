@@ -63,7 +63,7 @@ const GlobalState = (props) => {
   //        //
 
   const setModalType = async (modalType, task) => {
-    // If a task is provided, edit Task. else add task.
+    // Set whether modal opening should be addTask or editTask. If editTask, task will be passed to populate the form with existing task data.
     try {
       dispatch({
         type: TOGGLE_MODAL_TYPE_SUCCESS,
@@ -160,6 +160,7 @@ const GlobalState = (props) => {
     try {
       // console.log('CONTEXT: UPDATE TASK BY ID,');
       // Update task
+      // TODO: Calculate new score before updating
       const res = await fetcher(`${server}/api/tasks/${task._id}`, {
         method: 'PUT',
         body: JSON.stringify(task),

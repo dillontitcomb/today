@@ -6,6 +6,8 @@ import { useReducer } from 'react';
 import {
   TOGGLE_MODAL_SUCCESS,
   TOGGLE_MODAL_FAILURE,
+  TOGGLE_MODAL_TYPE_SUCCESS,
+  TOGGLE_MODAL_TYPE_FAILURE,
   ADD_HABIT_SUCCESS,
   ADD_HABIT_FAILURE,
   ADD_TASK_SUCCESS,
@@ -47,6 +49,7 @@ const GlobalState = (props) => {
     profile: {},
     loading: false,
     showModal: false,
+    modalType: 'addTask',
     errors: {},
     error: {},
   };
@@ -58,6 +61,18 @@ const GlobalState = (props) => {
   // UX/UI  //
   //        //
   //        //
+
+  const setModalType = async (modalType, task) => {
+    // If a task is provided, edit Task. else add task.
+    try {
+      dispatch({
+        type: TOGGLE_MODAL_TYPE_SUCCESS,
+        payload: { modalType, task },
+      });
+    } catch (err) {
+      dispatch({ type: TOGGLE_MODAL_TYPE_FAILURE, payload: err });
+    }
+  };
 
   const openModal = async () => {
     try {
@@ -424,8 +439,10 @@ const GlobalState = (props) => {
         profile: state.profile,
         loading: state.loading,
         showModal: state.showModal,
+        modalType: state.modalType,
         errors: state.errors,
         error: state.error,
+        setModalType,
         openModal,
         closeModal,
         getTasks,

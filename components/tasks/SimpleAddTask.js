@@ -30,7 +30,7 @@ const InputGroup = styled.div`
 
 // TODO: take as props: habitId (attach to habit array), inactive (change active to false), and updateHabit (make second API request to add this task's ID to the habit that created it)
 export default function SimpleAddTask(props) {
-  const { addTask } = useGlobalContext();
+  const { addTask, closeModal } = useGlobalContext();
 
   const formik = useFormik({
     initialValues: {
@@ -44,6 +44,7 @@ export default function SimpleAddTask(props) {
     onSubmit: async (values) => {
       console.log('Trying to submit form to add task!');
       addTask(values, props.updateHabit);
+      closeModal();
       toastSuccess('Task Successfully Created!');
     },
   });

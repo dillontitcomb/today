@@ -2,6 +2,7 @@ import { useSession } from 'next-auth/client';
 import { Title } from '../../components/layout/Typography';
 import { Button } from '../../components/layout/Buttons';
 import SimpleAddTask from '../../components/tasks/SimpleAddTask';
+import SimpleEditTask from '../../components/tasks/SimpleEditTask';
 import TasksList from '../../components/tasks/tasksList/TasksList';
 import useGlobalContext from '../../hooks/useGlobalContext';
 import { useEffect } from 'react';
@@ -24,7 +25,15 @@ export default function tasks() {
 
   if (!loading && !session) return <p>Access Denied</p>;
 
-  const { tasks, getTasks, showModal, openModal } = useGlobalContext();
+  const {
+    task,
+    tasks,
+    getTasks,
+    showModal,
+    openModal,
+    setModalType,
+    modalType,
+  } = useGlobalContext();
 
   useEffect(() => {
     getTasks();
@@ -32,6 +41,7 @@ export default function tasks() {
 
   function handleOpenModal(e) {
     console.log('Opening Modal!');
+    setModalType('addTask', {});
     openModal();
   }
 
@@ -50,7 +60,11 @@ export default function tasks() {
       </TasksContainer>
       {showModal ? (
         <Modal>
-          <SimpleAddTask></SimpleAddTask>
+          {modalType === 'addTask' ? (
+            <SimpleAddTask></SimpleAddTask>
+          ) : (
+            <SimpleEditTask task={task}></SimpleEditTask>
+          )}
         </Modal>
       ) : (
         ''

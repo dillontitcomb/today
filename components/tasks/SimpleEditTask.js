@@ -1,19 +1,17 @@
 import { useFormik } from 'formik';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
 import styled from 'styled-components';
 import useGlobalContext from '../../hooks/useGlobalContext';
 import { Button } from '../layout/Buttons';
 import {
   Checkbox,
   Form,
-  FormMessage,
   NumberInput,
   Option,
   Select,
   TextInput,
 } from '../layout/Forms';
 import { SubText } from '../layout/Typography';
+import { toastSuccess, toastError } from '../../utils/toasts';
 
 const FormContainer = styled.div`
   margin: auto;
@@ -38,10 +36,7 @@ const InputGroup = styled.div`
 `;
 
 export default function SimpleEditTask({ task }) {
-  const router = useRouter();
-  const { updateTask, deleteTask } = useGlobalContext();
-  const [message, setMessage] = useState('');
-  const [messageStyle, setMessageStyle] = useState('');
+  const { updateTask, deleteTask, closeModal } = useGlobalContext();
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -58,11 +53,8 @@ export default function SimpleEditTask({ task }) {
       // TODO: Add context func to update task
       console.log('Trying to submit form to edit task!', values._id);
       updateTask(values);
-      setMessage(`Task updated!`);
-      setMessageStyle('');
-      setTimeout(() => {
-        router.push('/tasks');
-      }, 800);
+      closeModal();
+      toastSuccess('Task Successfully Updated!');
     },
   });
 
@@ -75,11 +67,9 @@ export default function SimpleEditTask({ task }) {
   async function handleDeleteTask() {
     console.log('Trying to delete task!');
     deleteTask(task._id);
-    setMessageStyle('danger');
-    setMessage('Message deleted');
-    setTimeout(() => {
-      router.push('/tasks');
-    }, 800);
+    closeModal();
+    toastError('Task Deleted.');
+
     // TODO: Add message on tasks dashboard that task has been deleted
   }
 
@@ -161,9 +151,6 @@ export default function SimpleEditTask({ task }) {
               Delete Task
             </Button>
           </ButtonContainer>
-          {message && (
-            <FormMessage messageStyle={messageStyle}>{message}</FormMessage>
-          )}
         </FormContainer>
       </Form>
     </div>

@@ -1,6 +1,8 @@
 import {
   TOGGLE_MODAL_SUCCESS,
   TOGGLE_MODAL_FAILURE,
+  TOGGLE_MODAL_TYPE_SUCCESS,
+  TOGGLE_MODAL_TYPE_FAILURE,
   ADD_HABIT_SUCCESS,
   ADD_HABIT_FAILURE,
   GET_TASKS_SUCCESS,
@@ -39,6 +41,13 @@ export default function globalReducer(state, action) {
       return {
         ...state,
         showModal: action.payload,
+      };
+    case TOGGLE_MODAL_TYPE_SUCCESS:
+      console.log('TOGGLE_MODAL_TYPE_SUCCESS: ', action.payload);
+      return {
+        ...state,
+        modalType: action.payload.modalType,
+        task: action.payload.task,
       };
 
     // TASKS
@@ -95,6 +104,7 @@ export default function globalReducer(state, action) {
 
     // FAILURE
     case TOGGLE_MODAL_FAILURE:
+    case TOGGLE_MODAL_TYPE_FAILURE:
     case GET_TASKS_FAILURE:
     case GET_TASK_FAILURE:
     case UPDATE_TASK_FAILURE:

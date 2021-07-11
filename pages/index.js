@@ -1,4 +1,4 @@
-import { signIn, signOut, useSession } from 'next-auth/client';
+import { signIn, useSession } from 'next-auth/client';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { Button } from '../components/layout/Buttons';

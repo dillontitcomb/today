@@ -1,6 +1,7 @@
 import { signIn, signOut, useSession } from 'next-auth/client';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { server } from '../../config/index';
 
 const Navigation = styled.nav`
   border: none;
@@ -51,6 +52,10 @@ const NavLink = styled.a`
 export default function Navbar() {
   const [session, loading] = useSession();
 
+  function handleSignout() {
+    signOut({ callbackUrl: `${server}` });
+  }
+
   return (
     <Navigation>
       <div>
@@ -73,7 +78,7 @@ export default function Navbar() {
             <Link href='/profile'>
               <NavLink>Settings</NavLink>
             </Link>
-            <NavLink onClick={signOut}>Log Out</NavLink>
+            <NavLink onClick={handleSignout}>Log Out</NavLink>
           </>
         )}
         {!session && (

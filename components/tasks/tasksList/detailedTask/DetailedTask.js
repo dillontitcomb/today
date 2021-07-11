@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-
-import CompletedDetailedTask from './CompletedDetailedTask';
 import DetailedTaskName from './DetailedTaskName';
 import DetailedTaskInfo from './DetailedTaskInfo';
 import DetailedTaskComplete from './DetailedTaskComplete';
@@ -13,8 +11,6 @@ const Container = styled.div`
 `;
 
 export default function DetailedTask({ task }) {
-  if (task.complete) return <CompletedDetailedTask task={task} />;
-
   return (
     <Container>
       <DetailedTaskName task={task} />

@@ -1,17 +1,20 @@
 import { useSession } from 'next-auth/client';
 import { Title } from '../../components/layout/Typography';
-import { Button } from '../../components/layout/Buttons';
+import { Button, RadioButtonGroup } from '../../components/layout/Buttons';
 import SimpleAddTask from '../../components/tasks/SimpleAddTask';
 import SimpleEditTask from '../../components/tasks/SimpleEditTask';
 import TasksList from '../../components/tasks/tasksList/TasksList';
 import useGlobalContext from '../../hooks/useGlobalContext';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Modal from '../../components/layout/Modal';
+import { getTaskScore } from '../../utils/helperFunctions';
+import CompletedTasksList from '../../components/tasks/tasksList/completedTasksList';
 
 const TasksContainer = styled.div`
   max-width: 600px;
   margin: 0 auto;
+  padding: 2rem 0;
 `;
 const TasksTitle = styled.div`
   display: flex;
@@ -22,6 +25,7 @@ const TasksTitle = styled.div`
 
 export default function tasks() {
   const [session, loading] = useSession();
+  const [showCompleted, setShowCompleted] = useState(false);
 
   if (!loading && !session) return <p>Access Denied</p>;
 
@@ -35,6 +39,13 @@ export default function tasks() {
     modalType,
   } = useGlobalContext();
 
+  const currentTasks = tasks.filter(
+    (task) => task.complete === false && task.active === true
+  );
+  const completedTasks = tasks.filter(
+    (task) => task.complete === true && task.active === true
+  );
+
   useEffect(() => {
     getTasks();
   }, []);
@@ -43,6 +54,13 @@ export default function tasks() {
     console.log('Opening Modal!');
     setModalType('addTask', {});
     openModal();
+  }
+
+  function handleShowCurrentTasks() {
+    setShowCompleted(false);
+  }
+  function handleShowCompletedTasks() {
+    setShowCompleted(true);
   }
 
   return (
@@ -55,8 +73,28 @@ export default function tasks() {
           <Button buttonstyle='secondary' onClick={handleOpenModal}>
             Add New
           </Button>
+          <RadioButtonGroup>
+            <Button
+              className={showCompleted ? '' : 'active'}
+              noradius
+              onClick={handleShowCurrentTasks}
+            >
+              Current
+            </Button>
+            <Button
+              className={showCompleted ? 'active' : ''}
+              noradius
+              onClick={handleShowCompletedTasks}
+            >
+              Completed
+            </Button>
+          </RadioButtonGroup>
         </TasksTitle>
-        <TasksList tasks={tasks}></TasksList>
+        {showCompleted ? (
+          <CompletedTasksList tasks={completedTasks}></CompletedTasksList>
+        ) : (
+          <TasksList tasks={currentTasks}></TasksList>
+        )}
       </TasksContainer>
       {showModal ? (
         <Modal>

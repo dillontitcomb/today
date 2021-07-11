@@ -23,7 +23,6 @@ export const SeparatedList = styled.div`
   display: flex;
   flex-direction: column;
   grid-gap: 0.5rem;
-  padding: 1rem;
 `;
 
 export const SeparatedListItem = styled.div`

@@ -65,6 +65,32 @@ const handleOutlineTextColor = ({ buttonstyle, theme }) => {
       return theme.colors.darkestGrey;
   }
 };
+export const RadioButtonGroup = styled.div`
+  margin-left: auto;
+  overflow: hidden;
+  border-radius: 5px;
+  // THIS IS THE WORST CODE OF ALL TIME
+  button {
+    color: ${({ theme }) => theme.colors.darkestGrey};
+    border: 2px solid ${({ theme }) => theme.colors.darkestGrey};
+  }
+  button.active {
+    background-color: ${({ theme }) => theme.colors.darkestGrey};
+    color: ${({ theme }) => theme.colors.lightText};
+  }
+
+  > :not(:last-child) {
+    border-right: none;
+  }
+  > :first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  > :last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+`;
 
 export const Button = styled.button`
   width: ${(props) => (props.$fill ? '100%' : 'inherit')};
@@ -116,6 +142,10 @@ export const OutlineButton = styled.button`
   > * {
     color: ${(props) => handleOutlineTextColor(props)};
   }
+`;
+
+export const RadioButton = styled(OutlineButton)`
+  border-radius: none;
 `;
 
 export const IconButton = styled(Button)`

@@ -102,7 +102,7 @@ const GlobalState = (props) => {
   const getTasks = async () => {
     try {
       console.log('TASK CONTEXT: GET TASKS');
-      const res = await fetcher(`${server}/api/tasks`);
+      const res = await fetcher(`${server}/api/tasks/all`);
       const tasks = res.data;
       dispatch({ type: GET_TASKS_SUCCESS, payload: tasks });
     } catch (err) {
@@ -145,7 +145,7 @@ const GlobalState = (props) => {
       }
 
       // Then get updated tasks and update task context accordingly
-      const tasksRes = await fetcher(`${server}/api/tasks`);
+      const tasksRes = await fetcher(`${server}/api/tasks/all`);
       const updatedTasks = tasksRes.data;
       const payload = { task: updatedTask, tasks: updatedTasks };
       dispatch({ type: ADD_TASK_SUCCESS, payload: payload });
@@ -167,7 +167,7 @@ const GlobalState = (props) => {
       });
       const updatedTask = res.data;
       // Get all tasks now single task has been updated
-      const tasksRes = await fetcher(`${server}/api/tasks`);
+      const tasksRes = await fetcher(`${server}/api/tasks/all`);
       const updatedTasks = tasksRes.data;
       // return updated task list
       const payload = { task: updatedTask, tasks: updatedTasks };
@@ -189,7 +189,7 @@ const GlobalState = (props) => {
       });
       const updatedTask = res.data;
       // Get all tasks now single task has been updated
-      const tasksRes = await fetcher(`${server}/api/tasks`);
+      const tasksRes = await fetcher(`${server}/api/tasks/all`);
       const updatedTasks = tasksRes.data;
       const payload = { task: updatedTask, tasks: updatedTasks };
       // return updated task list
@@ -204,11 +204,11 @@ const GlobalState = (props) => {
   const deleteTask = async (id) => {
     try {
       // console.log('CONTEXT: DELETE TASK');
-      // Delete task, then get all tasks with this task deleted
+      // Delete task, then return all remaining tasks
       await fetcher(`${server}/api/tasks/${id}`, {
         method: 'DELETE',
       });
-      const tasksRes = await fetcher(`${server}/api/tasks`);
+      const tasksRes = await fetcher(`${server}/api/tasks/all`);
       const tasks = tasksRes.data;
       dispatch({ type: DELETE_TASK_SUCCESS, payload: tasks });
     } catch (err) {

@@ -10,7 +10,6 @@ const Checkbox = styled.input`
   height: 1.2rem;
   width: 1.2rem;
 `;
-// TODO: make checkbox a complete button
 
 export default function DetailedTaskComplete({ task }) {
   const [complete, setComplete] = useState(task.complete);

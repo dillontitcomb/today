@@ -26,7 +26,7 @@ const theme = {
     darkGrey: '#9E9E9E',
     darkestGrey: '#616161',
     success: '#007E33',
-    successLight: '#00983d',
+    successLight: '#00b247',
     danger: '#CC0000',
     dangerDulled: '#ff4444',
     dangerLight: '#ff5e5e',

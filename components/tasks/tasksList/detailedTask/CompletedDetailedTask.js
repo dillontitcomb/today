@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import DetailedTaskName from './DetailedTaskName';
 import DetailedTaskInfo from './DetailedTaskInfo';
 import DetailedTaskComplete from './DetailedTaskComplete';
-import { SeparatedListItem } from '../../../layout/Lists';
 
 const Container = styled.div`
   display: grid;
@@ -11,14 +10,12 @@ const Container = styled.div`
   grid-gap: 0.5rem;
 `;
 
-export default function DetailedTask({ task }) {
+export default function CompletedDetailedTask({ task }) {
   return (
-    <SeparatedListItem>
-      <Container>
-        <DetailedTaskName task={task} />
-        <DetailedTaskInfo task={task} />
-        <DetailedTaskComplete task={task} />
-      </Container>
-    </SeparatedListItem>
+    <Container>
+      <DetailedTaskName task={task} />
+      <DetailedTaskInfo task={task} />
+      <DetailedTaskComplete task={task} />
+    </Container>
   );
 }

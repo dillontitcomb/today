@@ -60,24 +60,24 @@ export default function Navbar() {
     <Navigation>
       <div>
         <Link href='/'>
-          <NavLogo>Today ✓</NavLogo>
+          <NavLogo>Realist ✓</NavLogo>
         </Link>
       </div>
       <NavLinkContainer>
-        <Link href='/today'>
+        {/* <Link href='/today'>
           <NavLink>Today</NavLink>
         </Link>
         <Link href='/habits'>
           <NavLink>Habits</NavLink>
-        </Link>
+        </Link> */}
         <Link href='/tasks'>
           <NavLink>Tasks</NavLink>
         </Link>
         {session && (
           <>
-            <Link href='/profile'>
+            {/* <Link href='/profile'>
               <NavLink>Settings</NavLink>
-            </Link>
+            </Link> */}
             <NavLink onClick={handleSignout}>Log Out</NavLink>
           </>
         )}

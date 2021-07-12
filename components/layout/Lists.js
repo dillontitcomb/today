@@ -33,6 +33,11 @@ export const SeparatedListItem = styled.div`
     rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 `;
 
+export const SeparatedListItemSkeleton = styled(SeparatedListItem)`
+  text-align: center;
+  opacity: 0.5;
+`;
+
 export const ListItem = styled.div`
   padding: 1rem;
   &:hover {

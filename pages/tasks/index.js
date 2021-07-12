@@ -90,6 +90,7 @@ export default function tasks() {
             </Button>
           </RadioButtonGroup>
         </TasksTitle>
+        
         {showCompleted ? (
           <CompletedTasksList tasks={completedTasks}></CompletedTasksList>
         ) : (

@@ -15,7 +15,7 @@ const StyledFooter = styled.div`
 export default function Footer() {
   return (
     <StyledFooter>
-      <Lead>TodayApp | Dillon Titcomb | 2021</Lead>
+      <Lead>Realist | Dillon Titcomb | 2021</Lead>
     </StyledFooter>
   );
 }

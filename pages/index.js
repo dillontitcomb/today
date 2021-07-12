@@ -49,17 +49,16 @@ const index = () => {
   return (
     <LandingContainer>
       <HeaderText>
-        Welcome to <HeroText>Today</HeroText>
+        Welcome to Rea<HeroText>list</HeroText>
       </HeaderText>
       <SubHeaderText>
-        The personalized to-do list app and habit tracker that helps you focus
-        on today
+        A to-do list app that knows not all tasks are created equal
       </SubHeaderText>
       <ButtonContainer>
         {session ? (
-          <Link href='/today'>
+          <Link href='/tasks'>
             <Button buttonstyle='secondary' large>
-              Plan Your Day
+              Get Started
             </Button>
           </Link>
         ) : (
@@ -70,10 +69,10 @@ const index = () => {
       </ButtonContainer>
       <ListDisplayContainer>
         <SeparatedList>
-          <SeparatedListItem>Learn to use TodayApp</SeparatedListItem>
-          <SeparatedListItem>Add my tasks and habits</SeparatedListItem>
-          <SeparatedListItem>Create detailed daily plans</SeparatedListItem>
-          <SeparatedListItem>Get more stuff done</SeparatedListItem>
+          <SeparatedListItem>Learn to use Realist</SeparatedListItem>
+          <SeparatedListItem>Add my to-do's</SeparatedListItem>
+          <SeparatedListItem>Understand my to-do's</SeparatedListItem>
+          <SeparatedListItem>Get more done</SeparatedListItem>
         </SeparatedList>
       </ListDisplayContainer>
     </LandingContainer>

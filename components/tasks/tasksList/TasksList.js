@@ -19,9 +19,7 @@ export default function TasksList({ tasks }) {
           );
         })
       ) : (
-        <SeparatedListItemSkeleton>
-          No tasks remaining
-        </SeparatedListItemSkeleton>
+        <SeparatedListItemSkeleton>No tasks found</SeparatedListItemSkeleton>
       )}
     </SeparatedList>
   );

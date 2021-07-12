@@ -40,7 +40,7 @@ const ButtonContainer = styled.div`
 
 const ListDisplayContainer = styled.div`
   width: 400px;
-  margin: 2rem auto 0 auto;
+  margin: 1rem auto 0 auto;
 `;
 
 const index = () => {
@@ -52,7 +52,8 @@ const index = () => {
         Welcome to Rea<HeroText>list</HeroText>
       </HeaderText>
       <SubHeaderText>
-        A to-do list app that knows not all tasks are created equal
+        A straightforward to-do list app that knows not all tasks are created
+        equal
       </SubHeaderText>
       <ButtonContainer>
         {session ? (
@@ -69,7 +70,7 @@ const index = () => {
       </ButtonContainer>
       <ListDisplayContainer>
         <SeparatedList>
-          <SeparatedListItem>Learn to use Realist</SeparatedListItem>
+          <SeparatedListItem>Start using Realist</SeparatedListItem>
           <SeparatedListItem>Add my to-do's</SeparatedListItem>
           <SeparatedListItem>Understand my to-do's</SeparatedListItem>
           <SeparatedListItem>Get more done</SeparatedListItem>

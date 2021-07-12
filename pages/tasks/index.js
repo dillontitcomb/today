@@ -21,6 +21,7 @@ const TasksTitle = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 1rem;
+  padding-bottom: 0.5rem;
 `;
 
 export default function tasks() {
@@ -90,7 +91,7 @@ export default function tasks() {
             </Button>
           </RadioButtonGroup>
         </TasksTitle>
-        
+
         {showCompleted ? (
           <CompletedTasksList tasks={completedTasks}></CompletedTasksList>
         ) : (

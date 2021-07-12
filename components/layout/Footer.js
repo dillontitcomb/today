@@ -15,7 +15,9 @@ const StyledFooter = styled.div`
 export default function Footer() {
   return (
     <StyledFooter>
-      <Lead>Realist | Dillon Titcomb | 2021</Lead>
+      <Lead weight='light' primary>
+        Realist | Dillon Titcomb | 2021
+      </Lead>
     </StyledFooter>
   );
 }

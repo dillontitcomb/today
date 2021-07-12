@@ -17,7 +17,7 @@ export default function CompletedTasksList({ tasks }) {
           })
         ) : (
           <SeparatedListItemSkeleton>
-            No tasks completed... yet!
+            No completed tasks found
           </SeparatedListItemSkeleton>
         )}
       </SeparatedList>

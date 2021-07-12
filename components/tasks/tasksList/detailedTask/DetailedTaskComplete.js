@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import useGlobalContext from '../../../../hooks/useGlobalContext';
 const Container = styled.div`
   place-self: end;
   display: flex;

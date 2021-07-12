@@ -1,4 +1,4 @@
-ext from '../context/global/GlobalContext';
+import GlobalContext from '../context/global/globalContext';
 import { useContext } from 'react';
 
 export default function useGlobalContext() {

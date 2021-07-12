@@ -1,6 +1,6 @@
 import { server } from '../../config';
 import { fetcher } from '../../utils/helperFunctions';
-import GlobalContext from './GlobalContext';
+import GlobalContext from './globalContext';
 import globalReducer from './globalReducer';
 import { useReducer } from 'react';
 import {

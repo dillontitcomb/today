@@ -8,8 +8,7 @@ import useGlobalContext from '../../hooks/useGlobalContext';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Modal from '../../components/layout/Modal';
-import { getTaskScore } from '../../utils/helperFunctions';
-import CompletedTasksList from '../../components/tasks/tasksList/completedTasksList';
+import CompletedTasksList from '../../components/tasks/tasksList/CompletedTasksList';
 
 const TasksContainer = styled.div`
   max-width: 600px;

@@ -1,6 +1,6 @@
-## **Today**
+## **Realist**
 
-### The compassionate habit tracker and productivity application that helps you focus on today.
+### A personalized to-do list that helps you understand how you work.
 
 ---
 

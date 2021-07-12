@@ -11,9 +11,9 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "formik": "^2.2.9",
-    "mongoose": "^5.12.14",
-    "next": "^11.0.0",
-    "next-auth": "^3.27.0",
+    "mongoose": "^5.13.2",
+    "next": "^11.0.1",
+    "next-auth": "^3.27.3",
     "react": "^16.13.1",
     "react-day-picker": "^7.4.10",
     "react-dom": "^16.13.1",
@@ -25,6 +25,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.12.0"
+    "babel-plugin-styled-components": "^1.13.2"
   }
 }

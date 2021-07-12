@@ -4,7 +4,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import Footer from '../components/layout/Footer';
 import Navbar from '../components/layout/Navbar';
 import '../css/_app.css';
-import GlobalState from '../context/global/globalState';
+import GlobalState from '../context/global/GlobalState';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

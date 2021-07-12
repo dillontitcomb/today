@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import useGlobalContext from '../../../../hooks/useGlobalContext';
+import { toastSuccess } from '../../../../utils/toasts';
+
 const Container = styled.div`
   place-self: end;
   display: flex;
@@ -14,10 +16,22 @@ const Checkbox = styled.input`
 
 export default function DetailedTaskComplete({ task }) {
   const [complete, setComplete] = useState(task.complete);
+  const { updateTask } = useGlobalContext();
 
   function handleComplete(e) {
     e.stopPropagation();
-    setComplete(!complete);
+    // If incomplete, make complete; if complete, revert to incomplete
+    if (!complete) {
+      setComplete(!complete);
+      task.complete = true;
+      updateTask(task);
+      toastSuccess('Task completed!');
+    } else {
+      setComplete(!complete);
+      task.complete = false;
+      updateTask(task);
+      toastSuccess('Task moved to Current');
+    }
   }
 
   return (

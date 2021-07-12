@@ -1,6 +1,6 @@
 ## **Realist**
 
-### A personalized to-do list that helps you understand how you work.
+### A realistic to-do list app that knows all tasks are not created equal.
 
 ---
 
